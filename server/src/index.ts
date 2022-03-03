@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import session from 'express-session';
+import cors from 'cors';
 
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 // BodyParser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 
 // Middleware
 app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
