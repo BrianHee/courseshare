@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import passport from 'passport';
+// import passport from 'passport';
 import session from 'express-session';
 import cors from 'cors';
 
@@ -37,15 +37,15 @@ app.use((req, res, next) => {
 	next();
 });
 
-// BodyParser
+// BodyParser & Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-// Middleware
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
+// Passport
+// app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // API Access
 app.use((req, res, next) => {

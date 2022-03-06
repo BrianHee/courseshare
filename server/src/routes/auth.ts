@@ -51,7 +51,7 @@ router.post(
 		const token = await JWT.sign(
 			{ email: newUser.email },
 			config.jwt_secret,
-			{ expiresIn: 360000 }
+			{ expiresIn: '14d' }
 		);
 
 		res.json({
@@ -97,7 +97,7 @@ router.post('/login', async (req, res) => {
 	}
 
 	const token = await JWT.sign({ email: user.email }, config.jwt_secret, {
-		expiresIn: 360000
+		expiresIn: '14d'
 	});
 
 	return res.json({

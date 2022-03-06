@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import config from '../../config/config';
 
+// Realistically should separate signup/login modals
+
 interface ModalPropsIfc {
 	text: string;
 	variant: 'primary' | 'secondary';
