@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
 	{
-		handle: {
-			type: String,
-			required: true
-		},
+		// handle: {
+		// 	type: String,
+		// 	required: true
+		// },
 		email: {
 			type: String,
 			required: true,

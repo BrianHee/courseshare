@@ -25,7 +25,8 @@ router.post(
 			return res.json({ errors, data: null });
 		}
 
-		const { handle, email, password } = req.body;
+		// const { handle, email, password } = req.body;
+		const { email, password } = req.body;
 
 		const user = await User.findOne({ email });
 
@@ -42,8 +43,13 @@ router.post(
 
 		const hashedPassword = await bcrypt.hash(password, 5);
 
+		// const newUser = await User.create({
+		// 	handle,
+		// 	email,
+		// 	password: hashedPassword
+		// });
+
 		const newUser = await User.create({
-			handle,
 			email,
 			password: hashedPassword
 		});
