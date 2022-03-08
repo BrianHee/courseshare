@@ -1,24 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, NavItem, Navbar, NavbarBrand } from 'reactstrap';
+
+import { UserContext } from '../../context';
 
 export interface NavPropsInterface {}
 
 const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
+	const [state, setState] = useContext(UserContext);
+
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		setState({ data: null, loading: false, error: null });
+		localStorage.removeItem('token');
+		navigate('/');
+	};
+
 	return (
 		<Navbar color="light" light sticky="top" expand="md">
 			<Container>
 				<NavbarBrand tag={Link} to="/">
 					CBuilder
 				</NavbarBrand>
-				{/* {localStorage.getItem('token') && (
-					<NavItem>
-						<Link to="/" className="nav-link">
-							Logout
-						</Link>
-					</NavItem>
-				)} */}
 			</Container>
+			{state.data && (
+				<NavLink to="/" onClick={handleLogout}>
+					LogOut
+				</NavLink>
+			)}
 		</Navbar>
 	);
 };

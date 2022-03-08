@@ -1,9 +1,10 @@
 import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import config from '../../config/config';
+import { UserContext } from '../../context';
 
 // Realistically should separate signup/login modals
 
@@ -26,8 +27,10 @@ const ModalComponent = (props: ModalPropsIfc) => {
 
 	const navigate = useNavigate();
 
+	const [state, setState] = useContext(UserContext);
+
 	const handleClick = async () => {
-		let data;
+		let response;
 		if (isSignupFlow) {
 			const { data: signUpData } = await axios.post(
 				config.server.signup,
@@ -36,22 +39,34 @@ const ModalComponent = (props: ModalPropsIfc) => {
 					password
 				}
 			);
-			data = signUpData;
+			response = signUpData;
 		} else {
 			const { data: loginData } = await axios.post(config.server.login, {
 				email,
 				password
 			});
-			data = loginData;
+			response = loginData;
 		}
 
-		if (data.errors.length) {
-			return setErrorMsg(data.errors[0].msg);
+		if (response.errors.length) {
+			return setErrorMsg(response.errors[0].msg);
 		}
 
 		//return prevents login if credentials are incorrect
 
-		localStorage.setItem('token', data.data.token);
+		setState({
+			data: {
+				id: response.data.user.id,
+				email: response.data.user.email
+			},
+			loading: false,
+			error: null
+		});
+
+		localStorage.setItem('token', response.data.token);
+		axios.defaults.headers.common[
+			'authorization'
+		] = `Bearer ${response.data.token}`;
 		navigate('/course');
 	};
 
