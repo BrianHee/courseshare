@@ -8,7 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 import logging from './config/logging';
 import config from './config/config';
-import authRoutes from './routes/auth';
+import authRoutes from './routes/user';
 
 const app = express();
 

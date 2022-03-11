@@ -5,17 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import { store } from './rdxapp/store';
 import { UserProvider } from './context';
 
 ReactDOM.render(
-	// <Provider store={store}>
 	<UserProvider>
 		<BrowserRouter>
 			<App />
 		</BrowserRouter>
 	</UserProvider>,
-	// </Provider>
 	document.getElementById('root')
 );
 

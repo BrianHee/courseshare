@@ -4,6 +4,8 @@ import axios from 'axios';
 interface User {
 	data: {
 		id: string;
+		firstName: string;
+		lastName: string;
 		email: string;
 	} | null;
 	error: string | null;
@@ -36,6 +38,8 @@ const UserProvider = ({ children }: any) => {
 			setUser({
 				data: {
 					id: response.data.user.id,
+					firstName: response.data.firstName,
+					lastName: response.data.lastName,
 					email: response.data.user.email
 				},
 				loading: false,

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
@@ -7,60 +7,31 @@ import PageInterface from '../interfaces/page';
 import config from '../config/config';
 import { UserContext } from '../context';
 
-const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
+const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [password2, setPassword2] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 
 	const navigate = useNavigate();
 
 	const [state, setState] = useContext(UserContext);
 
-	const autoLogin = async () => {
-		const token = localStorage.getItem('token');
-		console.log(token);
-
-		if (token) {
-			const { data: loginData } = await axios.post(
-				config.server.autologin,
-				{
-					token
-				}
-			);
-			let response = loginData;
-			console.log(response);
-
-			if (response) {
-				setState({
-					data: {
-						id: response.data.user.id,
-						firstName: response.data.user.firstName,
-						lastName: response.data.user.lastName,
-						email: response.data.user.email
-					},
-					loading: false,
-					error: null
-				});
-				console.log(state);
-				axios.defaults.headers.common[
-					'authorization'
-				] = `Bearer ${token}`;
-				navigate('/course');
-			}
-		}
-	};
-
-	useEffect(() => {
-		autoLogin();
-	}, []);
-	// [] prevents infinite loop?
-
 	const handleClick = async () => {
-		const { data: loginData } = await axios.post(config.server.login, {
-			email,
-			password
-		});
-		let response = loginData;
+		// let response;
+		const { data: registerData } = await axios.post(
+			config.server.register,
+			{
+				firstName,
+				lastName,
+				email,
+				password,
+				password2
+			}
+		);
+		let response = registerData;
 
 		if (response.errors.length) {
 			return setErrorMsg(response.errors[0]);
@@ -69,15 +40,13 @@ const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
 		setState({
 			data: {
 				id: response.data.user.id,
-				firstName: response.data.user.firstName,
-				lastName: response.data.user.lastName,
+				firstName: response.data.firstName,
+				lastName: response.data.lastName,
 				email: response.data.user.email
 			},
 			loading: false,
 			error: null
 		});
-
-		console.log(state);
 
 		localStorage.setItem('token', response.data.token);
 		axios.defaults.headers.common[
@@ -88,7 +57,22 @@ const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
 
 	return (
 		<div>
-			<p>Login Page</p>
+			<InputGroup className="mb-3">
+				<InputGroup.Text>First name</InputGroup.Text>
+				<FormControl
+					type="text"
+					value={firstName}
+					onChange={(e) => setFirstName(e.target.value)}
+				/>
+			</InputGroup>
+			<InputGroup className="mb-3">
+				<InputGroup.Text>Last name</InputGroup.Text>
+				<FormControl
+					type="text"
+					value={lastName}
+					onChange={(e) => setLastName(e.target.value)}
+				/>
+			</InputGroup>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Email</InputGroup.Text>
 				<FormControl
@@ -105,12 +89,20 @@ const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 			</InputGroup>
+			<InputGroup className="mb-3">
+				<InputGroup.Text>Confirm password</InputGroup.Text>
+				<FormControl
+					type="password"
+					value={password2}
+					onChange={(e) => setPassword2(e.target.value)}
+				/>
+			</InputGroup>
 			{errorMsg && errorMsg}
 			<Button variant="primary" onClick={handleClick}>
-				Login
+				Register
 			</Button>
 		</div>
 	);
 };
 
-export default LoginPage;
+export default RegisterPage;
