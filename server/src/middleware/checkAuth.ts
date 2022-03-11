@@ -2,13 +2,10 @@ import { NextFunction, Request, Response } from 'express';
 import JWT from 'jsonwebtoken';
 
 import config from '../config/config';
+import logging from '../config/logging';
 
-export const checkAuth = async (
-	req: Request,
-	res: Response,
-	next: NextFunction
-) => {
-	// console.log('hello i am middleware');
+export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
+	console.log('hello i am middleware');
 	// return res.send('Not authenticated');
 	let token = req.header('authorization');
 
@@ -25,19 +22,31 @@ export const checkAuth = async (
 	token = token.split(' ')[1];
 
 	try {
-		const user = (await JWT.verify(token, config.jwt_secret)) as {
+		console.log('try of checkAuth entered');
+		const user = JWT.verify(token, config.jwt_secret) as {
 			email: string;
 		};
 
+		if (!user.email) {
+			req.user = '';
+			console.log(req.user);
+			next();
+		}
+
 		req.user = user.email;
+		console.log(req.user);
+		console.log(user.email);
+
 		next();
 	} catch (error) {
+		logging.error(error);
 		return res.status(403).json({
-			error: [
-				{
-					msg: 'unauthorized'
-				}
-			]
+			error
+			// error: [
+			// 	{
+			// 		msg: 'unauthorized'
+			// 	}
+			// ]
 		});
 	}
 };

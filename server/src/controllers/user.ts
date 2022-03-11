@@ -118,8 +118,25 @@ const autologin = async (req: Request, res: Response) => {
 	} catch (error) {}
 };
 
+const me = async (req: Request, res: Response) => {
+	const user = await User.findOne({ email: req.user });
+
+	return res.json({
+		errors: [],
+		data: {
+			user: {
+				id: user._id,
+				firstName: user.firstName,
+				lastName: user.lastName,
+				email: user.email
+			}
+		}
+	});
+};
+
 export default {
 	register,
 	login,
-	autologin
+	autologin,
+	me
 };

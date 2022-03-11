@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import logging from '../config/logging';
 
 interface User {
 	data: {
@@ -24,32 +25,68 @@ const UserProvider = ({ children }: any) => {
 	});
 
 	const token = localStorage.getItem('token');
+	console.log(token);
 
 	if (token) {
 		axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
 	}
 
-	const fetchUser = async () => {
-		const { data: response } = await axios.get(
-			'http://localhost:1337/auth/me'
-		);
+	// const fetchUser = async () => {
+	// 	const { data: response } = await axios.get(
+	// 		'http://localhost:1337/auth/me'
+	// 	);
 
-		if (response.data && response.data.user) {
-			setUser({
-				data: {
-					id: response.data.user.id,
-					firstName: response.data.firstName,
-					lastName: response.data.lastName,
-					email: response.data.user.email
-				},
-				loading: false,
-				error: null
-			});
-		} else if (response.data && response.data.errors.length) {
+	// 	if (response.data && response.data.user) {
+	// 		setUser({
+	// 			data: {
+	// 				id: response.data.user.id,
+	// 				firstName: response.data.firstName,
+	// 				lastName: response.data.lastName,
+	// 				email: response.data.user.email
+	// 			},
+	// 			loading: false,
+	// 			error: null
+	// 		});
+	// 		console.log(user);
+	// 	} else if (response.data && response.data.errors.length) {
+	// 		setUser({
+	// 			data: null,
+	// 			loading: false,
+	// 			error: response.errors[0].msg
+	// 		});
+	// 		console.log('fetch failed');
+	// 	}
+	// };
+
+	const fetchUser = async () => {
+		try {
+			const { data: response } = await axios.get(
+				'http://localhost:1337/auth/me'
+			);
+			if (response.data && response.data.user) {
+				setUser({
+					data: {
+						id: response.data.user.id,
+						firstName: response.data.firstName,
+						lastName: response.data.lastName,
+						email: response.data.user.email
+					},
+					loading: false,
+					error: null
+				});
+			} else {
+				setUser({
+					data: null,
+					loading: false,
+					error: response.error
+				});
+			}
+		} catch (error) {
+			logging.error(error);
 			setUser({
 				data: null,
 				loading: false,
-				error: response.errors[0].msg
+				error: null
 			});
 		}
 	};

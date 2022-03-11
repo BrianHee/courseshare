@@ -9,6 +9,7 @@ const LocalStrategy = require('passport-local').Strategy;
 import logging from './config/logging';
 import config from './config/config';
 import authRoutes from './routes/user';
+import courseRoutes from './routes/course';
 
 const app = express();
 
@@ -67,8 +68,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get('/', (req, res) => res.send('hello world'));
+// app.get('/', (req, res) => res.send('hello world'));
 app.use('/auth', authRoutes); // designates all auth routes eg) /auth/signup
+app.use('/courses', courseRoutes);
 
 // Error Handling
 app.use((req, res, next) => {
