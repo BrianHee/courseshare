@@ -27,14 +27,13 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 			email: string;
 		};
 
-		if (!user.email) {
-			req.user = '';
-			console.log(req.user);
-			next();
-		}
+		// if (!user.email) {
+		// 	req.user = '';
+		// 	console.log(req.user);
+		// 	next();
+		// }
 
 		req.user = user.email;
-		console.log(req.user);
 		console.log(user.email);
 
 		next();

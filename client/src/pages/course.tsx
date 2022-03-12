@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Container } from 'reactstrap';
 
 import PageInterface from '../interfaces/page';
@@ -8,6 +8,10 @@ import { UserContext } from '../context';
 const CoursePage: React.FunctionComponent<PageInterface> = (props) => {
 	const userContext = useContext(UserContext);
 	const [state, setState] = userContext;
+
+	useEffect(() => {
+		console.log(state, 'from CoursePage');
+	}, []);
 
 	return (
 		<Container fluid className="p-0">

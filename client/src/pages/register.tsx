@@ -20,7 +20,6 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	const [state, setState] = useContext(UserContext);
 
 	const handleClick = async () => {
-		// let response;
 		const { data: registerData } = await axios.post(
 			config.server.register,
 			{

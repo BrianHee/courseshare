@@ -46,8 +46,8 @@ const register = async (req: Request, res: Response) => {
 			token,
 			user: {
 				id: newUser._id,
-				firstName: user.firstName,
-				lastName: user.lastName,
+				firstName: newUser.firstName,
+				lastName: newUser.lastName,
 				email: newUser.email
 			}
 		}
@@ -119,7 +119,9 @@ const autologin = async (req: Request, res: Response) => {
 };
 
 const me = async (req: Request, res: Response) => {
+	console.log('checkAuth passed, /auth/me entered');
 	const user = await User.findOne({ email: req.user });
+	console.log(user);
 
 	return res.json({
 		errors: [],

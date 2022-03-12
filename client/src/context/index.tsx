@@ -31,34 +31,9 @@ const UserProvider = ({ children }: any) => {
 		axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
 	}
 
-	// const fetchUser = async () => {
-	// 	const { data: response } = await axios.get(
-	// 		'http://localhost:1337/auth/me'
-	// 	);
-
-	// 	if (response.data && response.data.user) {
-	// 		setUser({
-	// 			data: {
-	// 				id: response.data.user.id,
-	// 				firstName: response.data.firstName,
-	// 				lastName: response.data.lastName,
-	// 				email: response.data.user.email
-	// 			},
-	// 			loading: false,
-	// 			error: null
-	// 		});
-	// 		console.log(user);
-	// 	} else if (response.data && response.data.errors.length) {
-	// 		setUser({
-	// 			data: null,
-	// 			loading: false,
-	// 			error: response.errors[0].msg
-	// 		});
-	// 		console.log('fetch failed');
-	// 	}
-	// };
-
 	const fetchUser = async () => {
+		console.log('fetching user for context');
+		console.log(user);
 		try {
 			const { data: response } = await axios.get(
 				'http://localhost:1337/auth/me'
@@ -67,13 +42,15 @@ const UserProvider = ({ children }: any) => {
 				setUser({
 					data: {
 						id: response.data.user.id,
-						firstName: response.data.firstName,
-						lastName: response.data.lastName,
+						firstName: response.data.user.firstName,
+						lastName: response.data.user.lastName,
 						email: response.data.user.email
 					},
 					loading: false,
 					error: null
 				});
+				console.log('SUCCESS user set');
+				console.log(user);
 			} else {
 				setUser({
 					data: null,
