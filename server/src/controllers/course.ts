@@ -111,7 +111,7 @@ const update = (req: Request, res: Response) => {
 				course
 					.save()
 					.then((savedCourse) => {
-						logging.info(`Blog with id ${_id} updated`);
+						logging.info(`Course with id ${_id} updated`);
 						return res.json(201).json({
 							course: savedCourse
 						});
