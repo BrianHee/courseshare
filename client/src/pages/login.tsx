@@ -3,11 +3,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
-import PageInterface from '../interfaces/page';
+// import PageInterface from '../interfaces/page';
 import config from '../config/config';
 import { UserContext } from '../context';
 
-const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
+const LoginPage: React.FunctionComponent<any> = (props) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
@@ -32,14 +32,14 @@ const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
 
 			if (response) {
 				setState({
-					data: {
-						id: response.data.user.id,
-						firstName: response.data.user.firstName,
-						lastName: response.data.user.lastName,
-						email: response.data.user.email
-					},
-					loading: false,
-					error: null
+					// data: {
+					id: response.data.user.id,
+					firstName: response.data.user.firstName,
+					lastName: response.data.user.lastName,
+					email: response.data.user.email,
+					// },
+					loading: false
+					// error: null
 				});
 				console.log(state);
 				axios.defaults.headers.common[
@@ -67,14 +67,14 @@ const LoginPage: React.FunctionComponent<PageInterface> = (props) => {
 		}
 
 		setState({
-			data: {
-				id: response.data.user.id,
-				firstName: response.data.user.firstName,
-				lastName: response.data.user.lastName,
-				email: response.data.user.email
-			},
-			loading: false,
-			error: null
+			// data: {
+			id: response.data.user.id,
+			firstName: response.data.user.firstName,
+			lastName: response.data.user.lastName,
+			email: response.data.user.email,
+			// },
+			loading: false
+			// error: null
 		});
 
 		console.log(state);

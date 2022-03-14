@@ -2,9 +2,8 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import Header from '../components/Header';
 import Navigation from '../components/Navigation';
-import PageInterface from '../interfaces/page';
 
-const HomePage: React.FunctionComponent<PageInterface> = (props) => {
+const HomePage: React.FunctionComponent<any> = (props) => {
 	return (
 		<Container fluid className="p-0">
 			<Navigation />

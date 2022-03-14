@@ -3,25 +3,42 @@ import axios from 'axios';
 import logging from '../config/logging';
 
 interface User {
-	data: {
-		id: string;
-		firstName: string;
-		lastName: string;
-		email: string;
-	} | null;
-	error: string | null;
+	// data: {
+	// 	id: string;
+	// 	firstName: string;
+	// 	lastName: string;
+	// 	email: string;
+	// };
+	id: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	// error: string;
 	loading: boolean;
 }
 
 const UserContext = createContext<
 	[User, React.Dispatch<React.SetStateAction<User>>]
->([{ data: null, loading: true, error: null }, () => {}]);
+>([
+	{
+		id: '',
+		firstName: '',
+		lastName: '',
+		email: '',
+		loading: true
+		// error: ''
+	},
+	() => {}
+]);
 
 const UserProvider = ({ children }: any) => {
 	const [user, setUser] = useState<User>({
-		data: null,
-		loading: true,
-		error: null
+		id: '',
+		firstName: '',
+		lastName: '',
+		email: '',
+		loading: true
+		// error: null
 	});
 
 	const token = localStorage.getItem('token');
@@ -40,30 +57,38 @@ const UserProvider = ({ children }: any) => {
 			);
 			if (response.data && response.data.user) {
 				setUser({
-					data: {
-						id: response.data.user.id,
-						firstName: response.data.user.firstName,
-						lastName: response.data.user.lastName,
-						email: response.data.user.email
-					},
-					loading: false,
-					error: null
+					// data: {
+					id: response.data.user.id,
+					firstName: response.data.user.firstName,
+					lastName: response.data.user.lastName,
+					email: response.data.user.email,
+					// },
+					loading: false
+					// error: null
 				});
 				console.log('SUCCESS user set');
 				console.log(user);
 			} else {
 				setUser({
-					data: null,
-					loading: false,
-					error: response.error
+					// data: null,
+					id: '',
+					firstName: '',
+					lastName: '',
+					email: '',
+					loading: false
+					// error: response.error
 				});
 			}
 		} catch (error) {
 			logging.error(error);
 			setUser({
-				data: null,
-				loading: false,
-				error: null
+				// data: null,
+				id: '',
+				firstName: '',
+				lastName: '',
+				email: '',
+				loading: false
+				// error: null
 			});
 		}
 	};
@@ -73,9 +98,13 @@ const UserProvider = ({ children }: any) => {
 			fetchUser();
 		} else {
 			setUser({
-				data: null,
-				loading: false,
-				error: null
+				// data: null,
+				id: '',
+				firstName: '',
+				lastName: '',
+				email: '',
+				loading: false
+				// error: null
 			});
 		}
 	}, []);
