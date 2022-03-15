@@ -1,85 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Container } from 'reactstrap';
 import axios from 'axios';
-
-import PageInterface from '../interfaces/page';
-import NavBar from '../components/NavBar';
-import { UserContext } from '../context';
-import ICourse from '../interfaces/course';
+import React, { useContext, useEffect, useState } from 'react';
 import config from '../config/config';
 import logging from '../config/logging';
-import { Link } from 'react-router-dom';
-import CoursePreview from '../components/CoursePreview';
-import IUser from '../interfaces/user';
+import { UserContext } from '../context';
+import ICourse from '../interfaces/course';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-const CoursePage: React.FunctionComponent<PageInterface> = (props) => {
-	const userContext = useContext(UserContext);
-	const [state, setState] = userContext;
-
-	const [courses, setCourses] = useState<ICourse[]>([]);
+const CoursePage: React.FunctionComponent<any> = (props) => {
+	const [_id, setId] = useState<string>('');
+	const [course, setCourse] = useState<ICourse | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string>('');
 
+	const [modal, setModal] = useState<boolean>(false);
+	const [deleting, setDeleting] = useState<boolean>(false);
+
+	const [state, setState] = useContext(UserContext);
+	const { courseID } = useParams();
+	const navigate = useNavigate();
+
 	useEffect(() => {
-		console.log(state, 'from CoursePage');
-		getAllCourses();
+		if (courseID) {
+			setId(courseID);
+		} else {
+			navigate('/');
+		}
 	}, []);
 
-	const getAllCourses = async () => {
-		try {
-			const response = await axios.get(`${config.server.url}/courses`);
-			console.log(response, 'getallcourses response received');
-
-			if (response.status === 200) {
-				let courses = response.data.courses;
-				courses.sort((x: ICourse, y: ICourse) =>
-					y.updatedAt.localeCompare(x.updatedAt)
-				);
-				setCourses(courses);
-			} else {
-				setError('Unable to retrieve courses');
-			}
-		} catch (error) {
-			logging.error(error);
-			setError('Unable to fetch courses');
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	if (loading) {
-		return <h1>Loading courses...</h1>;
-	}
-
-	return (
-		<Container fluid className="p-0">
-			<NavBar />
-			{state.id ? <h1>Hello, {state.firstName}</h1> : <></>}
-			<Container className="mt-5">Courses</Container>
-			<Container className="mt-5">
-				{courses.length === 0 && (
-					<h1>
-						No courses yet, make <Link to="/edit">one</Link>
-					</h1>
-				)}
-				{courses.map((course, index) => {
-					return (
-						<div key={index}>
-							<CoursePreview
-								_id={course._id}
-								author={(course.author as IUser).firstName}
-								headline={course.headline}
-								title={course.title}
-								createdAt={course.createdAt}
-								updatedAt={course.updatedAt}
-							/>
-						</div>
-					);
-				})}
-				{error && error}
-			</Container>
-		</Container>
-	);
+	return <p>CoursePage</p>;
 };
 
 export default CoursePage;
