@@ -5,7 +5,7 @@ const ErrorPage: React.FunctionComponent = () => {
 	return (
 		<div>
 			<p>Error</p>
-			<Link to="/">Return Home</Link>
+			<Link to="/home">Return Home</Link>
 		</div>
 	);
 };

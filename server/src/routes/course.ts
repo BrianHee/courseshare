@@ -7,8 +7,8 @@ router.post('/create', controller.create);
 router.get('/:courseID', controller.read);
 router.get('/', controller.readAll);
 router.post('/query', controller.query);
-router.patch('/update', controller.update);
-router.delete('/', controller.deleteCourse);
+router.patch('/update/:courseID', controller.update);
+router.delete('/:courseID', controller.deleteCourse);
 
 export default router;
 

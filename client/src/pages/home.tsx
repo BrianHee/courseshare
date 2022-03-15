@@ -55,6 +55,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 		<Container fluid className="p-0">
 			<NavBar />
 			{state.id ? <h1>Hello, {state.firstName}</h1> : <></>}
+			<Link to="/edit">Create new post</Link>
 			<Container className="mt-5">Courses</Container>
 			<Container className="mt-5">
 				{courses.length === 0 && (

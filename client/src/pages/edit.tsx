@@ -126,6 +126,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const editCourse = async () => {
+		console.log('editing course entered');
 		if (title === '' || headline === '' || content === '') {
 			setError('Please fill out all required forms');
 			setSuccess('');
@@ -266,12 +267,13 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					</FormGroup>
 					<FormGroup>
 						<Label>Preview</Label>
-						<div className="border p-2"></div>
-						<div
-							dangerouslySetInnerHTML={{
-								__html: content
-							}}
-						></div>
+						<div className="border p-2">
+							<div
+								dangerouslySetInnerHTML={{
+									__html: content
+								}}
+							></div>
+						</div>
 					</FormGroup>
 				</Form>
 			</Container>

@@ -51,7 +51,7 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 		axios.defaults.headers.common[
 			'authorization'
 		] = `Bearer ${response.data.token}`;
-		navigate('/course');
+		navigate('/home');
 	};
 
 	return (

@@ -45,7 +45,7 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 				axios.defaults.headers.common[
 					'authorization'
 				] = `Bearer ${token}`;
-				navigate('/course');
+				navigate('/home');
 			}
 		}
 	};
