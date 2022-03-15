@@ -10,7 +10,11 @@ import draftToHtml from 'draftjs-to-html';
 import Navigation from '../components/Navigation';
 import { Container, Form, FormGroup } from 'react-bootstrap';
 import Header from '../components/Header';
-import { Input, Label } from 'reactstrap';
+import { Button, Input, Label } from 'reactstrap';
+import { Editor } from 'react-draft-wysiwyg';
+import SuccessText from '../components/SuccessText';
+import { Link, useSearchParams } from 'react-router-dom';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const EditPage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
@@ -27,6 +31,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [success, setSuccess] = useState<string>('');
 	const [error, setError] = useState<string>('');
 
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [state, setState] = useContext(UserContext);
 
 	useEffect(() => {
@@ -188,6 +193,81 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 							disabled={saving}
 							onChange={(e) => setHeadline(e.target.value)}
 						/>
+					</FormGroup>
+					<FormGroup>
+						<Label>Content</Label>
+						<Editor
+							editorState={editorState}
+							wrapperClassName="card"
+							editorClassName="card-body"
+							onEditorStateChange={(newState) => {
+								setEditorState(newState);
+								setContent(
+									draftToHtml(
+										convertToRaw(
+											newState.getCurrentContent()
+										)
+									)
+								);
+							}}
+							toolbar={{
+								options: [
+									'inline',
+									'blockType',
+									'fontSize',
+									'list',
+									'textAlign',
+									'history',
+									'embedded',
+									'emoji',
+									'image'
+								],
+								inline: { inDropdown: true },
+								list: { inDropdown: true },
+								textAlign: { inDropdown: true },
+								link: { inDropdown: true },
+								history: { inDropdown: true }
+							}}
+						/>
+					</FormGroup>
+					<FormGroup>
+						<SuccessText success={success} />
+					</FormGroup>
+					<FormGroup>
+						<Button
+							block
+							onClick={() => {
+								if (_id !== '') {
+									editCourse();
+								} else {
+									createCourse();
+								}
+							}}
+							disabled={saving}
+						>
+							<i className="fas fa-save mr-1"></i>
+							{_id !== '' ? 'Update' : 'Post'}
+						</Button>
+						{_id !== '' && (
+							<Button
+								block
+								color="success"
+								tag={Link}
+								to={`/courses/${_id}`}
+							>
+								View your post!
+							</Button>
+						)}
+					</FormGroup>
+					<FormGroup>
+						<Label>Preview</Label>
+						<div className="border p-2"></div>
+						<div>
+							dangerouslySetInnerHTML=
+							{{
+								_html: content
+							}}
+						</div>
 					</FormGroup>
 				</Form>
 			</Container>

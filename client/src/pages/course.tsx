@@ -54,7 +54,7 @@ const CoursePage: React.FunctionComponent<PageInterface> = (props) => {
 	return (
 		<Container fluid className="p-0">
 			<NavBar />
-			{state.data ? <h1>Hello, {state.data.firstName}</h1> : <></>}
+			{state.id ? <h1>Hello, {state.firstName}</h1> : <></>}
 			<Container className="mt-5">Courses</Container>
 			<Container className="mt-5">
 				{courses.length === 0 && (

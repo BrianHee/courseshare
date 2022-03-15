@@ -37,14 +37,14 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 		}
 
 		setState({
-			data: {
-				id: response.data.user.id,
-				firstName: response.data.firstName,
-				lastName: response.data.lastName,
-				email: response.data.user.email
-			},
-			loading: false,
-			error: null
+			// data: {
+			id: response.data.user.id,
+			firstName: response.data.user.firstName,
+			lastName: response.data.user.lastName,
+			email: response.data.user.email,
+			// },
+			loading: false
+			// error: null
 		});
 
 		localStorage.setItem('token', response.data.token);

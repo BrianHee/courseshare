@@ -13,7 +13,14 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		setState({ data: null, loading: false, error: null });
+		setState({
+			id: '',
+			firstName: '',
+			lastName: '',
+			email: '',
+			loading: false
+			// error: null
+		});
 		localStorage.removeItem('token');
 		navigate('/');
 	};
@@ -25,7 +32,7 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 					CBuilder
 				</NavbarBrand>
 			</Container>
-			{state.data && (
+			{state.id && (
 				<NavLink to="/" onClick={handleLogout}>
 					LogOut
 				</NavLink>
