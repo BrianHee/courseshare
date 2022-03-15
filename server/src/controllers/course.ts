@@ -46,6 +46,7 @@ const read = (req: Request, res: Response) => {
 			if (course) {
 				return res.status(200).json({ course });
 			} else {
+				console.log('Else block hit course not found');
 				return res.status(404).json({
 					error: 'Course not found'
 				});

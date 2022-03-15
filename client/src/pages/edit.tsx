@@ -13,7 +13,7 @@ import Header from '../components/Header';
 import { Button, Input, Label } from 'reactstrap';
 import { Editor } from 'react-draft-wysiwyg';
 import SuccessText from '../components/SuccessText';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const EditPage: React.FunctionComponent<any> = (props) => {
@@ -31,14 +31,16 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [success, setSuccess] = useState<string>('');
 	const [error, setError] = useState<string>('');
 
-	const [searchParams, setSearchParams] = useSearchParams();
 	const [state, setState] = useContext(UserContext);
+	const { courseID } = useParams();
 
 	useEffect(() => {
-		let courseID = props.match.params.courseID;
+		// let courseID = props.match.params.courseID;
 
 		if (courseID) {
+			console.log(`courseID set to ${courseID}`);
 			setId(courseID);
+			getCourse(courseID);
 		} else {
 			setLoading(false);
 		}
@@ -46,12 +48,15 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const getCourse = async (id: string) => {
 		try {
+			console.log('getting courses...');
 			const response = await axios.get(
 				`${config.server.url}/courses/${id}`
 			);
 
 			if (response.status === 200) {
-				if (state.id !== response.data.course.author.id) {
+				if (state.id !== response.data.course.author._id) {
+					console.log(response.data.course.author._id);
+					console.log(state.id);
 					logging.warn('This course is owned by someone else');
 					setId('');
 				} else {
@@ -262,12 +267,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					<FormGroup>
 						<Label>Preview</Label>
 						<div className="border p-2"></div>
-						<div>
-							dangerouslySetInnerHTML=
-							{{
-								_html: content
+						<div
+							dangerouslySetInnerHTML={{
+								__html: content
 							}}
-						</div>
+						></div>
 					</FormGroup>
 				</Form>
 			</Container>
