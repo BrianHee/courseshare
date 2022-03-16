@@ -119,7 +119,7 @@ const update = (req: Request, res: Response) => {
 					})
 					.catch((error) => {
 						logging.error(error.message);
-
+						console.log('update error message entered'); // entering error for some reason when adding image
 						return res.status(500).json({
 							error: error.message
 						});
