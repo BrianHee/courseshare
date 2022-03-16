@@ -113,7 +113,7 @@ const update = (req: Request, res: Response) => {
 					.save()
 					.then((savedCourse) => {
 						logging.info(`Course with id ${_id} updated`);
-						return res.json(201).json({
+						return res.status(201).json({
 							course: savedCourse
 						});
 					})
@@ -132,6 +132,7 @@ const update = (req: Request, res: Response) => {
 		})
 		.catch((error) => {
 			logging.error(error.message);
+			console.log('Final catch of update');
 
 			return res.status(500).json({
 				error: error.message

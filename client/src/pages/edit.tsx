@@ -149,9 +149,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 				}
 			);
 
-			if (response.status === 201) {
+			if (response.status === 201 || 200) {
+				console.log(response.status, 'if');
 				setSuccess('Course updated.');
 			} else {
+				console.log(response.status, 'else');
 				setError('Unable to update course');
 			}
 		} catch (error) {
