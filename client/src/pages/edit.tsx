@@ -54,9 +54,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			);
 
 			if (response.status === 200) {
-				if (state.id !== response.data.course.author._id) {
+				if (state._id !== response.data.course.author._id) {
 					console.log(response.data.course.author._id);
-					console.log(state.id);
+					console.log(state._id);
 					logging.warn('This course is owned by someone else');
 					setId('');
 				} else {
@@ -107,7 +107,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					picture,
 					headline,
 					content,
-					author: state.id
+					author: state._id
 				}
 			);
 
@@ -145,7 +145,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					picture,
 					headline,
 					content,
-					author: state.id
+					author: state._id
 				}
 			);
 

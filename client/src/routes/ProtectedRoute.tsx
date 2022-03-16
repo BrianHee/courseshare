@@ -7,5 +7,5 @@ export const ProtectedRoute = (props: any) => {
 
 	if (state.loading) return <div>Loading...</div>;
 
-	return state.id ? <Outlet /> : <Navigate to="/" />;
+	return state._id ? <Outlet /> : <Navigate to="/" />;
 };

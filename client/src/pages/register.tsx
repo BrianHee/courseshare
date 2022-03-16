@@ -38,7 +38,7 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 
 		setState({
 			// data: {
-			id: response.data.user.id,
+			_id: response.data.user._id,
 			firstName: response.data.user.firstName,
 			lastName: response.data.user.lastName,
 			email: response.data.user.email,

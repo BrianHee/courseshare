@@ -124,7 +124,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 					</p>
 				</Header>
 				<Container className="mt-5">
-					{state.id === (course.author as IUser)._id && (
+					{state._id === (course.author as IUser)._id && (
 						<Container fluid className="p-0">
 							<Button
 								color="info"

@@ -45,7 +45,7 @@ const register = async (req: Request, res: Response) => {
 		data: {
 			token,
 			user: {
-				id: newUser._id,
+				_id: newUser._id,
 				firstName: newUser.firstName,
 				lastName: newUser.lastName,
 				email: newUser.email
@@ -82,7 +82,7 @@ const login = async (req: Request, res: Response) => {
 		data: {
 			token,
 			user: {
-				id: user._id,
+				_id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email
@@ -107,7 +107,7 @@ const autologin = async (req: Request, res: Response) => {
 				errors: [],
 				data: {
 					user: {
-						id: user._id,
+						_id: user._id,
 						firstName: user.firstName,
 						lastName: user.lastName,
 						email: user.email
@@ -127,7 +127,7 @@ const me = async (req: Request, res: Response) => {
 		errors: [],
 		data: {
 			user: {
-				id: user._id,
+				_id: user._id,
 				firstName: user.firstName,
 				lastName: user.lastName,
 				email: user.email

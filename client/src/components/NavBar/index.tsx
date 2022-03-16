@@ -14,7 +14,7 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 
 	const handleLogout = () => {
 		setState({
-			id: '',
+			_id: '',
 			firstName: '',
 			lastName: '',
 			email: '',
@@ -32,7 +32,7 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 					CBuilder
 				</NavbarBrand>
 			</Container>
-			{state.id && (
+			{state._id && (
 				<NavLink to="/" onClick={handleLogout}>
 					LogOut
 				</NavLink>

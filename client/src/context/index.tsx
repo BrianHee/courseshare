@@ -9,7 +9,7 @@ interface User {
 	// 	lastName: string;
 	// 	email: string;
 	// };
-	id: string;
+	_id: string;
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -21,7 +21,7 @@ const UserContext = createContext<
 	[User, React.Dispatch<React.SetStateAction<User>>]
 >([
 	{
-		id: '',
+		_id: '',
 		firstName: '',
 		lastName: '',
 		email: '',
@@ -33,7 +33,7 @@ const UserContext = createContext<
 
 const UserProvider = ({ children }: any) => {
 	const [user, setUser] = useState<User>({
-		id: '',
+		_id: '',
 		firstName: '',
 		lastName: '',
 		email: '',
@@ -58,7 +58,7 @@ const UserProvider = ({ children }: any) => {
 			if (response.data && response.data.user) {
 				setUser({
 					// data: {
-					id: response.data.user.id,
+					_id: response.data.user._id,
 					firstName: response.data.user.firstName,
 					lastName: response.data.user.lastName,
 					email: response.data.user.email,
@@ -71,7 +71,7 @@ const UserProvider = ({ children }: any) => {
 			} else {
 				setUser({
 					// data: null,
-					id: '',
+					_id: '',
 					firstName: '',
 					lastName: '',
 					email: '',
@@ -83,7 +83,7 @@ const UserProvider = ({ children }: any) => {
 			logging.error(error);
 			setUser({
 				// data: null,
-				id: '',
+				_id: '',
 				firstName: '',
 				lastName: '',
 				email: '',
@@ -99,7 +99,7 @@ const UserProvider = ({ children }: any) => {
 		} else {
 			setUser({
 				// data: null,
-				id: '',
+				_id: '',
 				firstName: '',
 				lastName: '',
 				email: '',
