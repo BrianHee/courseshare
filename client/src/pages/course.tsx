@@ -11,7 +11,8 @@ import NavBar from '../components/NavBar';
 import { ModalHeader } from 'reactstrap';
 import Header from '../components/Header';
 import IUser from '../interfaces/user';
-import { userInfo } from 'os';
+
+import '../styles/coursepage.scss';
 
 const CoursePage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
@@ -142,7 +143,10 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 						</Container>
 					)}
 					{error}
-					<div dangerouslySetInnerHTML={{ __html: course.content }} />
+					<div
+						className="content-container"
+						dangerouslySetInnerHTML={{ __html: course.content }}
+					/>
 				</Container>
 			</Container>
 		);
