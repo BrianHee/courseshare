@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/create', controller.create);
 router.get('/:chapterID', controller.read);
 router.get('/', controller.readAll);
-router.patch('/update/:chapterID', controller.update);
+router.patch('/:chapterID', controller.update);
 router.delete('/:chapterID', controller.deleteChapter);
 
 export default router;
