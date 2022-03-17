@@ -4,5 +4,10 @@ import controller from '../controllers/coursex';
 const router = express.Router();
 
 router.post('/create', controller.create);
+router.get('/:courseID', controller.read);
+router.get('/', controller.readAll);
+router.post('/query', controller.query);
+router.patch('/update/:courseID', controller.update);
+router.delete('/:courseID', controller.deleteCoursex);
 
 export default router;
