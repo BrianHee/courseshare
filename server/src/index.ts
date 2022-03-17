@@ -4,12 +4,16 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import cors from 'cors';
 
-const LocalStrategy = require('passport-local').Strategy;
+// const LocalStrategy = require('passport-local').Strategy;
 
 import logging from './config/logging';
 import config from './config/config';
 import authRoutes from './routes/user';
 import courseRoutes from './routes/course';
+
+import coursexRoutes from './routes/coursex';
+import chapterRoutes from './routes/chapter';
+import pageRoutes from './routes/page';
 
 const app = express();
 
@@ -71,6 +75,9 @@ app.use((req, res, next) => {
 // app.get('/', (req, res) => res.send('hello world'));
 app.use('/auth', authRoutes); // designates all auth routes eg) /auth/signup
 app.use('/courses', courseRoutes);
+app.use('/coursex', coursexRoutes);
+app.use('/chapter', chapterRoutes);
+app.use('/page', pageRoutes);
 
 // Error Handling
 app.use((req, res, next) => {

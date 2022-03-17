@@ -21,14 +21,12 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const [error, setError] = useState<string>('');
 
 	useEffect(() => {
-		console.log(state, 'from HomePage');
 		getAllCourses();
 	}, []);
 
 	const getAllCourses = async () => {
 		try {
 			const response = await axios.get(`${config.server.url}/courses`);
-			console.log(response, 'getallcourses response received');
 
 			if (response.status === 200) {
 				let courses = response.data.courses;

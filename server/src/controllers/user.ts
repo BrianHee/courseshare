@@ -101,7 +101,6 @@ const autologin = async (req: Request, res: Response) => {
 		const email = tokenToEmail.email;
 
 		const user = await User.findOne({ email });
-		console.log(user);
 		if (user) {
 			return res.json({
 				errors: [],
@@ -119,9 +118,7 @@ const autologin = async (req: Request, res: Response) => {
 };
 
 const me = async (req: Request, res: Response) => {
-	console.log('checkAuth passed, /auth/me entered');
 	const user = await User.findOne({ email: req.user });
-	console.log(user);
 
 	return res.json({
 		errors: [],

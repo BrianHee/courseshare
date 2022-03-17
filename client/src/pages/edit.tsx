@@ -38,7 +38,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		// let courseID = props.match.params.courseID;
 
 		if (courseID) {
-			console.log(`courseID set to ${courseID}`);
 			setId(courseID);
 			getCourse(courseID);
 		} else {
@@ -48,15 +47,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const getCourse = async (id: string) => {
 		try {
-			console.log('getting courses...');
 			const response = await axios.get(
 				`${config.server.url}/courses/${id}`
 			);
 
 			if (response.status === 200) {
 				if (state._id !== response.data.course.author._id) {
-					console.log(response.data.course.author._id);
-					console.log(state._id);
 					logging.warn('This course is owned by someone else');
 					setId('');
 				} else {
@@ -126,7 +122,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const editCourse = async () => {
-		console.log('editing course entered');
 		if (title === '' || headline === '' || content === '') {
 			setError('Please fill out all required forms');
 			setSuccess('');
@@ -150,10 +145,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			);
 
 			if (response.status === 201 || 200) {
-				console.log(response.status, 'if');
 				setSuccess('Course updated.');
 			} else {
-				console.log(response.status, 'else');
 				setError('Unable to update course');
 			}
 		} catch (error) {

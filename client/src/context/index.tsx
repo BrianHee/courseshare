@@ -42,15 +42,12 @@ const UserProvider = ({ children }: any) => {
 	});
 
 	const token = localStorage.getItem('token');
-	console.log(token);
 
 	if (token) {
 		axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
 	}
 
 	const fetchUser = async () => {
-		console.log('fetching user for context');
-		console.log(user);
 		try {
 			const { data: response } = await axios.get(
 				'http://localhost:1337/auth/me'
@@ -66,8 +63,6 @@ const UserProvider = ({ children }: any) => {
 					loading: false
 					// error: null
 				});
-				console.log('SUCCESS user set');
-				console.log(user);
 			} else {
 				setUser({
 					// data: null,

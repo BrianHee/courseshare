@@ -1,10 +1,6 @@
-import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
-import JWT from 'jsonwebtoken';
 
 import Course from '../models/Course';
-import config from '../config/config';
-import validateRegisterInput from '../validation/register';
 import logging from '../config/logging';
 
 const create = async (req: Request, res: Response) => {
@@ -46,7 +42,6 @@ const read = (req: Request, res: Response) => {
 			if (course) {
 				return res.status(200).json({ course });
 			} else {
-				console.log('Else block hit course not found');
 				return res.status(404).json({
 					error: 'Course not found'
 				});
@@ -119,7 +114,6 @@ const update = (req: Request, res: Response) => {
 					})
 					.catch((error) => {
 						logging.error(error.message);
-						console.log('update error message entered'); // entering error for some reason when adding image
 						return res.status(500).json({
 							error: error.message
 						});
@@ -132,7 +126,6 @@ const update = (req: Request, res: Response) => {
 		})
 		.catch((error) => {
 			logging.error(error.message);
-			console.log('Final catch of update');
 
 			return res.status(500).json({
 				error: error.message

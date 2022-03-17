@@ -28,11 +28,8 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(state);
-		console.log('Course page loaded');
 		if (courseID) {
 			setId(courseID);
-			console.log(courseID, 'courseID set');
 		} else {
 			navigate('/');
 		}
@@ -40,7 +37,6 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 	useEffect(() => {
 		if (_id !== '') {
-			console.log('getting course');
 			getCourse();
 		}
 	}, [_id]);
@@ -53,14 +49,11 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
-				console.log(response.data.course.author);
 			} else {
 				setError('Unable to retrieve course');
-				console.log('getCourse error');
 			}
 		} catch (error) {
 			setError('Unable to retrieve course');
-			console.log('getCourse catch entered');
 		} finally {
 			setLoading(false);
 		}
@@ -78,12 +71,10 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 				navigate('/home');
 			} else {
 				setError('Unable to delete course');
-				console.log('deleteCourse error');
 				setDeleting(false);
 			}
 		} catch (error) {
 			setError('Unable to delete course');
-			console.log('deleteCourse catch entered');
 			setDeleting(false);
 		}
 	};

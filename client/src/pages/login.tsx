@@ -18,7 +18,6 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 
 	const autoLogin = async () => {
 		const token = localStorage.getItem('token');
-		console.log(token);
 
 		if (token) {
 			const { data: loginData } = await axios.post(
@@ -28,7 +27,6 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 				}
 			);
 			let response = loginData;
-			console.log(response);
 
 			if (response) {
 				setState({
@@ -41,7 +39,6 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 					loading: false
 					// error: null
 				});
-				console.log(state);
 				axios.defaults.headers.common[
 					'authorization'
 				] = `Bearer ${token}`;
@@ -77,13 +74,11 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 			// error: null
 		});
 
-		console.log(state);
-
 		localStorage.setItem('token', response.data.token);
 		axios.defaults.headers.common[
 			'authorization'
 		] = `Bearer ${response.data.token}`;
-		navigate('/course');
+		navigate('/home');
 	};
 
 	return (
