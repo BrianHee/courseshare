@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
+import Header from '../components/Misc/Header';
+import Navigation from '../components/Misc/Navigation';
 
 const LandingPage: React.FunctionComponent<any> = (props) => {
 	return (

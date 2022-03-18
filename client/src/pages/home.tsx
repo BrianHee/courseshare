@@ -3,13 +3,13 @@ import { Container } from 'reactstrap';
 import axios from 'axios';
 
 import PageInterface from '../interfaces/page';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Misc/NavBar';
 import { UserContext } from '../context';
 import ICourse from '../interfaces/course';
 import config from '../config/config';
 import logging from '../config/logging';
 import { Link } from 'react-router-dom';
-import CoursePreview from '../components/CoursePreview';
+import CoursePreview from '../components/Misc/CoursePreview';
 import IUser from '../interfaces/user';
 
 const HomePage: React.FunctionComponent<PageInterface> = (props) => {

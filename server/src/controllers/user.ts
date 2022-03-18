@@ -114,7 +114,11 @@ const autologin = async (req: Request, res: Response) => {
 				}
 			});
 		}
-	} catch (error) {}
+	} catch (error) {
+		return res.json({
+			error: error
+		});
+	}
 };
 
 const me = async (req: Request, res: Response) => {

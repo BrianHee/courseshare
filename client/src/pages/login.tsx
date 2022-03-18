@@ -16,42 +16,6 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 
 	const [state, setState] = useContext(UserContext);
 
-	const autoLogin = async () => {
-		const token = localStorage.getItem('token');
-
-		if (token) {
-			const { data: loginData } = await axios.post(
-				config.server.autologin,
-				{
-					token
-				}
-			);
-			let response = loginData;
-
-			if (response) {
-				setState({
-					// data: {
-					_id: response.data.user._id,
-					firstName: response.data.user.firstName,
-					lastName: response.data.user.lastName,
-					email: response.data.user.email,
-					// },
-					loading: false
-					// error: null
-				});
-				axios.defaults.headers.common[
-					'authorization'
-				] = `Bearer ${token}`;
-				navigate('/home');
-			}
-		}
-	};
-
-	useEffect(() => {
-		autoLogin();
-	}, []);
-	// [] prevents infinite loop?
-
 	const handleClick = async () => {
 		const { data: loginData } = await axios.post(config.server.login, {
 			email,

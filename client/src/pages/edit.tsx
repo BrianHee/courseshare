@@ -7,12 +7,12 @@ import { UserContext } from '../context';
 import ICourse from '../interfaces/course';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
-import Navigation from '../components/Navigation';
+import Navigation from '../components/Misc/Navigation';
 import { Container, Form, FormGroup } from 'react-bootstrap';
-import Header from '../components/Header';
+import Header from '../components/Misc/Header';
 import { Button, Input, Label } from 'reactstrap';
 import { Editor } from 'react-draft-wysiwyg';
-import SuccessText from '../components/SuccessText';
+import SuccessText from '../components/Misc/SuccessText';
 import { Link, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 

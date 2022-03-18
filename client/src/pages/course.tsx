@@ -7,9 +7,9 @@ import ICourse from '../interfaces/course';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { Button, Container, Modal, ModalBody, ModalFooter } from 'reactstrap';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/Misc/NavBar';
 import { ModalHeader } from 'reactstrap';
-import Header from '../components/Header';
+import Header from '../components/Misc/Header';
 import IUser from '../interfaces/user';
 
 import '../styles/coursepage.scss';
