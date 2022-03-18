@@ -7,10 +7,15 @@ import { useNavigate } from 'react-router-dom';
 // import PageInterface from '../interfaces/page';
 import config from '../../../config/config';
 import { UserContext } from '../../../context';
+import LoadComponent from '../Loading';
+
+import './styles.scss';
 
 export interface NavPropsInterface {}
 
 const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
+	const [loading, setLoading] = useState(false);
+
 	const navigate = useNavigate();
 
 	const [state, setState] = useContext(UserContext);
@@ -19,12 +24,10 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 		const token = localStorage.getItem('token');
 
 		if (token) {
-			const { data: loginData } = await axios.post(
-				config.server.autologin,
-				{
-					token
-				}
-			);
+			setLoading(true);
+			const { data: loginData } = await axios.post(config.server.autologin, {
+				token
+			});
 			let response = loginData;
 			console.log('token available');
 
@@ -33,12 +36,10 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 					_id: response.data.user._id,
 					firstName: response.data.user.firstName,
 					lastName: response.data.user.lastName,
-					email: response.data.user.email,
-					loading: false
+					email: response.data.user.email
+					// loading: false
 				});
-				axios.defaults.headers.common[
-					'authorization'
-				] = `Bearer ${token}`;
+				axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
 				navigate('/home');
 			} else {
 				navigate('/login');
@@ -55,7 +56,9 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 					CBuilder
 				</NavbarBrand>
 				<Nav className="mr-auto" navbar />
-				<button onClick={loginUser}>Login</button>
+				<button className="login-button" onClick={loginUser}>
+					{loading ? <LoadComponent /> : 'Login'}
+				</button>
 				<Link to="/register">Register</Link>
 			</Container>
 		</Navbar>

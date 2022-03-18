@@ -17,8 +17,8 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 			_id: '',
 			firstName: '',
 			lastName: '',
-			email: '',
-			loading: false
+			email: ''
+			// loading: false
 			// error: null
 		});
 		localStorage.removeItem('token');

@@ -20,16 +20,13 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	const [state, setState] = useContext(UserContext);
 
 	const handleClick = async () => {
-		const { data: registerData } = await axios.post(
-			config.server.register,
-			{
-				firstName,
-				lastName,
-				email,
-				password,
-				password2
-			}
-		);
+		const { data: registerData } = await axios.post(config.server.register, {
+			firstName,
+			lastName,
+			email,
+			password,
+			password2
+		});
 		let response = registerData;
 
 		if (response.errors.length) {
@@ -41,16 +38,14 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 			_id: response.data.user._id,
 			firstName: response.data.user.firstName,
 			lastName: response.data.user.lastName,
-			email: response.data.user.email,
+			email: response.data.user.email
 			// },
-			loading: false
+			// loading: false
 			// error: null
 		});
 
 		localStorage.setItem('token', response.data.token);
-		axios.defaults.headers.common[
-			'authorization'
-		] = `Bearer ${response.data.token}`;
+		axios.defaults.headers.common['authorization'] = `Bearer ${response.data.token}`;
 		navigate('/home');
 	};
 
@@ -58,43 +53,23 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 		<div>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>First name</InputGroup.Text>
-				<FormControl
-					type="text"
-					value={firstName}
-					onChange={(e) => setFirstName(e.target.value)}
-				/>
+				<FormControl type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 			</InputGroup>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Last name</InputGroup.Text>
-				<FormControl
-					type="text"
-					value={lastName}
-					onChange={(e) => setLastName(e.target.value)}
-				/>
+				<FormControl type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
 			</InputGroup>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Email</InputGroup.Text>
-				<FormControl
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
+				<FormControl type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 			</InputGroup>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Password</InputGroup.Text>
-				<FormControl
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+				<FormControl type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 			</InputGroup>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Confirm password</InputGroup.Text>
-				<FormControl
-					type="password"
-					value={password2}
-					onChange={(e) => setPassword2(e.target.value)}
-				/>
+				<FormControl type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} />
 			</InputGroup>
 			{errorMsg && errorMsg}
 			<Button variant="primary" onClick={handleClick}>

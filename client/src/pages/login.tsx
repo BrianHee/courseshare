@@ -8,9 +8,9 @@ import config from '../config/config';
 import { UserContext } from '../context';
 
 const LoginPage: React.FunctionComponent<any> = (props) => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [errorMsg, setErrorMsg] = useState('');
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [errorMsg, setErrorMsg] = useState<string>('');
 
 	const navigate = useNavigate();
 
@@ -32,16 +32,14 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 			_id: response.data.user._id,
 			firstName: response.data.user.firstName,
 			lastName: response.data.user.lastName,
-			email: response.data.user.email,
+			email: response.data.user.email
 			// },
-			loading: false
+			// loading: false
 			// error: null
 		});
 
 		localStorage.setItem('token', response.data.token);
-		axios.defaults.headers.common[
-			'authorization'
-		] = `Bearer ${response.data.token}`;
+		axios.defaults.headers.common['authorization'] = `Bearer ${response.data.token}`;
 		navigate('/home');
 	};
 
@@ -50,19 +48,11 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 			<p>Login Page</p>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Email</InputGroup.Text>
-				<FormControl
-					type="email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-				/>
+				<FormControl type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 			</InputGroup>
 			<InputGroup className="mb-3">
 				<InputGroup.Text>Password</InputGroup.Text>
-				<FormControl
-					type="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+				<FormControl type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 			</InputGroup>
 			{errorMsg && errorMsg}
 			<Button variant="primary" onClick={handleClick}>

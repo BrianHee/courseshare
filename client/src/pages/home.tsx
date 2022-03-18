@@ -11,6 +11,7 @@ import logging from '../config/logging';
 import { Link } from 'react-router-dom';
 import CoursePreview from '../components/Misc/CoursePreview';
 import IUser from '../interfaces/user';
+import LoadComponent from '../components/Misc/Loading';
 
 const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const userContext = useContext(UserContext);
@@ -18,6 +19,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 
 	const [courses, setCourses] = useState<ICourse[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [render, setRender] = useState<any>('');
 	const [error, setError] = useState<string>('');
 
 	useEffect(() => {
@@ -30,9 +32,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 
 			if (response.status === 200) {
 				let courses = response.data.courses;
-				courses.sort((x: ICourse, y: ICourse) =>
-					y.updatedAt.localeCompare(x.updatedAt)
-				);
+				courses.sort((x: ICourse, y: ICourse) => y.updatedAt.localeCompare(x.updatedAt));
 				setCourses(courses);
 			} else {
 				setError('Unable to retrieve courses');
@@ -45,9 +45,60 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 		}
 	};
 
-	if (loading) {
-		return <h1>Loading courses...</h1>;
-	}
+	useEffect(() => {
+		if (courses.length === 0) {
+			setRender(
+				<h1>
+					No courses yet, make <Link to="/edit">one</Link>
+				</h1>
+			);
+		} else {
+			setRender(
+				courses.map((course, index) => {
+					return (
+						<div key={index}>
+							<CoursePreview
+								_id={course._id}
+								author={(course.author as IUser).firstName}
+								headline={course.headline}
+								title={course.title}
+								createdAt={course.createdAt}
+								updatedAt={course.updatedAt}
+							/>
+						</div>
+					);
+				})
+			);
+		}
+	}, [courses]);
+
+	// const renderCourses = () => {
+	// 	console.log('displayCourses hit');
+	// 	if (courses.length === 0) {
+	// 		return (
+	// 			<h1>
+	// 				No courses yet, make <Link to="/edit">one</Link>
+	// 			</h1>
+	// 		);
+	// 	} else {
+	// 		console.log('else hit');
+	// 		courses.map((course, index) => {
+	// 			console.log('map hit');
+	// 			return (
+	// 				<div key={index}>
+	// 					<CoursePreview
+	// 						_id={course._id}
+	// 						author={(course.author as IUser).firstName}
+	// 						headline={course.headline}
+	// 						title={course.title}
+	// 						createdAt={course.createdAt}
+	// 						updatedAt={course.updatedAt}
+	// 					/>
+	// 				</div>
+	// 			);
+	// 		});
+	// 	}
+	// };
 
 	return (
 		<Container fluid className="p-0">
@@ -56,7 +107,9 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 			<Link to="/edit">Create new post</Link>
 			<Container className="mt-5">Courses</Container>
 			<Container className="mt-5">
-				{courses.length === 0 && (
+				{loading ? <LoadComponent /> : render}
+				{/* {renderCourses()} */}
+				{/* {courses.length === 0 && (
 					<h1>
 						No courses yet, make <Link to="/edit">one</Link>
 					</h1>
@@ -74,7 +127,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 							/>
 						</div>
 					);
-				})}
+				})} */}
 				{error && error}
 			</Container>
 		</Container>
