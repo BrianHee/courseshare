@@ -4,24 +4,23 @@ import Course from '../models/Course';
 import logging from '../config/logging';
 
 const create = async (req: Request, res: Response) => {
-	logging.info('attempting to create course');
+	logging.info('attempting to create COURSEX');
 
-	const { author, title, content, headline, picture } = req.body;
+	const { author, title, description } = req.body;
 
 	const course = new Course({
 		// id
 		author,
 		title,
-		content,
-		headline,
-		picture
+		description,
+		lessoncount: 0
 	});
 
 	return course
 		.save() //break
 		.then((newCourse) => {
-			logging.info('New course created');
-			return res.status(201).json({ course: newCourse });
+			logging.info('New COURSEX created');
+			return res.status(201).json({ _id: newCourse._id });
 		})
 		.catch((error) => {
 			logging.error(error);
@@ -33,7 +32,7 @@ const create = async (req: Request, res: Response) => {
 
 const read = (req: Request, res: Response) => {
 	const _id = req.params.courseID;
-	logging.info(`Reading course id: ${_id} `);
+	logging.info(`Reading courseX id: ${_id} `);
 
 	Course.findById(_id) //break
 		.populate('author')
@@ -56,7 +55,7 @@ const read = (req: Request, res: Response) => {
 };
 
 const readAll = (req: Request, res: Response) => {
-	logging.info('Returning all courses');
+	logging.info('Returning all coursees');
 
 	Course.find() //break
 		.populate('author')

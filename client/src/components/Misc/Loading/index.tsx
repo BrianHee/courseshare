@@ -1,6 +1,7 @@
 import React from 'react';
 
 import '../../../../node_modules/spinkit/spinkit.css';
+import './styles.scss';
 
 const LoadComponent = () => {
 	return (

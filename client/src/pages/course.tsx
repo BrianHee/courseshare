@@ -43,9 +43,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(
-				`${config.server.url}/courses/${_id}`
-			);
+			const response = await axios.get(`${config.server.url}/course/${_id}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
@@ -63,9 +61,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 		setDeleting(true);
 
 		try {
-			const response = await axios.delete(
-				`${config.server.url}/courses/${_id}`
-			);
+			const response = await axios.delete(`${config.server.url}/course/${_id}`);
 
 			if (response.status === 201) {
 				navigate('/home');
@@ -97,47 +93,27 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 						<Button color="danger" onClick={() => deleteCourse()}>
 							Delete
 						</Button>
-						<Button
-							color="secondary"
-							onClick={() => setModal(false)}
-						>
+						<Button color="secondary" onClick={() => setModal(false)}>
 							Cancel
 						</Button>
 					</ModalFooter>
 				</Modal>
-				<Header
-					image={course.picture || undefined}
-					headline={course.headline}
-					title={course.title}
-				>
-					<p className="text-white">
-						{(course.author as IUser).firstName}
-					</p>
+				<Header title={course.title}>
+					<p className="text-white">{(course.author as IUser).firstName}</p>
 				</Header>
 				<Container className="mt-5">
 					{state._id === (course.author as IUser)._id && (
 						<Container fluid className="p-0">
-							<Button
-								color="info"
-								className="mr-2"
-								tag={Link}
-								to={`/edit/${course._id}`}
-							>
+							<Button color="info" className="mr-2" tag={Link} to={`/edit/${course._id}`}>
 								Edit
 							</Button>
-							<Button
-								color="danger"
-								onClick={() => setModal(true)}
-							>
+							<Button color="danger" onClick={() => setModal(true)}>
 								Delete
 							</Button>
 						</Container>
 					)}
 					{error}
-					<div
-						className="content-container"
-						dangerouslySetInnerHTML={{ __html: course.content }}
-					/>
+					<div className="content-container" dangerouslySetInnerHTML={{ __html: course.description }} />
 				</Container>
 			</Container>
 		);

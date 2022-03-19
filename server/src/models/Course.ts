@@ -3,11 +3,15 @@ import ICourse from '../interfaces/course';
 
 const CourseSchema: Schema = new Schema(
 	{
-		title: { type: String, unique: true },
-		author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-		content: { type: String },
-		headline: { type: String },
-		picture: { type: String }
+		title: { type: String, required: true },
+		author: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+			required: true
+		},
+		description: { type: String, required: true },
+		lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }],
+		lessoncount: { type: Number }
 	},
 	{
 		timestamps: true

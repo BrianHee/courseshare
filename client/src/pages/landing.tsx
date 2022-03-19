@@ -7,7 +7,7 @@ const LandingPage: React.FunctionComponent<any> = (props) => {
 	return (
 		<Container fluid className="p-0">
 			<Navigation />
-			<Header title="Course builder" headline="Check out my courses" />
+			<Header title="Course builder" />
 			<Container className="mt-5">Course stuff here</Container>
 		</Container>
 	);

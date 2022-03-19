@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavbarBrand } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 
-// import PageInterface from '../interfaces/page';
 import config from '../../../config/config';
 import { UserContext } from '../../../context';
 import LoadComponent from '../Loading';

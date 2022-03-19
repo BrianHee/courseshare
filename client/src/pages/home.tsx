@@ -28,7 +28,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 
 	const getAllCourses = async () => {
 		try {
-			const response = await axios.get(`${config.server.url}/courses`);
+			const response = await axios.get(`${config.server.url}/course`);
 
 			if (response.status === 200) {
 				let courses = response.data.courses;
@@ -60,7 +60,6 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 							<CoursePreview
 								_id={course._id}
 								author={(course.author as IUser).firstName}
-								headline={course.headline}
 								title={course.title}
 								createdAt={course.createdAt}
 								updatedAt={course.updatedAt}
@@ -72,62 +71,14 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 		}
 	}, [courses]);
 
-	// const renderCourses = () => {
-	// 	console.log('displayCourses hit');
-	// 	if (courses.length === 0) {
-	// 		return (
-	// 			<h1>
-	// 				No courses yet, make <Link to="/edit">one</Link>
-	// 			</h1>
-	// 		);
-	// 	} else {
-	// 		console.log('else hit');
-	// 		courses.map((course, index) => {
-	// 			console.log('map hit');
-	// 			return (
-	// 				<div key={index}>
-	// 					<CoursePreview
-	// 						_id={course._id}
-	// 						author={(course.author as IUser).firstName}
-	// 						headline={course.headline}
-	// 						title={course.title}
-	// 						createdAt={course.createdAt}
-	// 						updatedAt={course.updatedAt}
-	// 					/>
-	// 				</div>
-	// 			);
-	// 		});
-	// 	}
-	// };
-
 	return (
 		<Container fluid className="p-0">
 			<NavBar />
 			{state._id ? <h1>Hello, {state.firstName}</h1> : <></>}
-			<Link to="/edit">Create new post</Link>
+			<Link to="/create">Create new post</Link>
 			<Container className="mt-5">Courses</Container>
 			<Container className="mt-5">
 				{loading ? <LoadComponent /> : render}
-				{/* {renderCourses()} */}
-				{/* {courses.length === 0 && (
-					<h1>
-						No courses yet, make <Link to="/edit">one</Link>
-					</h1>
-				)}
-				{courses.map((course, index) => {
-					return (
-						<div key={index}>
-							<CoursePreview
-								_id={course._id}
-								author={(course.author as IUser).firstName}
-								headline={course.headline}
-								title={course.title}
-								createdAt={course.createdAt}
-								updatedAt={course.updatedAt}
-							/>
-						</div>
-					);
-				})} */}
 				{error && error}
 			</Container>
 		</Container>

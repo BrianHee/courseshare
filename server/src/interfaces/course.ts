@@ -1,10 +1,9 @@
-import { Document } from 'mongoose';
 import IUser from './user';
 
-export default interface ICourse extends Document {
+export default interface ICourse {
 	title: string;
 	author: IUser;
-	content: string;
-	headline: string;
-	picture?: string;
+	description: string;
+	lessons: object[];
+	lessoncount: number;
 }

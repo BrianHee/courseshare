@@ -15,16 +15,14 @@ import { Editor } from 'react-draft-wysiwyg';
 import SuccessText from '../components/Misc/SuccessText';
 import { Link, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import EditNav from '../components/CourseCreation';
 
 const EditPage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
 	const [title, setTitle] = useState<string>('');
-	const [picture, setPicture] = useState<string>('');
 	const [content, setContent] = useState<string>('');
-	const [headline, setHeadline] = useState<string>('');
-	const [editorState, setEditorState] = useState<EditorState>(
-		EditorState.createEmpty()
-	);
+	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
+	const [lessons, setLessons] = useState<ILesson[]>([])
 
 	const [saving, setSaving] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -35,8 +33,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const { courseID } = useParams();
 
 	useEffect(() => {
-		// let courseID = props.match.params.courseID;
-
+		console.log(state);
 		if (courseID) {
 			setId(courseID);
 			getCourse(courseID);
@@ -45,11 +42,21 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		}
 	}, []);
 
+	const getLessons = async (id: string) => {
+		try {
+			const response = await axios.get(`${config.server.url}/course/${id}`)
+			
+			if (response.status === 200) {
+
+			}
+		} catch (error) {
+			logging.error(error);
+		}
+	}
+
 	const getCourse = async (id: string) => {
 		try {
-			const response = await axios.get(
-				`${config.server.url}/courses/${id}`
-			);
+			const response = await axios.get(`${config.server.url}/course/${id}`);
 
 			if (response.status === 200) {
 				if (state._id !== response.data.course.author._id) {
@@ -59,17 +66,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					let course = response.data.course as ICourse;
 
 					setTitle(course.title);
-					setPicture(course.picture || '');
-					setContent(course.content);
-					setHeadline(course.headline);
+					setContent(course.description);
 
 					// Convert html to draft
-					const contentBlock = htmlToDraft(course.content);
-					const contentState = ContentState.createFromBlockArray(
-						contentBlock.contentBlocks
-					);
-					const _editorState =
-						EditorState.createWithContent(contentState);
+					const contentBlock = htmlToDraft(course.description);
+					const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+					const _editorState = EditorState.createWithContent(contentState);
 					setEditorState(_editorState);
 				}
 			} else {
@@ -85,7 +87,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const createCourse = async () => {
-		if (title === '' || headline === '' || content === '') {
+		if (title === '' || content === '') {
 			setError('Please fill out all required forms');
 			setSuccess('');
 			return;
@@ -96,16 +98,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		setSaving(true);
 
 		try {
-			const response = await axios.post(
-				`${config.server.url}/courses/create`,
-				{
-					title,
-					picture,
-					headline,
-					content,
-					author: state._id
-				}
-			);
+			const response = await axios.post(`${config.server.url}/course/create`, {
+				title,
+				content,
+				author: state._id
+			});
 
 			if (response.status === 201) {
 				setId(response.data.course._id);
@@ -122,7 +119,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const editCourse = async () => {
-		if (title === '' || headline === '' || content === '') {
+		if (title === '' || content === '') {
 			setError('Please fill out all required forms');
 			setSuccess('');
 			return;
@@ -133,16 +130,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		setSaving(true);
 
 		try {
-			const response = await axios.patch(
-				`${config.server.url}/courses/update/${_id}`,
-				{
-					title,
-					picture,
-					headline,
-					content,
-					author: state._id
-				}
-			);
+			const response = await axios.patch(`${config.server.url}/course/update/${_id}`, {
+				title,
+				content,
+				author: state._id
+			});
 
 			if (response.status === 201 || 200) {
 				setSuccess('Course updated.');
@@ -161,119 +153,95 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		return <h1>Loading...</h1>;
 	}
 
-	return (
-		<Container fluid className="p=0">
-			<Navigation />
-			<Header
-				headline=""
-				title={_id !== '' ? 'Edit course' : 'Create course'}
-			/>
-			<Container className="mt-5 mb-5">
-				<h1>{error}</h1>
-				<Form>
-					<FormGroup>
-						<Label for="title">Title</Label>
-						<Input
-							type="text"
-							name="title"
-							value={title}
-							id="title"
-							placeholder="Enter title"
-							disabled={saving}
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label for="headline">Headline</Label>
-						<Input
-							type="text"
-							name="headline"
-							value={headline}
-							id="headline"
-							placeholder="Enter headline"
-							disabled={saving}
-							onChange={(e) => setHeadline(e.target.value)}
-						/>
-					</FormGroup>
-					<FormGroup>
-						<Label>Content</Label>
-						<Editor
-							editorState={editorState}
-							wrapperClassName="card"
-							editorClassName="card-body"
-							onEditorStateChange={(newState) => {
-								setEditorState(newState);
-								setContent(
-									draftToHtml(
-										convertToRaw(
-											newState.getCurrentContent()
-										)
-									)
-								);
-							}}
-							toolbar={{
-								options: [
-									'inline',
-									'blockType',
-									'fontSize',
-									'list',
-									'textAlign',
-									'history',
-									'embedded',
-									'emoji',
-									'image'
-								],
-								inline: { inDropdown: true },
-								list: { inDropdown: true },
-								textAlign: { inDropdown: true },
-								link: { inDropdown: true },
-								history: { inDropdown: true }
-							}}
-						/>
-					</FormGroup>
-					<FormGroup>
-						<SuccessText success={success} />
-					</FormGroup>
-					<FormGroup>
-						<Button
-							block
-							onClick={() => {
-								if (_id !== '') {
-									editCourse();
-								} else {
-									createCourse();
-								}
-							}}
-							disabled={saving}
-						>
-							<i className="fas fa-save mr-1"></i>
-							{_id !== '' ? 'Update' : 'Post'}
-						</Button>
-						{_id !== '' && (
-							<Button
-								block
-								color="success"
-								tag={Link}
-								to={`/courses/${_id}`}
-							>
-								View your post!
-							</Button>
-						)}
-					</FormGroup>
-					<FormGroup>
-						<Label>Preview</Label>
-						<div className="border p-2">
-							<div
-								dangerouslySetInnerHTML={{
-									__html: content
-								}}
-							></div>
-						</div>
-					</FormGroup>
-				</Form>
-			</Container>
-		</Container>
-	);
+	// return (
+	// 	<Container fluid className="p=0">
+	// 		<Navigation />
+	// 		<Header title={_id !== '' ? 'Edit course' : 'Create course'} />
+	// 		<Container className="mt-5 mb-5">
+	// 			<h1>{error}</h1>
+	// 			<Form>
+	// 				<FormGroup>
+	// 					<Label for="title">Title</Label>
+	// 					<Input
+	// 						type="text"
+	// 						name="title"
+	// 						value={title}
+	// 						id="title"
+	// 						placeholder="Enter title"
+	// 						disabled={saving}
+	// 						onChange={(e) => setTitle(e.target.value)}
+	// 					/>
+	// 				</FormGroup>
+	// 				<FormGroup>
+	// 					<Label>Content</Label>
+	// 					<Editor
+	// 						editorState={editorState}
+	// 						wrapperClassName="card"
+	// 						editorClassName="card-body"
+	// 						onEditorStateChange={(newState) => {
+	// 							setEditorState(newState);
+	// 							setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
+	// 						}}
+	// 						toolbar={{
+	// 							options: [
+	// 								'inline',
+	// 								'blockType',
+	// 								'fontSize',
+	// 								'list',
+	// 								'textAlign',
+	// 								'history',
+	// 								'embedded',
+	// 								'emoji',
+	// 								'image'
+	// 							],
+	// 							inline: { inDropdown: true },
+	// 							list: { inDropdown: true },
+	// 							textAlign: { inDropdown: true },
+	// 							link: { inDropdown: true },
+	// 							history: { inDropdown: true }
+	// 						}}
+	// 					/>
+	// 				</FormGroup>
+	// 				<FormGroup>
+	// 					<SuccessText success={success} />
+	// 				</FormGroup>
+	// 				<FormGroup>
+	// 					<Button
+	// 						block
+	// 						onClick={() => {
+	// 							if (_id !== '') {
+	// 								editCourse();
+	// 							} else {
+	// 								createCourse();
+	// 							}
+	// 						}}
+	// 						disabled={saving}
+	// 					>
+	// 						<i className="fas fa-save mr-1"></i>
+	// 						{_id !== '' ? 'Update' : 'Post'}
+	// 					</Button>
+	// 					{_id !== '' && (
+	// 						<Button block color="success" tag={Link} to={`/course/${_id}`}>
+	// 							View your post!
+	// 						</Button>
+	// 					)}
+	// 				</FormGroup>
+	// 				<FormGroup>
+	// 					<Label>Preview</Label>
+	// 					<div className="border p-2">
+	// 						<div
+	// 							dangerouslySetInnerHTML={{
+	// 								__html: content
+	// 							}}
+	// 						></div>
+	// 					</div>
+	// 				</FormGroup>
+	// 			</Form>
+	// 		</Container>
+	// 	</Container>
+	// );
+
+	return (<EditNav courseId={courseID!} lessons=/>)
 };
 
 export default EditPage;

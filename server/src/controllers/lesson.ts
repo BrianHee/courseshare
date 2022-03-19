@@ -1,24 +1,24 @@
 import { Request, Response } from 'express';
 
-import Page from '../models/Page';
+import Lesson from '../models/Lesson';
 import logging from '../config/logging';
 
 const create = async (req: Request, res: Response) => {
-	logging.info('attempting to create Page');
+	logging.info('attempting to create Lesson');
 
-	const { chapter, title, content } = req.body;
+	const { course, title, content } = req.body;
 
-	const page = new Page({
-		chapter,
+	const lesson = new Lesson({
+		course,
 		title,
 		content
 	});
 
-	return page
+	return lesson
 		.save() //break
-		.then((newPage) => {
-			logging.info('New Page created');
-			return res.status(201).json({ page: newPage });
+		.then((newLesson) => {
+			logging.info('New Lessoln created');
+			return res.status(201).json({ lesson: newLesson });
 		})
 		.catch((error) => {
 			logging.error(error);
@@ -29,18 +29,18 @@ const create = async (req: Request, res: Response) => {
 };
 
 const read = (req: Request, res: Response) => {
-	const _id = req.params.pageID;
-	logging.info(`Reading page id: ${_id} `);
+	const _id = req.params.lesson;
+	logging.info(`Reading lesson id: ${_id} `);
 
-	Page.findById(_id) //break
+	Lesson.findById(_id) //break
 		// .populate('author')
 		// .exec()
-		.then((page) => {
-			if (page) {
-				return res.status(200).json({ page });
+		.then((lesson) => {
+			if (lesson) {
+				return res.status(200).json({ lesson });
 			} else {
 				return res.status(404).json({
-					error: 'Page not found'
+					error: 'Lesson not found'
 				});
 			}
 		})
@@ -53,15 +53,15 @@ const read = (req: Request, res: Response) => {
 };
 
 const readAll = (req: Request, res: Response) => {
-	logging.info('Returning all pages, this route must be edited');
+	logging.info('Returning all lesson, this route must be edited');
 
-	Page.find() //break
+	Lesson.find() //break
 		.populate('author')
 		.exec()
-		.then((pages) => {
+		.then((lessons) => {
 			return res.status(200).json({
-				count: pages.length,
-				pages
+				count: lessons.length,
+				lessons
 			});
 		})
 		.catch((error) => {
@@ -73,19 +73,20 @@ const readAll = (req: Request, res: Response) => {
 };
 
 const update = (req: Request, res: Response) => {
-	const _id = req.params.pageID;
-	logging.info(`Updating Page id: ${_id} `);
+	const _id = req.params.lessonID;
+	logging.info(`Updating Lesson id: ${_id} `);
 
-	Page.findById(_id) //break
+	Lesson.findById(_id) //break
 		.exec()
-		.then((page) => {
-			if (page) {
-				page.set(req.body);
-				page.save()
-					.then((savedPage) => {
-						logging.info(`page with id ${_id} updated`);
+		.then((lesson) => {
+			if (lesson) {
+				lesson.set(req.body);
+				lesson
+					.save()
+					.then((savedLesson) => {
+						logging.info(`Lesson with id ${_id} updated`);
 						return res.status(201).json({
-							page: savedPage
+							lesson: savedLesson
 						});
 					})
 					.catch((error) => {
@@ -109,16 +110,16 @@ const update = (req: Request, res: Response) => {
 		});
 };
 
-const deletePage = (req: Request, res: Response) => {
+const deleteLesson = (req: Request, res: Response) => {
 	logging.warn('Delete route called');
 
-	const _id = req.params.pageID;
+	const _id = req.params.lessonID;
 
-	Page.findByIdAndDelete(_id)
+	Lesson.findByIdAndDelete(_id)
 		.exec()
 		.then(() => {
 			return res.status(201).json({
-				message: 'Page deleted'
+				message: 'Lesson deleted'
 			});
 		})
 		.catch((error) => {
@@ -135,5 +136,5 @@ export default {
 	read,
 	readAll,
 	update,
-	deletePage
+	deleteLesson
 };

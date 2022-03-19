@@ -3,18 +3,10 @@ import axios from 'axios';
 import logging from '../config/logging';
 
 interface User {
-	// data: {
-	// 	id: string;
-	// 	firstName: string;
-	// 	lastName: string;
-	// 	email: string;
-	// };
 	_id: string;
 	firstName: string;
 	lastName: string;
 	email: string;
-	// error: string;
-	// loading: boolean;
 }
 
 const UserContext = createContext<[User, React.Dispatch<React.SetStateAction<User>>]>([
@@ -23,20 +15,16 @@ const UserContext = createContext<[User, React.Dispatch<React.SetStateAction<Use
 		firstName: '',
 		lastName: '',
 		email: ''
-		// loading: true
-		// error: ''
 	},
 	() => {}
 ]);
 
 const UserProvider = ({ children }: any) => {
 	const [user, setUser] = useState<User>({
-		_id: '',
+		_id: 'temp',
 		firstName: '',
 		lastName: '',
 		email: ''
-		// loading: true
-		// error: null
 	});
 
 	const token = localStorage.getItem('token');
@@ -55,10 +43,8 @@ const UserProvider = ({ children }: any) => {
 					firstName: response.data.user.firstName,
 					lastName: response.data.user.lastName,
 					email: response.data.user.email
-					// },
-					// loading: false
-					// error: null
 				});
+				console.log(user);
 			} else {
 				setUser({
 					// data: null,
@@ -66,20 +52,15 @@ const UserProvider = ({ children }: any) => {
 					firstName: '',
 					lastName: '',
 					email: ''
-					// loading: false
-					// error: response.error
 				});
 			}
 		} catch (error) {
 			logging.error(error);
 			setUser({
-				// data: null,
 				_id: '',
 				firstName: '',
 				lastName: '',
 				email: ''
-				// loading: false
-				// error: null
 			});
 		}
 	};
@@ -89,13 +70,10 @@ const UserProvider = ({ children }: any) => {
 			fetchUser();
 		} else {
 			setUser({
-				// data: null,
 				_id: '',
 				firstName: '',
 				lastName: '',
 				email: ''
-				// loading: false
-				// error: null
 			});
 		}
 	}, []);

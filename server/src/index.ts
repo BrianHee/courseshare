@@ -10,10 +10,7 @@ import logging from './config/logging';
 import config from './config/config';
 import authRoutes from './routes/user';
 import courseRoutes from './routes/course';
-
-import coursexRoutes from './routes/coursex';
-import chapterRoutes from './routes/chapter';
-import pageRoutes from './routes/page';
+import lessonRoutes from './routes/lesson';
 
 const app = express();
 
@@ -29,9 +26,7 @@ mongoose
 
 // Logging Middleware
 app.use((req, res, next) => {
-	logging.info(
-		`METHOD: '${req.method}' - URL: '${req.url}' - IP: '${req.socket.remoteAddress}'`
-	);
+	logging.info(`METHOD: '${req.method}' - URL: '${req.url}' - IP: '${req.socket.remoteAddress}'`);
 
 	res.on('finish', () => {
 		logging.info(
@@ -55,16 +50,10 @@ app.use(cors());
 // API Access
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-	);
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
 	if (req.method == 'OPTIONS') {
-		res.header(
-			'Access-Control-Allow-Methods',
-			'PUT, POST, PATCH, DELETE, GET'
-		);
+		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
 		return res.status(200).json({});
 	}
 
@@ -74,10 +63,8 @@ app.use((req, res, next) => {
 // Routes
 // app.get('/', (req, res) => res.send('hello world'));
 app.use('/auth', authRoutes); // designates all auth routes eg) /auth/signup
-app.use('/courses', courseRoutes);
-app.use('/coursex', coursexRoutes);
-app.use('/chapter', chapterRoutes);
-app.use('/page', pageRoutes);
+app.use('/course', courseRoutes);
+app.use('/lesson', lessonRoutes);
 
 // Error Handling
 app.use((req, res, next) => {
@@ -89,6 +76,4 @@ app.use((req, res, next) => {
 });
 
 // Listen for Requests
-app.listen(config.server.port, () =>
-	console.log(`app listening on port ${config.server.port}`)
-);
+app.listen(config.server.port, () => console.log(`app listening on port ${config.server.port}`));
