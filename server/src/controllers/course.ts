@@ -153,11 +153,58 @@ const deleteCourse = (req: Request, res: Response) => {
 		});
 };
 
+const getLessons = (req: Request, res: Response) => {
+	const _id = req.params.courseID;
+	logging.info(`getting related lessons for ${_id}`);
+
+	Course.findById(_id)
+		.exec() //break
+		.then((course) => {
+			if (course) {
+				return res.status(200).json({
+					lessons: course.lessons
+				});
+			} else {
+				logging.error('Course not found');
+				return res.status(404);
+			}
+		})
+		.catch((error) => {
+			logging.error(error.message);
+			return res.status(500);
+		});
+};
+
+const addLesson = (req: Request, res: Response) => {
+	const _id = req.params.courseID;
+	const { lessonId, lessonTitle } = req.body;
+	console.log(_id, lessonId, lessonTitle);
+
+	Course.findOneAndUpdate({ _id: _id }, { $push: { lessons: { lessonId, lessonTitle } } }, { new: true })
+		.then((course) => {
+			console.log(course);
+			if (course) {
+				return res.status(201).json({
+					lessons: course.lessons
+				});
+			} else {
+				logging.error('Could not add lesson');
+				return res.status(404);
+			}
+		})
+		.catch((error) => {
+			logging.error(error.message);
+			return res.status(500);
+		});
+};
+
 export default {
 	create,
 	read,
 	readAll,
 	query,
 	update,
-	deleteCourse
+	deleteCourse,
+	getLessons,
+	addLesson
 };

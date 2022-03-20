@@ -15,17 +15,18 @@ import { Editor } from 'react-draft-wysiwyg';
 import SuccessText from '../components/Misc/SuccessText';
 import { Link, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import EditNav from '../components/CourseCreation';
+import EditNav from '../components/CourseCreation/EditNav';
+import ILesson from '../interfaces/lesson';
 
 const EditPage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
-	const [lessons, setLessons] = useState<ILesson[]>([])
+	const [lessons, setLessons] = useState<ILesson[]>([]);
 
 	const [saving, setSaving] = useState<boolean>(false);
-	const [loading, setLoading] = useState<boolean>(true);
+	const [loading, setLoading] = useState<boolean>(false);
 	const [success, setSuccess] = useState<string>('');
 	const [error, setError] = useState<string>('');
 
@@ -33,26 +34,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const { courseID } = useParams();
 
 	useEffect(() => {
-		console.log(state);
 		if (courseID) {
 			setId(courseID);
-			getCourse(courseID);
 		} else {
 			setLoading(false);
 		}
 	}, []);
-
-	const getLessons = async (id: string) => {
-		try {
-			const response = await axios.get(`${config.server.url}/course/${id}`)
-			
-			if (response.status === 200) {
-
-			}
-		} catch (error) {
-			logging.error(error);
-		}
-	}
 
 	const getCourse = async (id: string) => {
 		try {
@@ -241,7 +228,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	// 	</Container>
 	// );
 
-	return (<EditNav courseId={courseID!} lessons=/>)
+	return (
+		<div>
+			<EditNav />
+			{error && error}
+		</div>
+	);
 };
 
 export default EditPage;

@@ -14,9 +14,7 @@ const CreatePage: React.FunctionComponent = () => {
 	const [state, setState] = useContext(UserContext);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		console.log(state._id);
-	}, []);
+	useEffect(() => {}, []);
 
 	const createCourse = async () => {
 		if (title === '' || description === '') {
@@ -30,12 +28,9 @@ const CreatePage: React.FunctionComponent = () => {
 				description,
 				author: state._id
 			});
-			console.log(response);
 
 			if (response.status === 201) {
-				console.log(response);
 				//not consoling the response
-				console.log(response.data._id);
 				setSuccess('Course succesfully created');
 				navigate(`/edit/${response.data._id}`);
 			}

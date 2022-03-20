@@ -29,7 +29,7 @@ const create = async (req: Request, res: Response) => {
 };
 
 const read = (req: Request, res: Response) => {
-	const _id = req.params.lesson;
+	const _id = req.params.lessonID;
 	logging.info(`Reading lesson id: ${_id} `);
 
 	Lesson.findById(_id) //break

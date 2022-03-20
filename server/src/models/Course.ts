@@ -10,7 +10,13 @@ const CourseSchema: Schema = new Schema(
 			required: true
 		},
 		description: { type: String, required: true },
-		lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }],
+		lessons: [
+			{
+				lessonId: { type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' },
+				lessonTitle: { type: String },
+				_id: false
+			}
+		],
 		lessoncount: { type: Number }
 	},
 	{

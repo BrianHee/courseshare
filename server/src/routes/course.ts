@@ -9,6 +9,8 @@ router.get('/', controller.readAll);
 router.post('/query', controller.query);
 router.patch('/update/:courseID', controller.update);
 router.delete('/:courseID', controller.deleteCourse);
+router.get('/:courseID/lessons', controller.getLessons);
+router.patch('/:courseID/add', controller.addLesson);
 
 export default router;
 

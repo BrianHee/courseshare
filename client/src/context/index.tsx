@@ -44,7 +44,6 @@ const UserProvider = ({ children }: any) => {
 					lastName: response.data.user.lastName,
 					email: response.data.user.email
 				});
-				console.log(user);
 			} else {
 				setUser({
 					// data: null,

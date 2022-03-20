@@ -28,7 +28,6 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 				token
 			});
 			let response = loginData;
-			console.log('token available');
 
 			if (!response.error) {
 				setState({
