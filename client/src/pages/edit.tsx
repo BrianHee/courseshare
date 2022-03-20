@@ -17,6 +17,7 @@ import { Link, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import EditNav from '../components/CourseCreation/EditNav';
 import ILesson from '../interfaces/lesson';
+import EditViewPort from '../components/CourseCreation/EditViewPort';
 
 const EditPage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
@@ -31,7 +32,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [error, setError] = useState<string>('');
 
 	const [state, setState] = useContext(UserContext);
-	const { courseID } = useParams();
+	const { courseID, lessonID } = useParams();
 
 	useEffect(() => {
 		if (courseID) {
@@ -41,197 +42,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		}
 	}, []);
 
-	const getCourse = async (id: string) => {
-		try {
-			const response = await axios.get(`${config.server.url}/course/${id}`);
-
-			if (response.status === 200) {
-				if (state._id !== response.data.course.author._id) {
-					logging.warn('This course is owned by someone else');
-					setId('');
-				} else {
-					let course = response.data.course as ICourse;
-
-					setTitle(course.title);
-					setContent(course.description);
-
-					// Convert html to draft
-					const contentBlock = htmlToDraft(course.description);
-					const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-					const _editorState = EditorState.createWithContent(contentState);
-					setEditorState(_editorState);
-				}
-			} else {
-				setError(`Unable to retrieve course ${_id}`);
-				setId('');
-			}
-		} catch (error) {
-			logging.error(error);
-			setError(error as string); // ? as string?
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	const createCourse = async () => {
-		if (title === '' || content === '') {
-			setError('Please fill out all required forms');
-			setSuccess('');
-			return;
-		}
-
-		setError('');
-		setSuccess('');
-		setSaving(true);
-
-		try {
-			const response = await axios.post(`${config.server.url}/course/create`, {
-				title,
-				content,
-				author: state._id
-			});
-
-			if (response.status === 201) {
-				setId(response.data.course._id);
-				setSuccess('Course posted.');
-			} else {
-				setError('Unable to create course');
-			}
-		} catch (error) {
-			logging.error(error);
-			setError(error as string);
-		} finally {
-			setSaving(false);
-		}
-	};
-
-	const editCourse = async () => {
-		if (title === '' || content === '') {
-			setError('Please fill out all required forms');
-			setSuccess('');
-			return;
-		}
-
-		setError('');
-		setSuccess('');
-		setSaving(true);
-
-		try {
-			const response = await axios.patch(`${config.server.url}/course/update/${_id}`, {
-				title,
-				content,
-				author: state._id
-			});
-
-			if (response.status === 201 || 200) {
-				setSuccess('Course updated.');
-			} else {
-				setError('Unable to update course');
-			}
-		} catch (error) {
-			logging.error(error);
-			setError(error as string);
-		} finally {
-			setSaving(false);
-		}
-	};
-
-	if (loading) {
-		return <h1>Loading...</h1>;
-	}
-
-	// return (
-	// 	<Container fluid className="p=0">
-	// 		<Navigation />
-	// 		<Header title={_id !== '' ? 'Edit course' : 'Create course'} />
-	// 		<Container className="mt-5 mb-5">
-	// 			<h1>{error}</h1>
-	// 			<Form>
-	// 				<FormGroup>
-	// 					<Label for="title">Title</Label>
-	// 					<Input
-	// 						type="text"
-	// 						name="title"
-	// 						value={title}
-	// 						id="title"
-	// 						placeholder="Enter title"
-	// 						disabled={saving}
-	// 						onChange={(e) => setTitle(e.target.value)}
-	// 					/>
-	// 				</FormGroup>
-	// 				<FormGroup>
-	// 					<Label>Content</Label>
-	// 					<Editor
-	// 						editorState={editorState}
-	// 						wrapperClassName="card"
-	// 						editorClassName="card-body"
-	// 						onEditorStateChange={(newState) => {
-	// 							setEditorState(newState);
-	// 							setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
-	// 						}}
-	// 						toolbar={{
-	// 							options: [
-	// 								'inline',
-	// 								'blockType',
-	// 								'fontSize',
-	// 								'list',
-	// 								'textAlign',
-	// 								'history',
-	// 								'embedded',
-	// 								'emoji',
-	// 								'image'
-	// 							],
-	// 							inline: { inDropdown: true },
-	// 							list: { inDropdown: true },
-	// 							textAlign: { inDropdown: true },
-	// 							link: { inDropdown: true },
-	// 							history: { inDropdown: true }
-	// 						}}
-	// 					/>
-	// 				</FormGroup>
-	// 				<FormGroup>
-	// 					<SuccessText success={success} />
-	// 				</FormGroup>
-	// 				<FormGroup>
-	// 					<Button
-	// 						block
-	// 						onClick={() => {
-	// 							if (_id !== '') {
-	// 								editCourse();
-	// 							} else {
-	// 								createCourse();
-	// 							}
-	// 						}}
-	// 						disabled={saving}
-	// 					>
-	// 						<i className="fas fa-save mr-1"></i>
-	// 						{_id !== '' ? 'Update' : 'Post'}
-	// 					</Button>
-	// 					{_id !== '' && (
-	// 						<Button block color="success" tag={Link} to={`/course/${_id}`}>
-	// 							View your post!
-	// 						</Button>
-	// 					)}
-	// 				</FormGroup>
-	// 				<FormGroup>
-	// 					<Label>Preview</Label>
-	// 					<div className="border p-2">
-	// 						<div
-	// 							dangerouslySetInnerHTML={{
-	// 								__html: content
-	// 							}}
-	// 						></div>
-	// 					</div>
-	// 				</FormGroup>
-	// 			</Form>
-	// 		</Container>
-	// 	</Container>
-	// );
-
 	return (
 		<div>
-			<EditNav />
 			{error && error}
+			<EditNav />
+			{lessonID ? <EditViewPort /> : <h1>No available lessons</h1>}
 		</div>
 	);
 };

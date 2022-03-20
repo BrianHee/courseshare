@@ -1,27 +1,33 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import config from '../../../config/config';
 import logging from '../../../config/logging';
-import ILesson from '../../../interfaces/lesson';
+// import ILesson from '../../../interfaces/lesson';
 
-export interface IEditNavProps {
-	courseId: string | null;
-	lessons: ILesson[];
+export interface ILessons {
+	lessonId: string;
+	lessonTitle: string;
 }
 
 const EditNav: React.FunctionComponent = () => {
-	const [error, setError] = useState('');
-	const [lessons, setLessons] = useState([]);
-	const [lessonsLen, setLessonsLen] = useState(0);
+	const [error, setError] = useState<string>('');
+	const [lessons, setLessons] = useState<ILessons[]>([]);
+	const [lessonsLen, setLessonsLen] = useState<number>(0);
 	const { courseID } = useParams();
+
+	const navigate = useNavigate();
 
 	const getLessons = async () => {
 		try {
-			const response = await axios.get(`${config.server.url}/course/${courseID}/lessons`);
+			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setLessons(response.data.course.lessons);
+				setLessonsLen(response.data.course.lessons.length);
+				console.log('length:', lessonsLen);
+				console.log('lessons set:', lessons);
 			} else {
 				console.log('Unable to find');
 				setError('Unable to find course');
@@ -33,7 +39,7 @@ const EditNav: React.FunctionComponent = () => {
 
 	useEffect(() => {
 		getLessons();
-	}, [lessons]);
+	}, [lessonsLen]);
 
 	const addLesson = async () => {
 		const [course, title, content] = [courseID, `Lesson ${lessonsLen + 1}`, ''];
@@ -55,6 +61,7 @@ const EditNav: React.FunctionComponent = () => {
 					});
 					console.log(update, 'lesson added');
 					setLessonsLen(update.data.lessons.length);
+					navigate(`/edit/${courseID}/${response.data.lesson._id}`);
 				} catch (error) {
 					logging.error(error);
 				}
@@ -75,7 +82,7 @@ const EditNav: React.FunctionComponent = () => {
 					lessons.map((ele, idx) => {
 						return (
 							<li key={idx}>
-								<h1>{ele}</h1>
+								<Link to={`/edit/${courseID}/${ele.lessonId}`}>{ele.lessonTitle}</Link>
 							</li>
 						);
 					})}
@@ -88,5 +95,3 @@ const EditNav: React.FunctionComponent = () => {
 };
 
 export default EditNav;
-
-// Course -> Map the pages -> Add Page button
