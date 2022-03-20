@@ -19,24 +19,14 @@ const EditViewPort: React.FunctionComponent = () => {
 	const { courseID, lessonID } = useParams();
 
 	const getLesson = async () => {
-		if (!lessonID) {
-			setError('No lessons available');
-			return;
-		}
-
 		try {
+			console.log('getting', lessonID);
 			const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
+			console.log('response', response);
 
 			if (response.status === 200) {
 				setTitle(response.data.lesson.title);
 				setContent(response.data.lesson.content);
-				console.log(content, 'of', title);
-
-				const contentBlock = htmlToDraft(content);
-				const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
-				const editorState = EditorState.createWithContent(contentState);
-
-				setEditorState(editorState);
 			} else {
 				console.log('Unable to find lesson');
 				setError('Unable to find lesson');
@@ -65,9 +55,21 @@ const EditViewPort: React.FunctionComponent = () => {
 
 	const deleteLesson = async () => {};
 
+	const updateEditor = () => {
+		const contentBlock = htmlToDraft(content);
+		const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+		const editorState = EditorState.createWithContent(contentState);
+
+		setEditorState(editorState);
+	};
+
 	useEffect(() => {
 		getLesson();
 	}, [lessonID]);
+
+	useEffect(() => {
+		updateEditor();
+	}, [content]);
 
 	return (
 		<div>
@@ -86,6 +88,7 @@ const EditViewPort: React.FunctionComponent = () => {
 					editorClassName="card-body"
 					onEditorStateChange={(newState) => {
 						setEditorState(newState);
+						console.log('Editor change', newState);
 						setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
 					}}
 					toolbar={{
