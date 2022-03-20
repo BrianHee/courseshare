@@ -1,0 +1,13 @@
+.loading-container {
+	height: 100%;
+	width: 100%;
+	// top: 0;
+	// left: 0;
+	z-index: 1;
+	position: fixed;
+	background: rgba(180, 180, 180, 0.5);
+	text-align: center;
+	align-content: center;
+	margin: auto;
+	padding: auto;
+}

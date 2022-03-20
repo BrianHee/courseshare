@@ -198,6 +198,29 @@ const addLesson = (req: Request, res: Response) => {
 		});
 };
 
+const deleteLesson = (req: Request, res: Response) => {
+	const _id = req.params.courseID;
+	const lessonId = req.params.lessonID;
+	console.log('removing from lesson from course', _id, lessonId);
+
+	Course.findOneAndUpdate({ _id: _id }, { $pull: { lessons: { lessonId } } }, { new: true })
+		.then((course) => {
+			if (course) {
+				logging.info('Lesson removed from course');
+				return res.status(201).json({
+					lessons: course.lessons
+				});
+			} else {
+				logging.error('Could not add lesson');
+				return res.status(404);
+			}
+		})
+		.catch((error) => {
+			logging.error(error.message);
+			return res.status(500);
+		});
+};
+
 export default {
 	create,
 	read,
@@ -206,5 +229,6 @@ export default {
 	update,
 	deleteCourse,
 	getLessons,
-	addLesson
+	addLesson,
+	deleteLesson
 };
