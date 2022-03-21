@@ -12,6 +12,7 @@ router.delete('/:courseID', controller.deleteCourse);
 router.get('/:courseID/lessons', controller.getLessons);
 router.patch('/:courseID/add', controller.addLesson);
 router.delete('/:courseID/:lessonID', controller.deleteLesson);
+router.patch('/:courseID/:lessonID', controller.updateLessonTitle);
 
 export default router;
 

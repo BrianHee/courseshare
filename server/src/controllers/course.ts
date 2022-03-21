@@ -203,7 +203,7 @@ const deleteLesson = (req: Request, res: Response) => {
 	const lessonId = req.params.lessonID;
 	console.log('removing from lesson from course', _id, lessonId);
 
-	Course.findOneAndUpdate({ _id: _id }, { $pull: { lessons: { lessonId } } }, { new: true })
+	Course.findOneAndUpdate({ _id }, { $pull: { lessons: { lessonId } } }, { new: true })
 		.then((course) => {
 			if (course) {
 				logging.info('Lesson removed from course');
@@ -212,6 +212,34 @@ const deleteLesson = (req: Request, res: Response) => {
 				});
 			} else {
 				logging.error('Could not add lesson');
+				return res.status(404);
+			}
+		})
+		.catch((error) => {
+			logging.error(error.message);
+			return res.status(500);
+		});
+};
+
+const updateLessonTitle = (req: Request, res: Response) => {
+	const _id = req.params.courseID;
+	const lessonId = req.params.lessonID;
+	const { lessonTitle } = req.body;
+	console.log('Updating lesson Title', _id, lessonId);
+
+	Course.findOneAndUpdate(
+		{ _id, 'lessons.lessonId': lessonId },
+		{ $set: { 'lessons.$.lessonTitle': lessonTitle } },
+		{ new: true }
+	)
+		.then((course) => {
+			if (course) {
+				logging.info('Lesson title updated');
+				return res.status(201).json({
+					lessons: course.lessons
+				});
+			} else {
+				logging.error('Could not update lesson');
 				return res.status(404);
 			}
 		})
@@ -230,5 +258,6 @@ export default {
 	deleteCourse,
 	getLessons,
 	addLesson,
-	deleteLesson
+	deleteLesson,
+	updateLessonTitle
 };

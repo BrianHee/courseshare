@@ -89,14 +89,25 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const saveLesson = async () => {
+		//fix this function
 		try {
 			const response = await axios.patch(`${config.server.url}/lesson/${lessonID}`, {
 				title,
 				content
 			});
+			console.log('Lesson saved');
 
 			if (response.status === 201) {
-				setSuccess('Successfully saved');
+				try {
+					const response = await axios.patch(`${config.server.url}/course/${courseID}/${lessonID}`, {
+						lessonTitle: title
+					});
+					console.log('Lesson title saved');
+					setSuccess('Successfully saved');
+					getNavLessons();
+				} catch (error) {
+					logging.error(error);
+				}
 			} else {
 				setError('Unable to save lesson');
 			}
