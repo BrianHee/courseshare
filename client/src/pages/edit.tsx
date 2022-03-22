@@ -144,7 +144,37 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		}
 	};
 
+	const deleteCourse = async () => {
+		console.log('Delete course called');
+		try {
+			const response = await axios.delete(`${config.server.url}/course/${courseID}`);
+
+			if (response.status === 201) {
+				console.log('Course delete, now deleting lessons');
+
+				const reply = await axios.delete(`${config.server.url}/lesson/course/${courseID}`);
+
+				if (reply.status === 201) {
+					console.log('All lessons deleted');
+					console.log(reply.data.message);
+				} else {
+					logging.error('Unable to delete lessons');
+				}
+			} else {
+				logging.error('Unable to delete course');
+			}
+		} catch (error) {
+			logging.error(error);
+		} finally {
+			navigate('/home');
+		}
+	};
+
 	const getLesson = async () => {
+		if (lessonsLen === 0) {
+			return;
+		}
+
 		try {
 			console.log('getting', lessonID);
 			const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
@@ -237,6 +267,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			</button>
 			<button type="button" onClick={deleteLesson}>
 				Delete lesson
+			</button>
+			<br />
+			<button type="button" onClick={deleteCourse}>
+				Delete course
 			</button>
 		</div>
 	);

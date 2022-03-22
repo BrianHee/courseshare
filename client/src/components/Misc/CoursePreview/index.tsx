@@ -16,7 +16,7 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 	return (
 		<Card className="border-0">
 			<CardBody className="p-0">
-				<Link to={`/course/${_id}`} style={{ textDecoration: 'none' }} className="text-primary">
+				<Link to={`/edit/${_id}`} style={{ textDecoration: 'none' }} className="text-primary">
 					<h1>
 						<strong>{title}</strong>
 					</h1>

@@ -8,5 +8,6 @@ router.get('/:lessonID', controller.read);
 router.get('/', controller.readAll);
 router.patch('/:lessonID', controller.update);
 router.delete('/:lessonID', controller.deleteLesson);
+router.delete('/course/:courseID', controller.deleteAllLessons);
 
 export default router;

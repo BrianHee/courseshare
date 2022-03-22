@@ -131,10 +131,33 @@ const deleteLesson = (req: Request, res: Response) => {
 		});
 };
 
+const deleteAllLessons = (req: Request, res: Response) => {
+	logging.warn('Deleting all lessons');
+
+	const _id = req.params.courseID;
+	const query = { "course": _id }; //prettier-ignore
+
+	Lesson.deleteMany(query)
+		.then((result) => {
+			console.log(`${result.deletedCount} item(s) deleted`);
+			return res.status(201).json({
+				message: `${result.deletedCount} item(s) deleted`
+			});
+		})
+		.catch((error) => {
+			logging.error(error.message);
+
+			return res.status(500).json({
+				error: error.message
+			});
+		});
+};
+
 export default {
 	create,
 	read,
 	readAll,
 	update,
-	deleteLesson
+	deleteLesson,
+	deleteAllLessons
 };
