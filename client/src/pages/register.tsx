@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
 import PageInterface from '../interfaces/page';
 import config from '../config/config';
@@ -51,30 +50,20 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 
 	return (
 		<div>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>First name</InputGroup.Text>
-				<FormControl type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-			</InputGroup>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>Last name</InputGroup.Text>
-				<FormControl type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-			</InputGroup>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>Email</InputGroup.Text>
-				<FormControl type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-			</InputGroup>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>Password</InputGroup.Text>
-				<FormControl type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-			</InputGroup>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>Confirm password</InputGroup.Text>
-				<FormControl type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} />
-			</InputGroup>
-			{errorMsg && errorMsg}
-			<Button variant="primary" onClick={handleClick}>
-				Register
-			</Button>
+			<form>
+				<label>First name</label>
+				<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+				<label>Last name</label>
+				<input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+				<label>Email</label>
+				<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+				<label>Password</label>
+				<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+				<label>Confirm password</label>
+				<input type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} />
+				{errorMsg && errorMsg}
+				<button onClick={handleClick}>Register</button>
+			</form>
 		</div>
 	);
 };

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link, useNavigate } from 'react-router-dom';
-import { Container, NavItem, Navbar, NavbarBrand } from 'reactstrap';
 
 import { UserContext } from '../../../context';
 
@@ -26,18 +25,14 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 	};
 
 	return (
-		<Navbar color="light" light sticky="top" expand="md">
-			<Container>
-				<NavbarBrand tag={Link} to="/">
-					CBuilder
-				</NavbarBrand>
-			</Container>
+		<div>
+			<Link to="/">CBuilder</Link>
 			{state._id && (
 				<NavLink to="/" onClick={handleLogout}>
 					LogOut
 				</NavLink>
 			)}
-		</Navbar>
+		</div>
 	);
 };
 

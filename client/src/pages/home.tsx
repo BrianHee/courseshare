@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container } from 'reactstrap';
 import axios from 'axios';
 
 import PageInterface from '../interfaces/page';
@@ -72,16 +71,16 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	}, [courses]);
 
 	return (
-		<Container fluid className="p-0">
+		<div>
 			<NavBar />
 			{state._id ? <h1>Hello, {state.firstName}</h1> : <></>}
 			<Link to="/create">Create new post</Link>
-			<Container className="mt-5">Courses</Container>
-			<Container className="mt-5">
+			<div>Courses</div>
+			<div>
 				{loading ? <LoadComponent /> : render}
 				{error && error}
-			</Container>
-		</Container>
+			</div>
+		</div>
 	);
 };
 

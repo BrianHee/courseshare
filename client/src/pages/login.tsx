@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
 // import PageInterface from '../interfaces/page';
 import config from '../config/config';
@@ -46,18 +45,14 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 	return (
 		<div>
 			<p>Login Page</p>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>Email</InputGroup.Text>
-				<FormControl type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-			</InputGroup>
-			<InputGroup className="mb-3">
-				<InputGroup.Text>Password</InputGroup.Text>
-				<FormControl type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-			</InputGroup>
-			{errorMsg && errorMsg}
-			<Button variant="primary" onClick={handleClick}>
-				Login
-			</Button>
+			<form>
+				<label>Email</label>
+				<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+				<label>Password</label>
+				<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+				{errorMsg && errorMsg}
+				<button onClick={handleClick}>Login</button>
+			</form>
 		</div>
 	);
 };

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Nav, Navbar, NavbarBrand } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 
 import config from '../../../config/config';
@@ -48,18 +47,15 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 	};
 
 	return (
-		<Navbar color="light" light sticky="top" expand="md">
-			<Container>
-				<NavbarBrand tag={Link} to="/">
-					CBuilder
-				</NavbarBrand>
-				<Nav className="mr-auto" navbar />
+		<div>
+			<div>
+				<Link to="/">CBuilder</Link>
 				<button className="login-button" onClick={loginUser}>
 					{loading ? <LoadComponent /> : 'Login'}
 				</button>
 				<Link to="/register">Register</Link>
-			</Container>
-		</Navbar>
+			</div>
+		</div>
 	);
 };
 

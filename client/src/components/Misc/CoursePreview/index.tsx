@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardBody } from 'reactstrap';
 
 export interface ICoursePreviewProps {
 	_id: string;
@@ -14,8 +13,8 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 	const { _id, author, children, createdAt, updatedAt, title } = props;
 
 	return (
-		<Card className="border-0">
-			<CardBody className="p-0">
+		<div>
+			<div>
 				<Link to={`/edit/${_id}`} style={{ textDecoration: 'none' }} className="text-primary">
 					<h1>
 						<strong>{title}</strong>
@@ -32,8 +31,8 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 					</p>
 				)}
 				{children}
-			</CardBody>
-		</Card>
+			</div>
+		</div>
 	);
 };
 
