@@ -13,110 +13,106 @@ import Header from '../components/Misc/Header';
 import IUser from '../interfaces/user';
 
 import '../styles/coursepage.scss';
+import CourseNav from '../components/CourseView/CourseNav';
+import ILesson from '../interfaces/lesson';
+
+export interface ILessons {
+	lessonId: string;
+	lessonTitle: string;
+}
 
 const CoursePage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
 	const [course, setCourse] = useState<ICourse | null>(null);
-	const [loading, setLoading] = useState<boolean>(true);
+	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
+	const [lesson, setLesson] = useState<ILesson>();
 	const [error, setError] = useState<string>('');
 
-	const [modal, setModal] = useState<boolean>(false);
-	const [deleting, setDeleting] = useState<boolean>(false);
-
 	const [state, setState] = useContext(UserContext);
-	const { courseID } = useParams();
+	const { courseID, lessonID } = useParams();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		if (courseID) {
-			setId(courseID);
-		} else {
-			navigate('/');
-		}
-	}, []);
-
-	useEffect(() => {
-		if (_id !== '') {
-			getCourse();
-		}
-	}, [_id]);
-
 	const getCourse = async () => {
+		console.log('getting course');
 		try {
-			const response = await axios.get(`${config.server.url}/course/${_id}`);
+			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
+				console.log('setting course');
 			} else {
-				setError('Unable to retrieve course');
+				console.log('Unable to set course');
 			}
 		} catch (error) {
-			setError('Unable to retrieve course');
-		} finally {
-			setLoading(false);
+			logging.error(error);
+			navigate('/error');
 		}
 	};
 
-	const deleteCourse = async () => {
-		setDeleting(true);
-
+	const getNavLessons = async () => {
 		try {
-			const response = await axios.delete(`${config.server.url}/course/${_id}`);
+			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
-			if (response.status === 201) {
-				navigate('/home');
+			if (response.status === 200) {
+				setNavLessons(response.data.course.lessons);
+				console.log('lessons set:', navLessons);
 			} else {
-				setError('Unable to delete course');
-				setDeleting(false);
+				console.log('Unable to find');
+				setError('Unable to find course');
 			}
 		} catch (error) {
-			setError('Unable to delete course');
-			setDeleting(false);
+			logging.error(error);
 		}
 	};
 
-	if (loading) {
-		return <p>Loading...</p>;
-	}
+	const getLesson = async () => {
+		console.log('Getting current lesson');
+		try {
+			console.log('getting', lessonID);
+			const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
+			console.log('response', response);
+
+			if (response.status === 200) {
+				setLesson(response.data.lesson);
+			} else {
+				console.log('Unable to find lesson');
+				setError('Unable to find lesson');
+			}
+		} catch (error) {
+			logging.error(error);
+		}
+	};
+
+	useEffect(() => {
+		getNavLessons();
+		getCourse();
+	}, []);
+
+	useEffect(() => {
+		getLesson();
+	}, [lessonID]);
+
+	useEffect(() => {
+		console.log('Curretn course is:', course);
+	}, [course]);
 
 	if (course) {
-		return (
-			<Container fluid className="p-0">
-				<NavBar />
-				<Modal isOpen={modal}>
-					<ModalHeader>Delete</ModalHeader>
-					<ModalBody>
-						{deleting ? <p>Loading...</p> : 'Are you sure?'}
-						<p>{error}</p>
-					</ModalBody>
-					<ModalFooter>
-						<Button color="danger" onClick={() => deleteCourse()}>
-							Delete
-						</Button>
-						<Button color="secondary" onClick={() => setModal(false)}>
-							Cancel
-						</Button>
-					</ModalFooter>
-				</Modal>
-				<Header title={course.title}>
-					<p className="text-white">{(course.author as IUser).firstName}</p>
-				</Header>
-				<Container className="mt-5">
-					{state._id === (course.author as IUser)._id && (
-						<Container fluid className="p-0">
-							<Button color="info" className="mr-2" tag={Link} to={`/edit/${course._id}`}>
-								Edit
-							</Button>
-							<Button color="danger" onClick={() => setModal(true)}>
-								Delete
-							</Button>
-						</Container>
-					)}
-					{error}
-					<div className="content-container" dangerouslySetInnerHTML={{ __html: course.description }} />
-				</Container>
-			</Container>
-		);
+		if (lesson) {
+			return (
+				<div>
+					<CourseNav lessons={navLessons} />
+					<div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+				</div>
+			);
+		} else {
+			return (
+				<div>
+					<CourseNav lessons={navLessons} />
+					<div>{course.title}</div>
+					<div>{course.description}</div>
+				</div>
+			);
+		}
 	} else {
 		return <Link to="/home" />;
 	}

@@ -170,6 +170,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		}
 	};
 
+	const seePreview = () => {
+		navigate(`/course/${courseID}`);
+	};
+
 	const getLesson = async () => {
 		if (lessonsLen === 0) {
 			return;
@@ -212,6 +216,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			updateEditor();
 		}
 	}, [update]);
+
+	if (!courseID) {
+		navigate('/error');
+	}
 
 	return (
 		<div>
@@ -269,6 +277,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 				Delete lesson
 			</button>
 			<br />
+			<button type="button" onClick={seePreview}>
+				Preview
+			</button>
 			<button type="button" onClick={deleteCourse}>
 				Delete course
 			</button>
