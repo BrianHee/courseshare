@@ -3,16 +3,18 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import config from '../../../config/config';
-import { UserContext } from '../../../context';
-import LoadComponent from '../Loading';
+import config from '../../../../config/config';
+import { UserContext } from '../../../../context';
+import LoadComponent from '../../../../components/Misc/Loading';
+import logo from '../../../../assets/logo.png';
 
-import './styles.scss';
+import styles from './styles.module.scss';
 
 export interface NavPropsInterface {}
 
-const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
+const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 	const [loading, setLoading] = useState(false);
+	const [scrollTrans, setScrollTrans] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -46,11 +48,24 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 		}
 	};
 
+	const callScrollTrans = () => {
+		if (window.scrollY >= 5) {
+			setScrollTrans(true);
+		} else {
+			setScrollTrans(false);
+		}
+	};
+	window.addEventListener('scroll', callScrollTrans);
+
 	return (
-		<div>
-			<div>
-				<Link to="/">CBuilder</Link>
-				<button className="login-button" onClick={loginUser}>
+		<div className={styles['navbar']}>
+			<div className="logo">
+				<Link to="/">
+					<img src={logo} alt="logo" height="40" />
+				</Link>
+			</div>
+			<div className={styles['container']}>
+				<button className={styles['login-button']} onClick={loginUser}>
 					{loading ? <LoadComponent /> : 'Login'}
 				</button>
 				<Link to="/register">Register</Link>
@@ -59,4 +74,4 @@ const Navigation: React.FunctionComponent<NavPropsInterface> = (props) => {
 	);
 };
 
-export default Navigation;
+export default LandingNav;

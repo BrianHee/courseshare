@@ -1,15 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
-import config from '../config/config';
-import logging from '../config/logging';
+import config from '../../config/config';
+import logging from '../../config/logging';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import EditNav from '../components/CourseCreation/EditNav';
-import EditViewPort from '../components/CourseCreation/EditViewPort';
+import EditNav from '../../components/CourseCreation/EditNav';
+import EditViewPort from '../../components/CourseCreation/EditViewPort';
 
 export interface ILessons {
 	lessonId: string;

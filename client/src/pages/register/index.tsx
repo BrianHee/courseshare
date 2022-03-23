@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import PageInterface from '../interfaces/page';
-import config from '../config/config';
-import { UserContext } from '../context';
+import PageInterface from '../../interfaces/page';
+import config from '../../config/config';
+import { UserContext } from '../../context';
 
 const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	const [firstName, setFirstName] = useState('');

@@ -3,3 +3,4 @@ build
 config
 .DS_Store
 Notes.md
+package-lock.json

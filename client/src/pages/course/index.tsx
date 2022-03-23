@@ -1,18 +1,17 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import config from '../config/config';
-import logging from '../config/logging';
-import { UserContext } from '../context';
-import ICourse from '../interfaces/course';
+import config from '../../config/config';
+import logging from '../../config/logging';
+import { UserContext } from '../../context';
+import ICourse from '../../interfaces/course';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import NavBar from '../components/Misc/NavBar';
-import Header from '../components/Misc/Header';
-import IUser from '../interfaces/user';
+import NavBar from '../../components/Misc/NavBar';
+import IUser from '../../interfaces/user';
 
-import '../styles/coursepage.scss';
-import CourseNav from '../components/CourseView/CourseNav';
-import ILesson from '../interfaces/lesson';
+import styles from './styles.module.scss';
+import CourseNav from '../../components/CourseView/CourseNav';
+import ILesson from '../../interfaces/lesson';
 
 export interface ILessons {
 	lessonId: string;

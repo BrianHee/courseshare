@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../context';
+import { UserContext } from '../../context';
 import axios from 'axios';
-import config from '../config/config';
-import logging from '../config/logging';
+import config from '../../config/config';
+import logging from '../../config/logging';
 import { useNavigate } from 'react-router-dom';
 
 const CreatePage: React.FunctionComponent = () => {

@@ -1,8 +1,18 @@
+@use './styles/fonts.scss';
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-decoration: none;
+	color: black;
+	box-sizing: border-box;
+}
+
 html,
 body {
 	height: 100%;
 	width: 100%;
-	margin: 0;
-	padding: 0;
-	position: relative;
+	// position: relative;
+	font-family: 'DM Serif Display', serif;
 }

@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 // import PageInterface from '../interfaces/page';
-import config from '../config/config';
-import { UserContext } from '../context';
+import config from '../../config/config';
+import { UserContext } from '../../context';
 
 const LoginPage: React.FunctionComponent<any> = (props) => {
 	const [email, setEmail] = useState<string>('');
