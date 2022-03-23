@@ -1,13 +1,20 @@
 @import '@fontsource/dm-serif-display';
 @import '@fontsource/dm-serif-text';
+@import '@fontsource/dm-sans';
 
-// h1 {
-// 	font-family: 'DM Serif Display', serif;
-// }
+h1 {
+	font-family: 'DM Serif Display', serif;
+}
 
-// h2 {
-// 	font-family: 'DM Serif Text', serif;
-// }
+h2 {
+	font-family: 'DM Serif Text', serif;
+}
 
-// h3 {
-// }
+h3 {
+	font-family: 'DM Serif Text', serif;
+}
+
+button {
+	font-family: 'DM sans', sans-serif;
+	font-weight: 700;
+}

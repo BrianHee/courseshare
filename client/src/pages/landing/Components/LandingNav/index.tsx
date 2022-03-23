@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import config from '../../../../config/config';
 import { UserContext } from '../../../../context';
-import LoadComponent from '../../../../components/Misc/Loading';
 import logo from '../../../../assets/logo.png';
+import logo2 from '../../../../assets/logo2.png';
 
 import styles from './styles.module.scss';
 
@@ -36,7 +36,6 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 					firstName: response.data.user.firstName,
 					lastName: response.data.user.lastName,
 					email: response.data.user.email
-					// loading: false
 				});
 				axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
 				navigate('/home');
@@ -48,27 +47,32 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 		}
 	};
 
-	const callScrollTrans = () => {
-		if (window.scrollY >= 5) {
+	const transitionNav = () => {
+		let mouseX = window.scrollY;
+		let nav = document.getElementById('navbar');
+		if (nav && mouseX > 30) {
 			setScrollTrans(true);
+			nav.style.background = '#fcfcfc';
+			nav.style.transition = 'background 0.75s';
 		} else {
 			setScrollTrans(false);
+			nav!.style.background = 'rgba(0,0,0,0)';
+			nav!.style.transition = 'background 0.75s';
 		}
 	};
-	window.addEventListener('scroll', callScrollTrans);
+	window.addEventListener('scroll', transitionNav);
 
 	return (
-		<div className={styles['navbar']}>
-			<div className="logo">
+		<div className={styles['navbar']} id="navbar">
+			<div className={styles['logo']}>
 				<Link to="/">
-					<img src={logo} alt="logo" height="40" />
+					<img src={scrollTrans ? logo2 : logo} alt="logo" height="40" />
 				</Link>
 			</div>
 			<div className={styles['container']}>
 				<button className={styles['login-button']} onClick={loginUser}>
-					{loading ? <LoadComponent /> : 'Login'}
+					Sign In
 				</button>
-				<Link to="/register">Register</Link>
 			</div>
 		</div>
 	);

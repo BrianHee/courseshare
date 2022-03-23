@@ -6,11 +6,11 @@ import { UserContext } from '../../context';
 import ICourse from '../../interfaces/course';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import NavBar from '../../components/Misc/NavBar';
+import NavBar from '../../components/NavBar';
 import IUser from '../../interfaces/user';
 
 import styles from './styles.module.scss';
-import CourseNav from '../../components/CourseView/CourseNav';
+import CourseNav from '../edit/Components/CourseNav';
 import ILesson from '../../interfaces/lesson';
 
 export interface ILessons {

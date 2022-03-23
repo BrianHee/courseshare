@@ -2,9 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import config from '../../../config/config';
-import logging from '../../../config/logging';
-import LoadComponent from '../../Misc/Loading';
+import config from '../../../../config/config';
+import logging from '../../../../config/logging';
 // import ILesson from '../../../interfaces/lesson';
 
 import './styles.scss';

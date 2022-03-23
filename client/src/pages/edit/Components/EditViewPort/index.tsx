@@ -5,8 +5,8 @@ import htmlToDraft from 'html-to-draftjs';
 import React, { useEffect, useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import config from '../../../config/config';
-import logging from '../../../config/logging';
+import config from '../../../../config/config';
+import logging from '../../../../config/logging';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 export interface ILessons {}

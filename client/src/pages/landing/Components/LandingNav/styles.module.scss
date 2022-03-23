@@ -1,11 +1,11 @@
+@use '../../../../styles/colors.scss';
+
 .navbar {
-	font-size: 1.5rem;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1rem;
+	padding: 10px;
 	position: fixed;
-	background: white;
 	width: 100%;
 }
 
@@ -14,23 +14,31 @@
 }
 
 .logo {
-	margin: 0 0 0 2rem;
+	margin: 10px 0 0 20px;
 }
 
 .container {
 	display: flex;
 	justify-content: space-between;
-	width: 15rem;
-	margin: 0 4rem;
+	margin: 0 50px;
+	font-family: Arial, sans-serif;
 }
 
 button {
-	background: none;
+	background: rgba(255, 255, 255, 0.5);
 	border: none;
-	padding: 0;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
 	font-family: 'DM Serif Display', sans-serif;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	color: #069;
 	cursor: pointer;
 	color: black;
+	transition: 0.25s;
+	margin: 0 auto;
+}
+
+button:hover {
+	background: rgba(255, 255, 255, 0.65);
 }

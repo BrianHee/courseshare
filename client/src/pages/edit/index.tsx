@@ -8,8 +8,8 @@ import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import EditNav from '../../components/CourseCreation/EditNav';
-import EditViewPort from '../../components/CourseCreation/EditViewPort';
+import EditNav from './Components/EditNav';
+import EditViewPort from './Components/EditViewPort';
 
 export interface ILessons {
 	lessonId: string;

@@ -2,15 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 import PageInterface from '../../interfaces/page';
-import NavBar from '../../components/Misc/NavBar';
+import NavBar from '../../components/NavBar';
 import { UserContext } from '../../context';
 import ICourse from '../../interfaces/course';
 import config from '../../config/config';
 import logging from '../../config/logging';
 import { Link } from 'react-router-dom';
-import CoursePreview from '../../components/Misc/CoursePreview';
+import CoursePreview from '../../components/CoursePreview';
 import IUser from '../../interfaces/user';
-import LoadComponent from '../../components/Misc/Loading';
 
 const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const userContext = useContext(UserContext);
@@ -77,7 +76,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 			<Link to="/create">Create new post</Link>
 			<div>Courses</div>
 			<div>
-				{loading ? <LoadComponent /> : render}
+				{render}
 				{error && error}
 			</div>
 		</div>
