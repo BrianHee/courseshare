@@ -2,6 +2,30 @@
 
 .container {
 	height: 100vh;
-	width: 100%;
 	background: colors.$myblue;
+}
+
+.component-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.left-component {
+	padding: 10rem 15rem;
+	font-size: 1.5rem;
+}
+
+.left-component h1 {
+	margin: 10vh;
+}
+
+.right-component {
+	margin: 100px 10px;
+}
+
+.image-component {
+	position: absolute;
+	top: 600px;
+	right: 175px;
+	z-index: 1;
 }

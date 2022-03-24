@@ -7,6 +7,7 @@
 	padding: 10px;
 	position: fixed;
 	width: 100%;
+	z-index: 10;
 }
 
 .navbar.scrollTrans {
@@ -18,10 +19,7 @@
 }
 
 .container {
-	display: flex;
-	justify-content: space-between;
 	margin: 0 50px;
-	font-family: Arial, sans-serif;
 }
 
 button {
@@ -30,9 +28,9 @@ button {
 	border-radius: 10px;
 	width: 100px;
 	height: 40px;
-	font-family: 'DM Serif Display', sans-serif;
+	font-family: Arial, sans-serif;
+	font-weight: 600;
 	font-size: 1rem;
-	color: #069;
 	cursor: pointer;
 	color: black;
 	transition: 0.25s;
@@ -40,5 +38,13 @@ button {
 }
 
 button:hover {
-	background: rgba(255, 255, 255, 0.65);
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.button2 {
+	background: rgba(220, 220, 220, 0.5);
+}
+
+.button2:hover {
+	background: rgba(220, 220, 220, 0.3);
 }

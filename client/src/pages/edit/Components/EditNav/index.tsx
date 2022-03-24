@@ -6,7 +6,7 @@ import config from '../../../../config/config';
 import logging from '../../../../config/logging';
 // import ILesson from '../../../interfaces/lesson';
 
-import './styles.scss';
+import styles from './styles.module.scss';
 
 export interface ILessons {
 	lessonId: string;

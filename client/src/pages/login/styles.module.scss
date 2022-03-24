@@ -1,0 +1,71 @@
+@use '../../styles/colors.scss';
+
+.container {
+	height: 100vh;
+	background-color: colors.$mywhite;
+	display: flex;
+	justify-content: center;
+}
+
+.form-container {
+	display: block;
+	justify-content: center;
+	text-align: center;
+	margin: auto;
+	background-color: white;
+	height: 500px;
+	width: 450px;
+	border-radius: 10px;
+	box-shadow: colors.$myshadow;
+}
+
+.title {
+	text-align: center;
+	font-size: 50px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+	padding: 50px;
+}
+
+.error {
+	color: red;
+	width: 100%;
+	min-height: 20px;
+	text-align: left;
+	margin: 5px 0;
+	padding: 0 50px;
+}
+
+input {
+	border: none;
+	border-radius: 10px;
+	background-color: colors.$mywhite;
+	margin: 10px 0;
+	padding: 0 20px;
+	width: 80%;
+	line-height: 3rem;
+	font-size: 20px;
+}
+
+input:focus {
+	outline: colors.$myblue 2px solid;
+}
+
+.login {
+	background: rgba(1, 1, 1, 1);
+	border: none;
+	border-radius: 10px;
+	width: 100px;
+	height: 55px;
+	font-family: Arial, sans-serif;
+	font-weight: 600;
+	font-size: 1.2rem;
+	cursor: pointer;
+	color: white;
+	transition: 0.25s;
+	margin: 0 auto;
+}
+
+.login:hover {
+	background: rgba(0, 0, 0, 0.75);
+}

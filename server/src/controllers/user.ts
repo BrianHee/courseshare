@@ -56,11 +56,12 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
 	const { email, password } = req.body;
+	console.log(email, password);
 
 	const user = await User.findOne({ email });
 
 	if (!user) {
-		return res.json({
+		return res.status(500).json({
 			errors: ['Invalid credentials']
 		});
 	}
@@ -68,7 +69,7 @@ const login = async (req: Request, res: Response) => {
 	const isMatch = await bcrypt.compare(password, user.password);
 
 	if (!isMatch) {
-		return res.json({
+		return res.status(500).json({
 			errors: ['Invalid credentials']
 		});
 	}
@@ -77,7 +78,7 @@ const login = async (req: Request, res: Response) => {
 		expiresIn: '7d'
 	});
 
-	return res.json({
+	return res.status(200).json({
 		errors: [],
 		data: {
 			token,
