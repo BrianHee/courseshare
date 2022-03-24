@@ -1,0 +1,52 @@
+@use '../../../../../styles/fonts.scss';
+
+.container {
+	position: absolute;
+	right: 220px;
+	top: 300px;
+	display: inline-flex;
+	font-size: 25px;
+	font-family: 'DM Mono';
+	font-weight: 600;
+}
+
+.container .dynamic-text {
+	height: 25px;
+	margin-left: 10px;
+	line-height: 25px;
+	// position: relative;
+	overflow: hidden;
+}
+
+.dynamic-texts li {
+	position: relative;
+	top: 100px;
+	animation: slide 6s steps(4) infinite;
+}
+
+@keyframes slide {
+	100% {
+		top: -360px;
+	}
+}
+
+.dynamic-text li span {
+	position: relative;
+}
+
+.dynamic-text li span::after {
+	content: '';
+	background-color: white;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	border-left: 2px solid black;
+	left: 0;
+	animation: typing 1.5s steps(7) infinite;
+}
+
+@keyframes typing {
+	100% {
+		left: 110%;
+	}
+}

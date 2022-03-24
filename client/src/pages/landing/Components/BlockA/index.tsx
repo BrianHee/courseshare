@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import steak from '../../../../assets/steak.png';
 import code from '../../../../assets/code.png';
 import blocka from '../../../../assets/blocka.png';
+import TypeComponent from './TypeComponent';
 
 const BlockA = () => {
 	const [currentImage, setCurrentImage] = useState(steak);
@@ -31,7 +32,7 @@ const BlockA = () => {
 				<div className={styles['right-component']}>
 					<img src={blocka} alt="steak" height="650" />
 					<img className={styles['image-component']} id="image" src={currentImage} alt="steak" height="100" />
-					{/* <img src={code} alt="steak" height="200" /> */}
+					<TypeComponent />
 				</div>
 			</div>
 		</div>

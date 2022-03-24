@@ -5,5 +5,5 @@ Left off:
 -   add delete course √
 -   add loading
 -   add styling
--   email confirmation?
+-   email confirmation? no
 -   preview page

@@ -13,10 +13,17 @@
 .left-component {
 	padding: 10rem 15rem;
 	font-size: 1.5rem;
+	cursor: default;
+	user-select: none;
 }
 
 .left-component h1 {
 	margin: 10vh;
+	transition: 0.5s;
+}
+
+.left-component h1:hover {
+	color: white;
 }
 
 .right-component {
