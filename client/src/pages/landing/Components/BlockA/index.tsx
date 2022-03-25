@@ -2,26 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-web';
 
 import styles from './styles.module.scss';
-import steak from '../../../../assets/steak.png';
-import code from '../../../../assets/code.png';
-import blocka from '../../../../assets/blocka.png';
-import TypeComponent from './TypeComponent';
+// import steak from '../../../../assets/steak.png';
+// import code from '../../../../assets/code.png';
+// import blocka from '../../../../assets/blocka.png';
 
 const BlockA = () => {
-	const [currentImage, setCurrentImage] = useState(steak);
-
-	// const transitionImage = () => {
-	// 	if (currentImage === steak) {
-	// 		setCurrentImage(code);
-	// 	} else {
-	// 		setCurrentImage(steak);
-	// 	}
-	// };
-
-	// useEffect(() => {
-	// 	setInterval(transitionImage, 1000);
-	// }, [currentImage]);
-
 	const animation = useRef(null);
 
 	useEffect(() => {
@@ -38,9 +23,9 @@ const BlockA = () => {
 		<div className={styles.container}>
 			<div className={styles['component-container']}>
 				<div className={styles['left-component']}>
-					<h1>Learn.</h1>
-					<h1>Teach.</h1>
-					<h1>Share.</h1>
+					<h1 className={styles['dynamic']}>Learn.</h1>
+					<h1 className={styles['dynamic']}>Teach.</h1>
+					<h1 className={styles['dynamic']}>Share.</h1>
 				</div>
 				<div className={styles['right-component']} ref={animation}>
 					{/* <img src={blocka} alt="steak" height="650" />

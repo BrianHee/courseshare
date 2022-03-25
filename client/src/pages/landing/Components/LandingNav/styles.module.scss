@@ -22,7 +22,7 @@
 	margin: 0 50px;
 }
 
-button {
+.button1 {
 	background: rgba(255, 255, 255, 0.5);
 	border: none;
 	border-radius: 10px;
@@ -37,12 +37,22 @@ button {
 	margin: 0 auto;
 }
 
-button:hover {
+.button1:hover {
 	background: rgba(255, 255, 255, 0.7);
 }
 
 .button2 {
 	background: rgba(220, 220, 220, 0.5);
+	border: none;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
+	font-family: Arial, sans-serif;
+	font-weight: 600;
+	font-size: 1rem;
+	cursor: pointer;
+	color: black;
+	margin: 0 auto;
 }
 
 .button2:hover {

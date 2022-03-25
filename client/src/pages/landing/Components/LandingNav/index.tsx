@@ -70,7 +70,7 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 				</Link>
 			</div>
 			<div className={styles['container']}>
-				<button className={scrollTrans ? styles['button2'] : ''} onClick={loginUser}>
+				<button className={scrollTrans ? styles['button2'] : styles['button1']} onClick={loginUser}>
 					Sign In
 				</button>
 			</div>

@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
 
 import { UserContext } from '../../context';
+
+import logo from '../../assets/logo.png';
+import styles from './styles.module.scss';
 
 export interface NavPropsInterface {}
 
@@ -25,14 +27,20 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 	};
 
 	return (
-		<div>
-			<Link to="/">CBuilder</Link>
-			{state._id && (
-				<NavLink to="/" onClick={handleLogout}>
-					LogOut
-				</NavLink>
-			)}
-		</div>
+		<nav className={styles['navbar']}>
+			<div className={styles['logo-container']}>
+				<Link to="/home">
+					<img src={logo} alt="courseshare" height="40" />
+				</Link>
+			</div>
+			<div className={styles['logout-container']}>
+				{state._id && (
+					<button className={styles['logout']} type="button" onClick={handleLogout}>
+						Sign out
+					</button>
+				)}
+			</div>
+		</nav>
 	);
 };
 

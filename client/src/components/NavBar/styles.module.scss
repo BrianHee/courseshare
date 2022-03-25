@@ -1,0 +1,35 @@
+@use '../../styles/colors.scss';
+
+.navbar {
+	background-color: colors.$myblue;
+	width: 100vw;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	vertical-align: middle;
+}
+
+.logo-container {
+	width: 50%;
+	margin: 10px 0 0 20px;
+}
+
+.logout {
+	background: rgba(0, 0, 0, 0);
+	border: none;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
+	font-family: Arial, sans-serif;
+	font-weight: 600;
+	font-size: 1.15rem;
+	cursor: pointer;
+	color: white;
+	transition: 0.2s;
+	margin: 0 50px;
+}
+
+.logout:hover {
+	border: 2px white solid;
+}
