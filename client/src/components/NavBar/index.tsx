@@ -28,17 +28,19 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 
 	return (
 		<nav className={styles['navbar']}>
-			<div className={styles['logo-container']}>
-				<Link to="/home">
-					<img src={logo} alt="courseshare" height="40" />
-				</Link>
-			</div>
-			<div className={styles['logout-container']}>
-				{state._id && (
-					<button className={styles['logout']} type="button" onClick={handleLogout}>
-						Sign out
-					</button>
-				)}
+			<div className={styles['container']}>
+				<div className={styles['logo-container']}>
+					<Link to="/home">
+						<img src={logo} alt="courseshare" height="40" />
+					</Link>
+				</div>
+				<div className={styles['logout-container']}>
+					{state._id && (
+						<button className={styles['logout']} type="button" onClick={handleLogout}>
+							Sign Out
+						</button>
+					)}
+				</div>
 			</div>
 		</nav>
 	);

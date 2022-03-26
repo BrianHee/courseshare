@@ -1,0 +1,20 @@
+@use '../../styles/colors.scss';
+
+.container {
+	width: 100vw;
+	background-color: white;
+}
+
+.greeting-container {
+	font-size: 30px;
+	width: 100%;
+	padding: 20px 50px;
+}
+.greeting-container h1 {
+	border-bottom: 2px colors.$mygray solid;
+}
+
+.tab-container {
+	display: flex;
+	justify-content: space-between;
+}

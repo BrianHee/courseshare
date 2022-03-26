@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import PageInterface from '../../interfaces/page';
@@ -11,14 +12,18 @@ import { Link } from 'react-router-dom';
 import CoursePreview from '../../components/CoursePreview';
 import IUser from '../../interfaces/user';
 
+import styles from './styles.module.scss';
+
 const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const userContext = useContext(UserContext);
 	const [state, setState] = userContext;
 
 	const [courses, setCourses] = useState<ICourse[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [render, setRender] = useState<any>('');
+	const [renderCourses, setRender] = useState<any>('');
 	const [error, setError] = useState<string>('');
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		getAllCourses();
@@ -43,12 +48,19 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 		}
 	};
 
+	const navigateNewCourse = () => {
+		navigate('/create');
+	};
+
 	useEffect(() => {
 		if (courses.length === 0) {
 			setRender(
-				<h1>
-					No courses yet, make <Link to="/edit">one</Link>
-				</h1>
+				<div className={styles['empty-message']}>
+					It's eerily empty here 👀 ...{' '}
+					<Link className={'link'} to="/create">
+						Get started
+					</Link>
+				</div>
 			);
 		} else {
 			setRender(
@@ -70,13 +82,19 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	}, [courses]);
 
 	return (
-		<div>
+		<div className={styles['container']}>
 			<NavBar />
-			{state._id ? <h1>Hello, {state.firstName}</h1> : <></>}
-			<Link to="/create">Create new post</Link>
-			<div>Courses</div>
+			<div className={styles['greeting-container']}>{state._id ? <h1>Hello, {state.firstName}!</h1> : <></>}</div>
+			<div className={styles['tab-container']}>
+				<div className={styles['tab']}>Courses</div>
+				<div className={styles['create-button']}>
+					<button type="button" onClick={navigateNewCourse}>
+						+ New Course
+					</button>
+				</div>
+			</div>
 			<div>
-				{render}
+				{renderCourses}
 				{error && error}
 			</div>
 		</div>
