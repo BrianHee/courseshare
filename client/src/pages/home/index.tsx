@@ -57,7 +57,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 			setRender(
 				<div className={styles['empty-message']}>
 					It's eerily empty here 👀 ...{' '}
-					<Link className={'link'} to="/create">
+					<Link className={styles['link']} to="/create">
 						Get started
 					</Link>
 				</div>
@@ -86,14 +86,16 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 			<NavBar />
 			<div className={styles['greeting-container']}>{state._id ? <h1>Hello, {state.firstName}!</h1> : <></>}</div>
 			<div className={styles['tab-container']}>
-				<div className={styles['tab']}>Courses</div>
-				<div className={styles['create-button']}>
-					<button type="button" onClick={navigateNewCourse}>
+				<div className={styles['tab']}>
+					<span>Courses</span>
+				</div>
+				<div>
+					<button className={styles['create-button']} type="button" onClick={navigateNewCourse}>
 						+ New Course
 					</button>
 				</div>
 			</div>
-			<div>
+			<div className={styles['courses-container']}>
 				{renderCourses}
 				{error && error}
 			</div>
