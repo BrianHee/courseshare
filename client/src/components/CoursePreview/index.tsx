@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import styles from './styles.module.scss';
+
 export interface ICoursePreviewProps {
 	_id: string;
 	title: string;
@@ -13,7 +15,7 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 	const { _id, author, children, createdAt, updatedAt, title } = props;
 
 	return (
-		<div>
+		<div className={styles['container']}>
 			<div>
 				<Link to={`/edit/${_id}`} style={{ textDecoration: 'none' }} className="text-primary">
 					<h1>

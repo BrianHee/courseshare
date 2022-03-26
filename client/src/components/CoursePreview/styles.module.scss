@@ -1,0 +1,11 @@
+@use '../../styles/colors.scss';
+@use '../../styles/fonts.scss';
+
+.container {
+	background-color: colors.$mywhite;
+	border: 2px solid colors.$mygray;
+	border-radius: 10px;
+	height: 100px;
+	padding: 10px;
+	margin: 0 0 20px;
+}
