@@ -28,6 +28,9 @@
 
 .right-component {
 	margin: 100px 10px;
+	animation: fade 1s both;
+	-moz-animation: fade 1s both;
+	-webkit-animation: fade 1s both;
 }
 
 .image-component {
