@@ -23,14 +23,16 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const navigate = useNavigate();
 
 	return (
-		<nav>
+		<nav className={styles['navbar']}>
 			<h1>Nav for editor</h1>
 			<ul>
 				{lessons &&
 					lessons.map((ele, idx) => {
 						return (
 							<li key={idx}>
-								<Link to={`/edit/${courseID}/${ele.lessonId}`}>{ele.lessonTitle}</Link>
+								<Link className={styles['link']} to={`/edit/${courseID}/${ele.lessonId}`}>
+									{ele.lessonTitle}
+								</Link>
 							</li>
 						);
 					})}

@@ -1,13 +1,34 @@
-.loading-container {
-	height: 100%;
+@use '../../../../styles/colors.scss';
+
+.navbar {
+	width: 350px;
+	height: 100vh;
+	background-color: colors.$mywhite;
+	overflow-y: scroll;
+}
+
+.navbar ul li {
+	font-size: 1.5rem;
+	border-top: 1px solid black;
+}
+
+.link {
+	padding: 0 20px;
+	height: 50px;
 	width: 100%;
-	// top: 0;
-	// left: 0;
-	z-index: 1;
-	position: fixed;
-	background: rgba(180, 180, 180, 0.5);
-	text-align: center;
-	align-content: center;
-	margin: auto;
-	padding: auto;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	transition: 0.5s;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.navbar ul li:last-child {
+	margin-bottom: 100px;
+}
+
+.link:hover {
+	background-color: colors.$mygray;
 }

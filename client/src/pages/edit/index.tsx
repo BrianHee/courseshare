@@ -9,7 +9,8 @@ import { Editor } from 'react-draft-wysiwyg';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import EditNav from './Components/EditNav';
-import EditViewPort from './Components/EditViewPort';
+
+import styles from './styles.module.scss';
 
 export interface ILessons {
 	lessonId: string;
@@ -222,9 +223,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	}
 
 	return (
-		<div>
-			{error && error}
-			{success && success}
+		<div className={styles['container']}>
 			<EditNav lessons={navLessons} />
 			{lessonID ? (
 				<div>
@@ -283,6 +282,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			<button type="button" onClick={deleteCourse}>
 				Delete course
 			</button>
+			{error && error}
+			{success && success}
 		</div>
 	);
 };

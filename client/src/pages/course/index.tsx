@@ -10,7 +10,7 @@ import NavBar from '../../components/NavBar';
 import IUser from '../../interfaces/user';
 
 import styles from './styles.module.scss';
-import CourseNav from '../edit/Components/CourseNav';
+import CourseNav from './Components/CourseNav';
 import ILesson from '../../interfaces/lesson';
 
 export interface ILessons {
