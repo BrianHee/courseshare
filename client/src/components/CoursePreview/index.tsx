@@ -15,14 +15,12 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 	const { _id, author, children, createdAt, updatedAt, title } = props;
 
 	return (
-		<div className={styles['container']}>
+		<Link to={`/edit/${_id}`} className={styles['container']}>
 			<div>
-				<Link to={`/edit/${_id}`} style={{ textDecoration: 'none' }} className="text-primary">
-					<h1>
-						<strong>{title}</strong>
-					</h1>
-					<br />
-				</Link>
+				<h1>
+					<strong>{title}</strong>
+				</h1>
+				<br />
 				{createdAt !== updatedAt ? (
 					<p>
 						Updated by {author} at {new Date(updatedAt).toLocaleString()}
@@ -34,7 +32,7 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 				)}
 				{children}
 			</div>
-		</div>
+		</Link>
 	);
 };
 
