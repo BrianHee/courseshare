@@ -21,7 +21,7 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 					<strong>{title}</strong>
 				</h1>
 				<br />
-				{createdAt !== updatedAt ? (
+				{/* {createdAt !== updatedAt ? (
 					<p>
 						Updated by {author} at {new Date(updatedAt).toLocaleString()}
 					</p>
@@ -30,7 +30,9 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 						Posted by {author} at {new Date(createdAt).toLocaleString()}
 					</p>
 				)}
-				{children}
+				{children} */}
+				<br />
+				<p>Share</p>
 			</div>
 		</Link>
 	);
