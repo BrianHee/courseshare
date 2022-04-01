@@ -19,7 +19,7 @@ export interface IProps {
 
 const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const { lessons } = props;
-	const { courseID } = useParams();
+	const { courseID, lessonID } = useParams();
 	const navigate = useNavigate();
 
 	return (
@@ -30,7 +30,12 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 					lessons.map((ele, idx) => {
 						return (
 							<li key={idx}>
-								<Link className={styles['link']} to={`/edit/${courseID}/${ele.lessonId}`}>
+								<Link
+									className={
+										ele.lessonId === lessonID ? `${styles.link} ${styles.selected}` : styles['link']
+									}
+									to={`/edit/${courseID}/${ele.lessonId}`}
+								>
 									{ele.lessonTitle}
 								</Link>
 							</li>

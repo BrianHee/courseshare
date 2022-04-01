@@ -225,10 +225,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	return (
 		<div className={styles['container']}>
 			<div className={styles['edit-nav']}>
+				<h1>{title}</h1>
 				<EditNav lessons={navLessons} />
 				<div className={styles['add-lesson-container']}>
 					<button className={styles['add-lesson-button']} type="button" onClick={addLesson}>
-						Add Lesson
+						+ Add Lesson
 					</button>
 				</div>
 			</div>

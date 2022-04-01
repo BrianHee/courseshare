@@ -20,7 +20,7 @@
 .navbar::-webkit-scrollbar-thumb {
 	background: colors.$mywhite;
 	border-radius: 10px;
-	border: 1px solid colors.$mygray;
+	border: 1.5px solid colors.$mygray;
 }
 
 .navbar ul li {
@@ -39,8 +39,13 @@
 	text-overflow: ellipsis;
 }
 
+.selected {
+	background-color: colors.$myblack;
+	color: colors.$mywhite;
+}
+
 .navbar ul li:last-child {
-	margin-bottom: 100px;
+	margin-bottom: 60px;
 }
 
 .link:hover {

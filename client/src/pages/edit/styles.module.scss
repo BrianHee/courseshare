@@ -8,21 +8,21 @@
 }
 
 .add-lesson-container {
-	width: 330px;
+	width: 340px;
 	position: absolute;
 	bottom: 0;
-	height: 75px;
+	height: 60px;
 	background-color: colors.$mywhite;
 	display: flex;
-	align-items: center;
-	align-content: center;
+	justify-content: center;
+	border-top: 1px solid colors.$mygray;
 }
 
 .add-lesson-button {
 	background-color: rgba(73, 73, 73, 1);
 	border: none;
 	border-radius: 10px;
-	width: 150px;
+	width: 50%;
 	height: 40px;
 	font-family: Arial, sans-serif;
 	font-weight: 600;
