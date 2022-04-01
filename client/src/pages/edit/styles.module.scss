@@ -1,15 +1,37 @@
 @use '../../styles/colors.scss';
 
+.wrapper {
+	width: 100%;
+}
+
 .container {
 	display: flex;
 }
 
-.viewport {
+.right-component {
+	position: fixed;
+	top: 75px;
+	left: 350px;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 20px;
+}
+
+.editor-viewport {
+}
+
+.viewport-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header-buttons {
 }
 
 .add-lesson-container {
-	width: 340px;
-	position: absolute;
+	width: 339px;
+	position: fixed;
 	bottom: 0;
 	height: 60px;
 	background-color: colors.$mywhite;
@@ -18,17 +40,53 @@
 	border-top: 1px solid colors.$mygray;
 }
 
-.add-lesson-button {
+.button {
 	background-color: rgba(73, 73, 73, 1);
-	border: none;
 	border-radius: 10px;
-	width: 50%;
+	width: 150px;
 	height: 40px;
 	font-family: Arial, sans-serif;
 	font-weight: 600;
 	font-size: 1.15rem;
 	cursor: pointer;
 	color: white;
-	transition: 0.5s;
+	transition: 0.2s;
 	margin: 10px 0;
+	align-items: center;
+}
+
+.button.add {
+	background-color: colors.$mygreen;
+	border: 2px solid colors.$mygreen;
+
+	&:hover {
+		background-color: colors.$mywhite;
+		color: colors.$mygreen;
+		border: 2px solid colors.$mygreen;
+	}
+}
+
+.button.save-lesson {
+	background-color: white;
+	border: 2px solid colors.$myblue;
+	color: colors.$myblue;
+
+	&:hover {
+		background-color: colors.$mygray;
+	}
+}
+
+.button.delete-lesson {
+	background-color: white;
+	border: 2px solid colors.$myred;
+	color: colors.$myred;
+
+	&:hover {
+		background-color: colors.$mygray;
+	}
+}
+
+.button-container {
+	position: fixed;
+	bottom: 0;
 }

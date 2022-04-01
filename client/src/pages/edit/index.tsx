@@ -11,6 +11,10 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import EditNav from './Components/EditNav';
 
 import styles from './styles.module.scss';
+import NavBar from '../../components/NavBar';
+import saveIcon from '../../assets/save.png';
+import trashIcon from '../../assets/trash.png';
+import trashOpen from '../../assets/trash-open.png';
 
 export interface ILessons {
 	lessonId: string;
@@ -223,72 +227,100 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	}
 
 	return (
-		<div className={styles['container']}>
-			<div className={styles['edit-nav']}>
-				<h1>{title}</h1>
-				<EditNav lessons={navLessons} />
-				<div className={styles['add-lesson-container']}>
-					<button className={styles['add-lesson-button']} type="button" onClick={addLesson}>
-						+ Add Lesson
-					</button>
+		<div className={styles['wrapper']}>
+			<NavBar />
+			<div className={styles['container']}>
+				<div className={styles['edit-nav']}>
+					<EditNav lessons={navLessons} />
+					<div className={styles['add-lesson-container']}>
+						<button className={`${styles.button} ${styles.add}`} type="button" onClick={addLesson}>
+							+ Add Lesson
+						</button>
+					</div>
 				</div>
+				<div className={styles['right-component']}>
+					{lessonID ? (
+						<div className={styles['editor-viewport']}>
+							<div className={styles['viewport-header']}>
+								<h1>{title}</h1>
+								<div className={styles['header-buttons']}>
+									<button
+										className={`${styles.button} ${styles['save-lesson']}`}
+										type="button"
+										onClick={saveLesson}
+									>
+										<img src={saveIcon} alt="save" height="15" /> Save Lesson
+									</button>
+									<button
+										className={`${styles.button} ${styles['delete-lesson']}`}
+										type="button"
+										onClick={deleteLesson}
+									>
+										<img src={trashIcon} alt="trash" height="15" /> Delete Lesson
+									</button>
+								</div>
+							</div>
+							<form>
+								<label>Title</label>
+								<br />
+								<input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+								<br />
+								<label>Content</label>
+								<Editor
+									editorState={editorState}
+									wrapperClassName="card"
+									editorClassName="card-body"
+									onEditorStateChange={(newState) => {
+										setEditorState(newState);
+										setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
+									}}
+									toolbar={{
+										options: [
+											'inline',
+											'blockType',
+											'fontSize',
+											'list',
+											'textAlign',
+											'history',
+											'embedded',
+											'emoji',
+											'image'
+										],
+										inline: { inDropdown: false },
+										list: { inDropdown: false },
+										textAlign: { inDropdown: false },
+										link: { inDropdown: false },
+										history: { inDropdown: false }
+									}}
+								/>
+							</form>
+						</div>
+					) : (
+						<div>
+							<h1>No lesson selected</h1>
+							<button
+								className={`${styles.button} ${styles['delete-course']}`}
+								type="button"
+								onClick={deleteCourse}
+							>
+								Delete course
+							</button>
+						</div>
+					)}
+					<div className={styles['button-container']}>
+						<button
+							className={`${styles.button} ${styles['preview-course']}`}
+							type="button"
+							onClick={seePreview}
+						>
+							Preview
+						</button>
+					</div>
+				</div>
+
+				{/* {error && error}
+			{success && success} */}
 			</div>
-			{lessonID ? (
-				<div className={styles['viewport']}>
-					<h1>Editor view port</h1>
-					<form>
-						<label>Title</label>
-						<br />
-						<input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-						<br />
-						<label>Content</label>
-						<Editor
-							editorState={editorState}
-							wrapperClassName="card"
-							editorClassName="card-body"
-							onEditorStateChange={(newState) => {
-								setEditorState(newState);
-								setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
-							}}
-							toolbar={{
-								options: [
-									'inline',
-									'blockType',
-									'fontSize',
-									'list',
-									'textAlign',
-									'history',
-									'embedded',
-									'emoji',
-									'image'
-								],
-								inline: { inDropdown: false },
-								list: { inDropdown: false },
-								textAlign: { inDropdown: false },
-								link: { inDropdown: false },
-								history: { inDropdown: false }
-							}}
-						/>
-					</form>
-				</div>
-			) : (
-				<h1>No available lessons</h1>
-			)}
-			<button type="button" onClick={saveLesson}>
-				Save lesson
-			</button>
-			<button type="button" onClick={deleteLesson}>
-				Delete lesson
-			</button>
-			<br />
-			<button type="button" onClick={seePreview}>
-				Preview
-			</button>
-			<button type="button" onClick={deleteCourse}>
-				Delete course
-			</button>
-			{error && error}
-			{success && success}
 		</div>
 	);
 };

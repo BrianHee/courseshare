@@ -8,4 +8,3 @@ export default interface ICourse {
 	createdAt: string;
 	updatedAt: string;
 }
-//ICoursex
