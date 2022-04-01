@@ -224,9 +224,16 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	return (
 		<div className={styles['container']}>
-			<EditNav lessons={navLessons} />
+			<div className={styles['edit-nav']}>
+				<EditNav lessons={navLessons} />
+				<div className={styles['add-lesson-container']}>
+					<button className={styles['add-lesson-button']} type="button" onClick={addLesson}>
+						Add Lesson
+					</button>
+				</div>
+			</div>
 			{lessonID ? (
-				<div>
+				<div className={styles['viewport']}>
 					<h1>Editor view port</h1>
 					<form>
 						<label>Title</label>
@@ -266,9 +273,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			) : (
 				<h1>No available lessons</h1>
 			)}
-			<button type="button" onClick={addLesson}>
-				Add Lesson
-			</button>
 			<button type="button" onClick={saveLesson}>
 				Save lesson
 			</button>

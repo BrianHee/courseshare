@@ -7,22 +7,36 @@
 	overflow-y: scroll;
 }
 
+.navbar::-webkit-scrollbar {
+	width: 10px;
+}
+
+.navbar::-webkit-scrollbar-track {
+	background: colors.$mygray;
+	border-radius: 10px;
+	margin-block: 5px;
+}
+
+.navbar::-webkit-scrollbar-thumb {
+	background: colors.$mywhite;
+	border-radius: 10px;
+	border: 1px solid colors.$mygray;
+}
+
 .navbar ul li {
 	font-size: 1.5rem;
 	border-top: 1px solid black;
 }
 
 .link {
-	padding: 0 20px;
+	padding: 12px 20px;
 	height: 50px;
 	width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
+	display: block;
 	transition: 0.5s;
+	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 .navbar ul li:last-child {
@@ -30,5 +44,6 @@
 }
 
 .link:hover {
-	background-color: colors.$mygray;
+	background-color: colors.$myblack;
+	color: colors.$mywhite;
 }
