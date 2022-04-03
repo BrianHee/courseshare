@@ -10,9 +10,9 @@
 
 .right-component {
 	position: fixed;
-	top: 75px;
-	left: 350px;
-	width: 100%;
+	top: 0;
+	left: 0;
+	margin: 75px 0 0 350px;
 	height: 100%;
 	overflow-y: scroll;
 	padding: 20px;
@@ -76,7 +76,7 @@
 	}
 }
 
-.button.delete-lesson {
+.button.delete {
 	background-color: white;
 	border: 2px solid colors.$myred;
 	color: colors.$myred;

@@ -252,7 +252,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 										<img src={saveIcon} alt="save" height="15" /> Save Lesson
 									</button>
 									<button
-										className={`${styles.button} ${styles['delete-lesson']}`}
+										className={`${styles.button} ${styles.delete}`}
 										type="button"
 										onClick={deleteLesson}
 									>
@@ -299,11 +299,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						<div>
 							<h1>No lesson selected</h1>
 							<button
-								className={`${styles.button} ${styles['delete-course']}`}
+								className={`${styles.button} ${styles.delete}`}
 								type="button"
 								onClick={deleteCourse}
 							>
-								Delete course
+								<img src={trashIcon} alt="trash" height="15" /> Delete course
 							</button>
 						</div>
 					)}

@@ -45,7 +45,9 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 
 	return (
 		<nav className={styles['navbar']}>
-			<p className={styles['title']}>{course && course.title}</p>
+			<Link to={`/edit/${courseID}`}>
+				<p className={styles['title']}>{course && course.title}</p>
+			</Link>
 			<ul>
 				{lessons &&
 					lessons.map((ele, idx) => {
