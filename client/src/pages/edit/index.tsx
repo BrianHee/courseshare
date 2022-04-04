@@ -158,6 +158,24 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		}
 	};
 
+	const saveCourse = async () => {
+		console.log('attempting to save course');
+		try {
+			const response = await axios.patch(`${config.server.url}/course/${courseID}`, {
+				title: courseTitle,
+				description: courseDesc
+			});
+
+			if (response.status === 201) {
+				console.log('Course title and desc updated');
+			} else {
+				logging.error('unable to save course title and desc');
+			}
+		} catch (error) {
+			logging.error(error);
+		}
+	};
+
 	const deleteCourse = async () => {
 		console.log('Delete course called');
 		try {
@@ -223,7 +241,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	useEffect(() => {
-		getLesson();
+		if (lessonID) {
+			getLesson();
+		}
 	}, [lessonID]);
 
 	useEffect(() => {
@@ -318,24 +338,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						</div>
 					) : (
 						<div className={styles['course-editor']}>
-							<span>Course Title</span>
-							<input
-								className={styles.input}
-								type="text"
-								value={courseTitle}
-								onChange={(e) => setCourseTitle(e.target.value)}
-							></input>
-							<span>Course Description</span>
-							<input
-								className={styles.input}
-								type="text"
-								value={courseDesc}
-								onChange={(e) => setCourseDesc(e.target.value)}
-							></input>
 							<button
 								className={`${styles.button} ${styles['save-lesson']}`}
 								type="button"
-								onClick={saveLesson}
+								onClick={saveCourse}
 							>
 								<img src={saveIcon} alt="save" height="15" /> Save
 							</button>
@@ -346,6 +352,21 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 							>
 								<img src={trashIcon} alt="trash" height="15" /> Delete Course
 							</button>
+							<div>
+								<label>Course Title</label>
+								<input
+									className={styles.input}
+									type="text"
+									value={courseTitle}
+									onChange={(e) => setCourseTitle(e.target.value)}
+								></input>
+								<label>Course Description</label>
+								<textarea
+									className={`${styles.input} ${styles['desc-input']}`}
+									value={courseDesc}
+									onChange={(e) => setCourseDesc(e.target.value)}
+								></textarea>
+							</div>
 						</div>
 					)}
 					<div className={styles['button-container']}>
