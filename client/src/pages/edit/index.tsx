@@ -10,6 +10,8 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import EditNav from './Components/EditNav';
 
+import ILesson from '../../interfaces/lesson';
+
 import styles from './styles.module.scss';
 import NavBar from '../../components/NavBar';
 import saveIcon from '../../assets/save.png';
@@ -25,6 +27,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lessonsLen, setLessonsLen] = useState<number>(0);
 
+	const [lesson, setLesson] = useState<ILesson>();
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
@@ -94,7 +97,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const saveLesson = async () => {
-		//fix this function
 		try {
 			const response = await axios.patch(`${config.server.url}/lesson/${lessonID}`, {
 				title,
@@ -190,6 +192,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			console.log('response', response);
 
 			if (response.status === 200) {
+				setLesson(response.data.lesson);
 				setTitle(response.data.lesson.title);
 				setContent(response.data.lesson.content);
 				setUpdate(true);
@@ -215,6 +218,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	useEffect(() => {
 		getLesson();
 	}, [lessonID]);
+
+	useEffect(() => {
+		if (!lesson) {
+			getLesson();
+		}
+	});
 
 	useEffect(() => {
 		if (update) {
