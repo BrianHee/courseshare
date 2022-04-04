@@ -17,6 +17,7 @@ import NavBar from '../../components/NavBar';
 import saveIcon from '../../assets/save.png';
 import trashIcon from '../../assets/trash.png';
 import trashOpen from '../../assets/trash-open.png';
+import ICourse from '../../interfaces/course';
 
 export interface ILessons {
 	lessonId: string;
@@ -27,6 +28,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lessonsLen, setLessonsLen] = useState<number>(0);
 
+	const [course, setCourse] = useState<ICourse>();
+	const [courseTitle, setCourseTitle] = useState<string>('');
+	const [courseDesc, setCourseDesc] = useState<string>('');
 	const [lesson, setLesson] = useState<ILesson>();
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
@@ -42,11 +46,14 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const navigate = useNavigate();
 
-	const getNavLessons = async () => {
+	const getCourse = async () => {
 		try {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
+				setCourse(response.data.course);
+				setCourseTitle(response.data.course.title);
+				setCourseDesc(response.data.course.description);
 				setNavLessons(response.data.course.lessons);
 				setLessonsLen(response.data.course.lessons.length);
 				console.log('length:', lessonsLen);
@@ -61,7 +68,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	useEffect(() => {
-		getNavLessons();
+		getCourse();
 	}, [lessonsLen]);
 
 	const addLesson = async () => {
@@ -111,7 +118,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					});
 					console.log('Lesson title saved');
 					setSuccess('Successfully saved');
-					getNavLessons();
+					getCourse();
 				} catch (error) {
 					logging.error(error);
 				}
@@ -272,7 +279,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 							<form>
 								<label>Title</label>
 								<br />
-								<input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+								<input
+									className={styles.input}
+									type="text"
+									value={title}
+									onChange={(e) => setTitle(e.target.value)}
+								></input>
 								<br />
 								<label>Content</label>
 								<Editor
@@ -305,14 +317,34 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 							</form>
 						</div>
 					) : (
-						<div>
-							<h1>No lesson selected</h1>
+						<div className={styles['course-editor']}>
+							<span>Course Title</span>
+							<input
+								className={styles.input}
+								type="text"
+								value={courseTitle}
+								onChange={(e) => setCourseTitle(e.target.value)}
+							></input>
+							<span>Course Description</span>
+							<input
+								className={styles.input}
+								type="text"
+								value={courseDesc}
+								onChange={(e) => setCourseDesc(e.target.value)}
+							></input>
+							<button
+								className={`${styles.button} ${styles['save-lesson']}`}
+								type="button"
+								onClick={saveLesson}
+							>
+								<img src={saveIcon} alt="save" height="15" /> Save
+							</button>
 							<button
 								className={`${styles.button} ${styles.delete}`}
 								type="button"
 								onClick={deleteCourse}
 							>
-								<img src={trashIcon} alt="trash" height="15" /> Delete course
+								<img src={trashIcon} alt="trash" height="15" /> Delete Course
 							</button>
 						</div>
 					)}
