@@ -20,10 +20,6 @@ const CourseNav: React.FunctionComponent<IProps> = (props) => {
 	const { lessons } = props;
 	const { courseID } = useParams();
 
-	useEffect(() => {
-		console.log('CourseNav loaded');
-	}, []);
-
 	return (
 		<nav>
 			<h1>Nav for Course</h1>

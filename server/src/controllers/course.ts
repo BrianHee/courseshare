@@ -178,11 +178,9 @@ const getLessons = (req: Request, res: Response) => {
 const addLesson = (req: Request, res: Response) => {
 	const _id = req.params.courseID;
 	const { lessonId, lessonTitle } = req.body;
-	console.log(_id, lessonId, lessonTitle);
 
 	Course.findOneAndUpdate({ _id: _id }, { $push: { lessons: { lessonId, lessonTitle } } }, { new: true })
 		.then((course) => {
-			console.log(course);
 			if (course) {
 				return res.status(201).json({
 					lessons: course.lessons

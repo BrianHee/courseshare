@@ -1,20 +1,32 @@
 @use '../../styles/colors.scss';
 
 .wrapper {
-	width: 100%;
+	width: 100vw;
+	// display: flex;
+	// top: 0;
+	// right: 0;
+	// bottom: 0;
+	// left: 0;
+	// flex-direction: column;
 }
 
-.container {
+.workspace-container {
 	display: flex;
+	// flex-grow: 1;
+	// position: relative;
 }
 
 .right-component {
+	// box-sizing: border-box;
+	// flex: auto;
 	position: fixed;
-	width: 75%;
-	top: 0;
-	left: 0;
+	// position: relative;
+	width: calc(100% - 350px);
+	height: calc(100% - 75px);
+	// top: 0;
+	// left: 0;
+	right: 0;
 	margin: 75px 0 0 350px;
-	height: 100%;
 	overflow-y: scroll;
 	padding: 20px;
 }

@@ -32,7 +32,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 			if (response.status === 200) {
 				setCourse(response.data.course);
 			} else {
-				console.log('Unable to get course');
+				logging.error('Unable to get course');
 			}
 		} catch (error) {
 			logging.error(error);

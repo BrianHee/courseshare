@@ -30,15 +30,13 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	const navigate = useNavigate();
 
 	const getCourse = async () => {
-		console.log('getting course');
 		try {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
-				console.log('setting course');
 			} else {
-				console.log('Unable to set course');
+				logging.error('Unable to set course');
 			}
 		} catch (error) {
 			logging.error(error);
@@ -52,9 +50,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 			if (response.status === 200) {
 				setNavLessons(response.data.course.lessons);
-				console.log('lessons set:', navLessons);
 			} else {
-				console.log('Unable to find');
 				setError('Unable to find course');
 			}
 		} catch (error) {
@@ -63,17 +59,13 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const getLesson = async () => {
-		console.log('Getting current lesson');
 		try {
-			console.log('getting', lessonID);
 			const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
-			console.log('response', response);
 
 			if (response.status === 200) {
 				setLesson(response.data.lesson);
 			} else {
-				console.log('Unable to find lesson');
-				setError('Unable to find lesson');
+				logging.error('Unable to find lesson');
 			}
 		} catch (error) {
 			logging.error(error);
@@ -88,10 +80,6 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	useEffect(() => {
 		getLesson();
 	}, [lessonID]);
-
-	useEffect(() => {
-		console.log('Curretn course is:', course);
-	}, [course]);
 
 	if (course) {
 		if (lesson) {

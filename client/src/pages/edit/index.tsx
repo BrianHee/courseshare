@@ -56,11 +56,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 				setCourseDesc(response.data.course.description);
 				setNavLessons(response.data.course.lessons);
 				setLessonsLen(response.data.course.lessons.length);
-				console.log('length:', lessonsLen);
-				console.log('lessons set:', navLessons);
 			} else {
-				console.log('Unable to find');
-				setError('Unable to find course');
+				logging.error('Unable to find course');
 			}
 		} catch (error) {
 			logging.error(error);
@@ -73,7 +70,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const addLesson = async () => {
 		const [course, title, content] = [courseID, `Lesson ${lessonsLen + 1}`, ''];
-		console.log('attempting to add lesson');
 
 		try {
 			const response = await axios.post(`${config.server.url}/lesson/create`, {
@@ -81,7 +77,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 				title,
 				content
 			});
-			console.log(response);
 
 			if (response.status === 201) {
 				try {
@@ -89,7 +84,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						lessonId: response.data.lesson._id,
 						lessonTitle: response.data.lesson.title
 					});
-					console.log(update, 'lesson added');
 					setLessonsLen(update.data.lessons.length);
 					navigate(`/edit/${courseID}/${response.data.lesson._id}`);
 				} catch (error) {
@@ -109,14 +103,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 				title,
 				content
 			});
-			console.log('Lesson saved');
 
 			if (response.status === 201) {
 				try {
 					const response = await axios.patch(`${config.server.url}/course/${courseID}/${lessonID}`, {
 						lessonTitle: title
 					});
-					console.log('Lesson title saved');
 					setSuccess('Successfully saved');
 					getCourse();
 				} catch (error) {
@@ -135,13 +127,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			const response = await axios.delete(`${config.server.url}/lesson/${lessonID}`);
 
 			if (response.status === 201) {
-				console.log('Lesson deleted from Lessons');
-
 				try {
 					const reply = await axios.delete(`${config.server.url}/course/${courseID}/${lessonID}`);
 
 					if (response.status === 201) {
-						console.log('Lesson deleted from Course');
 						setNavLessons(response.data.lessons);
 						setLessonsLen(lessonsLen - 1);
 					}
@@ -159,7 +148,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const saveCourse = async () => {
-		console.log('attempting to save course');
 		try {
 			const response = await axios.patch(`${config.server.url}/course/${courseID}`, {
 				title: courseTitle,
@@ -167,7 +155,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			});
 
 			if (response.status === 201) {
-				console.log('Course title and desc updated');
 			} else {
 				logging.error('unable to save course title and desc');
 			}
@@ -177,18 +164,13 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const deleteCourse = async () => {
-		console.log('Delete course called');
 		try {
 			const response = await axios.delete(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 201) {
-				console.log('Course delete, now deleting lessons');
-
 				const reply = await axios.delete(`${config.server.url}/lesson/course/${courseID}`);
 
 				if (reply.status === 201) {
-					console.log('All lessons deleted');
-					console.log(reply.data.message);
 				} else {
 					logging.error('Unable to delete lessons');
 				}
@@ -211,24 +193,23 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			return;
 		}
 
-		try {
-			console.log('getting', lessonID);
-			const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
-			console.log('response', response);
+		if (lessonID) {
+			try {
+				const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
 
-			if (response.status === 200) {
-				setLesson(response.data.lesson);
-				setTitle(response.data.lesson.title);
-				setContent(response.data.lesson.content);
-				setUpdate(true);
-			} else {
-				console.log('Unable to find lesson');
-				setError('Unable to find lesson');
+				if (response.status === 200) {
+					setLesson(response.data.lesson);
+					setTitle(response.data.lesson.title);
+					setContent(response.data.lesson.content);
+					setUpdate(true);
+				} else {
+					logging.error('Unable to find lesson');
+				}
+			} catch (error) {
+				logging.error(error);
+			} finally {
+				setUpdate(false);
 			}
-		} catch (error) {
-			logging.error(error);
-		} finally {
-			setUpdate(false);
 		}
 	};
 
@@ -265,7 +246,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	return (
 		<div className={styles['wrapper']}>
 			<NavBar />
-			<div className={styles['container']}>
+			<div className={styles['workspace-container']}>
 				<div className={styles['edit-nav']}>
 					<EditNav lessons={navLessons} />
 					<div className={styles['add-lesson-container']}>
@@ -338,20 +319,25 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						</div>
 					) : (
 						<div className={styles['course-editor']}>
-							<button
-								className={`${styles.button} ${styles['save-lesson']}`}
-								type="button"
-								onClick={saveCourse}
-							>
-								<img src={saveIcon} alt="save" height="15" /> Save
-							</button>
-							<button
-								className={`${styles.button} ${styles.delete}`}
-								type="button"
-								onClick={deleteCourse}
-							>
-								<img src={trashIcon} alt="trash" height="15" /> Delete Course
-							</button>
+							<div className={styles['viewport-header']}>
+								<h1>Course Information</h1>
+								<div className={styles['header-buttons']}>
+									<button
+										className={`${styles.button} ${styles['save-lesson']}`}
+										type="button"
+										onClick={saveCourse}
+									>
+										<img src={saveIcon} alt="save" height="15" /> Save
+									</button>
+									<button
+										className={`${styles.button} ${styles.delete}`}
+										type="button"
+										onClick={deleteCourse}
+									>
+										<img src={trashIcon} alt="trash" height="15" /> Delete Course
+									</button>
+								</div>
+							</div>
 							<div>
 								<label>Course Title</label>
 								<input
@@ -379,9 +365,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						</button>
 					</div>
 				</div>
-
-				{/* {error && error}
-			{success && success} */}
 			</div>
 		</div>
 	);
