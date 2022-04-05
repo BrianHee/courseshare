@@ -5,6 +5,9 @@ import config from '../../config/config';
 import logging from '../../config/logging';
 import { useNavigate } from 'react-router-dom';
 
+import styles from './styles.module.scss';
+import NavBar from '../../components/NavBar';
+
 const CreatePage: React.FunctionComponent = () => {
 	const [title, setTitle] = useState<string>('');
 	const [description, setDesc] = useState<string>('');
@@ -16,7 +19,9 @@ const CreatePage: React.FunctionComponent = () => {
 
 	useEffect(() => {}, []);
 
-	const createCourse = async () => {
+	const createCourse = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+
 		if (title === '' || description === '') {
 			setError('Please fill out all required forms');
 			return;
@@ -40,19 +45,20 @@ const CreatePage: React.FunctionComponent = () => {
 	};
 
 	return (
-		<div>
-			<form>
-				<label>Course Title</label>
-				<input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-				<br />
-				<label>Description</label>
-				<input type="text" value={description} onChange={(e) => setDesc(e.target.value)}></input>
-				<br />
-				<button type="button" onClick={createCourse}>
-					<strong>+</strong> Create Course
-				</button>
-			</form>
-			{error && error}
+		<div className={styles.container}>
+			<NavBar />
+			<div className={styles['form-wrapper']}>
+				<form>
+					<div className={styles.label}>Course title</div>
+					<input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+					<div className={styles.label}>Course description</div>
+					<textarea value={description} onChange={(e) => setDesc(e.target.value)}></textarea>
+					<div className={styles.error}>{error}</div>
+					<button type="button" onClick={createCourse}>
+						Create Course
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };

@@ -1,0 +1,94 @@
+@use '../../styles/colors.scss';
+
+.container {
+	height: 100vh;
+	background-color: colors.$mygray;
+	display: flex;
+	justify-content: center;
+}
+
+.form-wrapper {
+	display: block;
+	justify-content: center;
+	margin: auto;
+	height: auto;
+	min-height: 200px;
+	width: 500px;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: colors.$myshadow;
+}
+
+.form-wrapper {
+	input {
+		border: none;
+		border-radius: 5px;
+		border: 1px solid colors.$mydarkgray;
+		margin: 15px auto 0px;
+		padding: 0 20px;
+		width: 80%;
+		line-height: 3rem;
+		font-size: 20px;
+
+		&:focus {
+			outline: colors.$myblue 2px solid;
+		}
+	}
+
+	.label {
+		padding-top: 20px;
+		padding-left: 50px;
+		font-family: 'DM Serif Text';
+		font-size: 1.5rem;
+		text-align: left;
+	}
+
+	textarea {
+		border: 1px solid colors.$mydarkgray;
+		width: 80%;
+		margin: 10px 0;
+		padding: 0 20px;
+		border-radius: 5px;
+		line-height: 3rem;
+		font-size: 20px;
+		resize: none;
+		font-family: Arial;
+		font-size: 1rem;
+
+		&:focus {
+			outline: colors.$myblue 2px solid;
+		}
+	}
+
+	button {
+		align-items: center;
+		width: 150px;
+		height: 40px;
+		margin: 25px 0;
+		border-radius: 10px;
+		background-color: colors.$mygreen;
+		border: 2px solid colors.$mygreen;
+		color: white;
+		font-family: Arial, sans-serif;
+		font-weight: 600;
+		font-size: 1.15rem;
+		cursor: pointer;
+		transition: 0.2s;
+
+		&:hover {
+			background-color: colors.$mywhite;
+			color: colors.$mygreen;
+			border: 2px solid colors.$mygreen;
+		}
+	}
+
+	.error {
+		color: red;
+		width: 100%;
+		min-height: 20px;
+		text-align: left;
+		margin: 5px 0;
+		padding: 0 50px;
+	}
+}

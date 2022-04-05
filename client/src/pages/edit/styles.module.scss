@@ -2,29 +2,16 @@
 
 .wrapper {
 	width: 100vw;
-	// display: flex;
-	// top: 0;
-	// right: 0;
-	// bottom: 0;
-	// left: 0;
-	// flex-direction: column;
 }
 
 .workspace-container {
 	display: flex;
-	// flex-grow: 1;
-	// position: relative;
 }
 
 .right-component {
-	// box-sizing: border-box;
-	// flex: auto;
 	position: fixed;
-	// position: relative;
 	width: calc(100% - 350px);
 	height: calc(100% - 75px);
-	// top: 0;
-	// left: 0;
 	right: 0;
 	margin: 75px 0 0 350px;
 	overflow-y: scroll;
@@ -121,16 +108,17 @@
 	padding: 0 20px;
 	line-height: 3rem;
 	font-size: 20px;
-}
 
-.input:focus {
-	border: colors.$myblue 1px solid;
+	&:focus {
+		outline: colors.$myblue 1px solid;
+	}
 }
 
 .course-editor {
 	textarea {
 		height: 400px;
 		font-family: Arial;
+		resize: none;
 	}
 }
 
