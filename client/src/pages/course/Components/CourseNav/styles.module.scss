@@ -1,13 +1,64 @@
-.loading-container {
-	height: 100%;
-	width: 100%;
-	// top: 0;
-	// left: 0;
-	z-index: 1;
+@use '../../../../styles/colors.scss';
+
+.navbar {
 	position: fixed;
-	background: rgba(180, 180, 180, 0.5);
-	text-align: center;
-	align-content: center;
-	margin: auto;
-	padding: auto;
+	top: 75px;
+	width: 350px;
+	height: 100%;
+	background-color: colors.$mywhite;
+	overflow-y: scroll;
+	border-right: 1px solid colors.$mydarkgray;
+}
+
+.navbar::-webkit-scrollbar {
+	width: 10px;
+}
+
+.navbar::-webkit-scrollbar-track {
+	background: colors.$mygray;
+	border-radius: 10px;
+	margin-block: 5px;
+}
+
+.navbar::-webkit-scrollbar-thumb {
+	background: colors.$mywhite;
+	border-radius: 10px;
+	border: 1.5px solid colors.$mygray;
+}
+
+.title {
+	font-size: 1.5rem;
+	font-family: 'DM Serif Text';
+	font-weight: 700;
+	padding: 20px 20px;
+}
+
+.navbar ul li {
+	font-size: 1.5rem;
+	border-top: 1px solid black;
+}
+
+.link {
+	padding: 12px 20px;
+	height: 50px;
+	width: 100%;
+	display: block;
+	transition: 0.5s;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.selected {
+	background-color: colors.$myblack;
+	color: colors.$mywhite;
+}
+
+.navbar ul li:last-child {
+	margin-bottom: 80px;
+}
+
+.link:hover {
+	background-color: colors.$myblack;
+	color: colors.$mywhite;
 }

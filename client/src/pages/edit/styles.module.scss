@@ -102,6 +102,11 @@
 .button-container {
 	position: fixed;
 	bottom: 0;
+	right: 30px;
+
+	.preview-course:hover {
+		background-color: colors.$mydarkgray;
+	}
 }
 
 .lesson-title {

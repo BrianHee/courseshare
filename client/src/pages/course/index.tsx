@@ -22,7 +22,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
 	const [course, setCourse] = useState<ICourse | null>(null);
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
-	const [lesson, setLesson] = useState<ILesson>();
+	const [lesson, setLesson] = useState<ILesson | null>();
 	const [error, setError] = useState<string>('');
 
 	const [state, setState] = useContext(UserContext);
@@ -39,6 +39,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 				logging.error('Unable to set course');
 			}
 		} catch (error) {
+			console.log('catch entered');
 			logging.error(error);
 			navigate('/error');
 		}
@@ -59,16 +60,18 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const getLesson = async () => {
-		try {
-			const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
+		if (lessonID) {
+			try {
+				const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
 
-			if (response.status === 200) {
-				setLesson(response.data.lesson);
-			} else {
-				logging.error('Unable to find lesson');
+				if (response.status === 200) {
+					setLesson(response.data.lesson);
+				} else {
+					logging.error('Unable to find lesson');
+				}
+			} catch (error) {
+				logging.error(error);
 			}
-		} catch (error) {
-			logging.error(error);
 		}
 	};
 
@@ -79,25 +82,33 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 	useEffect(() => {
 		getLesson();
+		if (!lessonID) {
+			setLesson(null);
+		}
 	}, [lessonID]);
 
 	if (course) {
-		if (lesson) {
-			return (
-				<div>
-					<CourseNav lessons={navLessons} />
-					<div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+		return (
+			<div>
+				<NavBar />
+				<CourseNav lessons={navLessons} />
+				<div className={styles['content-container']}>
+					{lesson ? (
+						<div>
+							<div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+						</div>
+					) : (
+						<div>
+							<div>{course.title}</div>
+							<div
+								className={styles['html-content']}
+								dangerouslySetInnerHTML={{ __html: course.description }}
+							/>
+						</div>
+					)}
 				</div>
-			);
-		} else {
-			return (
-				<div>
-					<CourseNav lessons={navLessons} />
-					<div>{course.title}</div>
-					<div>{course.description}</div>
-				</div>
-			);
-		}
+			</div>
+		);
 	} else {
 		return <Link to="/home" />;
 	}

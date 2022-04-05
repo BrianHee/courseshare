@@ -1,5 +1,13 @@
 .content-container {
-	width: auto;
-	background: white;
-	word-wrap: break-word;
+	position: fixed;
+	width: calc(100% - 350px);
+	height: calc(100% - 75px);
+	right: 0;
+	margin: 75px 0 0 350px;
+	overflow-y: scroll;
+	padding: 20px;
+}
+
+.html-content {
+	white-space: pre-wrap;
 }
