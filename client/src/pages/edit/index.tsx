@@ -259,7 +259,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					{lessonID ? (
 						<div className={styles['editor-viewport']}>
 							<div className={styles['viewport-header']}>
-								<h1>{title}</h1>
+								<h1 className={styles['lesson-title']}>{title}</h1>
 								<div className={styles['header-buttons']}>
 									<button
 										className={`${styles.button} ${styles['save-lesson']}`}
@@ -277,7 +277,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 									</button>
 								</div>
 							</div>
-							<form>
+							<form className={styles['lesson-form']}>
 								<label>Title</label>
 								<br />
 								<input
@@ -290,8 +290,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 								<label>Content</label>
 								<Editor
 									editorState={editorState}
-									wrapperClassName="card"
-									editorClassName="card-body"
+									wrapperClassName={styles['wysiwyg-wrapper']}
+									editorClassName={styles['wysiwyg-editor']}
 									onEditorStateChange={(newState) => {
 										setEditorState(newState);
 										setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));

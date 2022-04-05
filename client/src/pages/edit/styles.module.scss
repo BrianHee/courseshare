@@ -104,6 +104,10 @@
 	bottom: 0;
 }
 
+.lesson-title {
+	max-width: 700px;
+}
+
 .input {
 	width: 100%;
 	border: 1px solid colors.$mydarkgray;
@@ -123,4 +127,22 @@
 		height: 400px;
 		font-family: Arial;
 	}
+}
+
+.wysiwyg-wrapper {
+	border: 1px solid colors.$mydarkgray;
+	border-radius: 5px;
+	min-height: 400px;
+
+	.wysiwyg-editor {
+		padding: 20px;
+	}
+}
+
+.lesson-form {
+	border: 1px solid colors.$myblack;
+	border-radius: 10px;
+	padding: 20px;
+	margin-top: 20px;
+	margin-bottom: 50px;
 }
