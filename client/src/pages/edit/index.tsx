@@ -56,7 +56,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
-				console.log(userVerified);
 				setUserVerified(state._id === response.data.course.author._id);
 
 				if (userVerified) {

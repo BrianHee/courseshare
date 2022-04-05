@@ -1,14 +1,42 @@
-.content-container {
+@use '../../styles/colors.scss';
+
+.container {
 	position: fixed;
+	right: 0;
+	overflow-y: scroll;
 	width: calc(100% - 350px);
 	height: calc(100% - 75px);
-	right: 0;
 	margin: 75px 0 0 350px;
-	overflow-y: scroll;
-	padding: 20px;
+	padding: 50px;
+	background-color: colors.$mygray;
+}
+
+.wrapper {
+	padding: 50px;
+	border-radius: 10px;
+	box-shadow: colors.$smaller-shadow;
+	background-color: colors.$mywhite;
+}
+
+.course-title {
+	margin-bottom: 50px;
+	text-align: center;
+	font-family: 'DM Serif Text';
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.lesson-title {
+	margin-bottom: 50px;
+	text-align: center;
+	font-family: 'DM Serif Text';
+	font-size: 2.5rem;
+	font-weight: 400;
 }
 
 .html-content {
+	font-family: 'DM Sans';
+	font-size: 1.5rem;
+	line-height: 2rem;
 	white-space: pre-wrap;
-	padding: 20px;
 }

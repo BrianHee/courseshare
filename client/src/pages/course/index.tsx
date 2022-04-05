@@ -92,17 +92,18 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 			<div>
 				<NavBar />
 				<CourseNav lessons={navLessons} />
-				<div className={styles['content-container']}>
+				<div className={styles['container']}>
 					{lesson ? (
-						<div>
+						<div className={styles['wrapper']}>
+							<div className={styles['lesson-title']}>{lesson.title}</div>
 							<div
 								className={styles['html-content']}
 								dangerouslySetInnerHTML={{ __html: lesson.content }}
 							/>
 						</div>
 					) : (
-						<div>
-							<div>{course.title}</div>
+						<div className={styles['wrapper']}>
+							<div className={styles['course-title']}>{course.title}</div>
 							<div
 								className={styles['html-content']}
 								dangerouslySetInnerHTML={{ __html: course.description }}
