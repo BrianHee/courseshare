@@ -27,24 +27,27 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 
 	useEffect(() => {
 		getAllCourses();
-	}, []);
+		console.log(state);
+	}, [state]);
 
 	const getAllCourses = async () => {
-		try {
-			const response = await axios.get(`${config.server.url}/course`);
+		if (state._id && state._id != 'temp') {
+			try {
+				const response = await axios.get(`${config.server.url}/course/user/${state._id}`);
 
-			if (response.status === 200) {
-				let courses = response.data.courses;
-				courses.sort((x: ICourse, y: ICourse) => y.updatedAt.localeCompare(x.updatedAt));
-				setCourses(courses);
-			} else {
-				setError('Unable to retrieve courses');
+				if (response.status === 200) {
+					let courses = response.data.courses;
+					courses.sort((x: ICourse, y: ICourse) => y.updatedAt.localeCompare(x.updatedAt));
+					setCourses(courses);
+				} else {
+					setError('Unable to retrieve courses');
+				}
+			} catch (error) {
+				logging.error(error);
+				setError('Unable to fetch courses');
+			} finally {
+				setLoading(false);
 			}
-		} catch (error) {
-			logging.error(error);
-			setError('Unable to fetch courses');
-		} finally {
-			setLoading(false);
 		}
 	};
 

@@ -95,7 +95,10 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 				<div className={styles['content-container']}>
 					{lesson ? (
 						<div>
-							<div dangerouslySetInnerHTML={{ __html: lesson.content }} />
+							<div
+								className={styles['html-content']}
+								dangerouslySetInnerHTML={{ __html: lesson.content }}
+							/>
 						</div>
 					) : (
 						<div>

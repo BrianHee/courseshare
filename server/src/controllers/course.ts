@@ -56,8 +56,9 @@ const read = (req: Request, res: Response) => {
 
 const readAll = (req: Request, res: Response) => {
 	logging.info('Returning all coursees');
+	const user_id = req.params.userID;
 
-	Course.find() //break
+	Course.find({ author: user_id }) //break
 		.populate('author')
 		.exec()
 		.then((courses) => {

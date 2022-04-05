@@ -38,7 +38,6 @@ const UserProvider = ({ children }: any) => {
 			const { data: response } = await axios.get('http://localhost:1337/auth/me');
 			if (response.data && response.data.user) {
 				setUser({
-					// data: {
 					_id: response.data.user._id,
 					firstName: response.data.user.firstName,
 					lastName: response.data.user.lastName,
@@ -46,7 +45,6 @@ const UserProvider = ({ children }: any) => {
 				});
 			} else {
 				setUser({
-					// data: null,
 					_id: '',
 					firstName: '',
 					lastName: '',

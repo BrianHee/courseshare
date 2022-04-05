@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/create', controller.create);
 router.get('/:courseID', controller.read);
-router.get('/', controller.readAll);
+router.get('/user/:userID', controller.readAll);
 router.post('/query', controller.query);
 router.patch('/:courseID', controller.update);
 router.delete('/:courseID', controller.deleteCourse);
