@@ -6,6 +6,8 @@ import PageInterface from '../../interfaces/page';
 import config from '../../config/config';
 import { UserContext } from '../../context';
 
+import styles from './styles.module.scss';
+
 const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -18,7 +20,9 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 
 	const [state, setState] = useContext(UserContext);
 
-	const handleClick = async () => {
+	const handleClick = async (e: React.SyntheticEvent) => {
+		e.preventDefault();
+
 		const { data: registerData } = await axios.post(config.server.register, {
 			firstName,
 			lastName,
@@ -33,14 +37,10 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 		}
 
 		setState({
-			// data: {
 			_id: response.data.user._id,
 			firstName: response.data.user.firstName,
 			lastName: response.data.user.lastName,
 			email: response.data.user.email
-			// },
-			// loading: false
-			// error: null
 		});
 
 		localStorage.setItem('token', response.data.token);
@@ -49,21 +49,56 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	};
 
 	return (
-		<div>
-			<form>
-				<label>First name</label>
-				<input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-				<label>Last name</label>
-				<input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-				<label>Email</label>
-				<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-				<label>Password</label>
-				<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-				<label>Confirm password</label>
-				<input type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} />
-				{errorMsg && errorMsg}
-				<button onClick={handleClick}>Register</button>
-			</form>
+		<div className={styles['container']}>
+			<div className={styles['form-wrapper']}>
+				<div className={styles['title']}>
+					Create your course<b>share</b> account
+				</div>
+				<form className={styles['registration-form']}>
+					<div className={styles['name']}>
+						<input
+							placeholder="First name"
+							type="text"
+							value={firstName}
+							onChange={(e) => setFirstName(e.target.value)}
+						/>
+						<input
+							placeholder="Last name"
+							type="text"
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+						/>
+					</div>
+					<div>
+						<input
+							placeholder="Email"
+							type="email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+					</div>
+					<div>
+						<input
+							placeholder="Password"
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</div>
+					<div>
+						<input
+							placeholder="Confirm password"
+							type="password"
+							value={password2}
+							onChange={(e) => setPassword2(e.target.value)}
+						/>
+					</div>
+					<div className={styles['error']}>{errorMsg && errorMsg}</div>
+					<button className={styles['register']} onClick={handleClick}>
+						Register
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };

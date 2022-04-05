@@ -7,24 +7,28 @@
 	justify-content: center;
 }
 
-.form-container {
+.form-wrapper {
 	display: block;
 	justify-content: center;
-	text-align: center;
 	margin: auto;
+	height: 600px;
+	width: 500px;
+	text-align: center;
 	background-color: white;
-	height: 500px;
-	width: 450px;
 	border-radius: 10px;
 	box-shadow: colors.$myshadow;
 }
 
 .title {
-	text-align: center;
-	font-size: 50px;
+	text-align: left;
+	font-size: 2rem;
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: 600;
-	padding: 50px;
+	padding: 50px 80px;
+
+	b {
+		color: colors.$myblue;
+	}
 }
 
 .error {
@@ -32,31 +36,37 @@
 	width: 100%;
 	min-height: 20px;
 	text-align: left;
-	margin: 5px 0;
-	padding: 0 50px;
+	margin: 10px 0;
+	padding: 0 60px;
 }
 
-.form-container input {
+.form-wrapper input {
 	border: none;
 	border-radius: 10px;
 	background-color: colors.$mygray;
-	margin: 10px 0;
+	margin: 15px 0;
 	padding: 0 20px;
 	width: 80%;
 	line-height: 3rem;
 	font-size: 20px;
+
+	&:focus {
+		outline: colors.$myblue 2px solid;
+	}
 }
 
-input:focus {
-	outline: colors.$myblue 2px solid;
+.name input {
+	margin: 0 10px 15px;
+	width: calc(40% - 10px);
 }
 
-.login {
-	background: rgba(1, 1, 1, 1);
+.register {
+	margin-top: 20px;
 	border: none;
 	border-radius: 10px;
 	width: 100px;
-	height: 55px;
+	height: 50px;
+	background: rgba(1, 1, 1, 1);
 	font-family: Arial, sans-serif;
 	font-weight: 600;
 	font-size: 1.2rem;
@@ -66,24 +76,13 @@ input:focus {
 	margin-bottom: 70px;
 }
 
-.login:hover {
+.register:hover {
 	background: rgba(0, 0, 0, 0.75);
 }
 
-.register {
-	padding: 0 50px;
-	width: 100%;
-	color: colors.$myblack;
-	font-family: Arial;
-	font-weight: 600;
-	text-align: left;
-
-	.link {
-		color: colors.$myblue;
-		text-decoration: underline;
-
-		&:hover {
-			color: colors.$myblack;
-		}
-	}
+.registration-form label {
+	position: relative;
+	top: 15px;
+	left: 15px;
+	z-index: 2;
 }
