@@ -63,9 +63,26 @@ input:focus {
 	cursor: pointer;
 	color: white;
 	transition: 0.25s;
-	margin: 0 auto;
+	margin-bottom: 60px;
 }
 
 .login:hover {
 	background: rgba(0, 0, 0, 0.75);
+}
+
+.register {
+	padding: 0 50px;
+	width: 100%;
+	font-family: Arial;
+	font-weight: 600;
+	text-align: left;
+}
+
+.link {
+	color: colors.$myblue;
+	text-decoration: underline;
+
+	&:hover {
+		color: black;
+	}
 }

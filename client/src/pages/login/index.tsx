@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -70,6 +71,12 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 					<button className={styles['login']} type="submit">
 						Sign In
 					</button>
+					<div className={styles.register}>
+						Don't have an account?{' '}
+						<Link className={styles.link} to={'/register'}>
+							Sign up
+						</Link>
+					</div>
 				</form>
 			</div>
 		</div>
