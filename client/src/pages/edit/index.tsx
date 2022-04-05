@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import config from '../../config/config';
 import logging from '../../config/logging';
@@ -18,6 +18,7 @@ import saveIcon from '../../assets/save.png';
 import trashIcon from '../../assets/trash.png';
 import trashOpen from '../../assets/trash-open.png';
 import ICourse from '../../interfaces/course';
+import { UserContext } from '../../context';
 
 export interface ILessons {
 	lessonId: string;
@@ -36,6 +37,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [content, setContent] = useState<string>('');
 	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 	const [update, setUpdate] = useState<boolean>(false);
+	const [userVerified, setUserVerified] = useState<boolean>(true);
 
 	const [success, setSuccess] = useState<string>('');
 	const [error, setError] = useState<string>('');
@@ -44,6 +46,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const { courseID, lessonID } = useParams();
 
+	const userContext = useContext(UserContext);
+	const [state, setState] = userContext;
+
 	const navigate = useNavigate();
 
 	const getCourse = async () => {
@@ -51,11 +56,18 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
-				setCourse(response.data.course);
-				setCourseTitle(response.data.course.title);
-				setCourseDesc(response.data.course.description);
-				setNavLessons(response.data.course.lessons);
-				setLessonsLen(response.data.course.lessons.length);
+				console.log(userVerified);
+				setUserVerified(state._id === response.data.course.author._id);
+
+				if (userVerified) {
+					setCourse(response.data.course);
+					setCourseTitle(response.data.course.title);
+					setCourseDesc(response.data.course.description);
+					setNavLessons(response.data.course.lessons);
+					setLessonsLen(response.data.course.lessons.length);
+				} else {
+					navigate('/error');
+				}
 			} else {
 				logging.error('Unable to find course');
 			}
