@@ -47,7 +47,9 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 				logging.error(error);
 				setError('Unable to fetch courses');
 			} finally {
-				setLoading(false);
+				setTimeout(() => {
+					setLoading(false);
+				}, 0);
 			}
 		}
 	};
@@ -99,11 +101,14 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 					</button>
 				</div>
 			</div>
-			<div className={styles['courses-container']}>
-				{renderCourses}
-				{error && error}
-			</div>
-			<LoadingComponent loading={loading} />
+			{loading ? (
+				<LoadingComponent />
+			) : (
+				<div className={styles['courses-container']}>
+					{renderCourses}
+					{error && error}
+				</div>
+			)}
 		</div>
 	);
 };

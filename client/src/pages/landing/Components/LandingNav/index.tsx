@@ -52,7 +52,7 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 		let nav = document.getElementById('navbar');
 		if (nav && mouseX > 30) {
 			setScrollTrans(true);
-			nav.style.background = '#fcfcfc';
+			nav.style.background = '#ffffff';
 			nav.style.transition = 'background 0.75s';
 		} else {
 			setScrollTrans(false);

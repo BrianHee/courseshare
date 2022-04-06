@@ -1,12 +1,10 @@
 .container {
-	position: fixed;
-	top: 0;
-	left: 0;
-	display: flex;
+	display: block;
 	align-items: center;
 	justify-content: center;
-	z-index: 5;
-	height: 100vh;
+	text-align: center;
+	padding-top: 25%;
+	height: 100%;
 	width: 100vw;
-	background-color: rgba(185, 185, 185, 0.75);
+	background-color: rgba(185, 185, 185, 0);
 }
