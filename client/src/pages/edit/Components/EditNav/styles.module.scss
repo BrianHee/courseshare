@@ -5,9 +5,9 @@
 	top: 75px;
 	width: 350px;
 	height: 100%;
-	background-color: colors.$mywhite;
+	background-color: colors.$mygray;
 	overflow-y: scroll;
-	border-right: 1px solid colors.$mydarkgray;
+	// border-right: 1px solid colors.$mydarkgray;
 }
 
 .navbar::-webkit-scrollbar {
@@ -60,6 +60,7 @@
 	display: block;
 	border: 1px solid colors.$mydarkgray;
 	border-radius: 10px;
+	background-color: white;
 	box-shadow: colors.$smaller-shadow;
 	transition: 0.5s;
 	white-space: nowrap;

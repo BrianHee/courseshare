@@ -15,7 +15,8 @@
 	right: 0;
 	margin: 75px 0 0 350px;
 	overflow-y: scroll;
-	padding: 0px; //
+	padding: 20px;
+	background-color: colors.$mygray;
 }
 
 .editor-viewport {
@@ -100,7 +101,7 @@
 }
 
 .lesson-title {
-	max-width: 700px;
+	max-width: 500px;
 }
 
 .input {
@@ -130,7 +131,7 @@
 .wysiwyg-wrapper {
 	border: 1px solid colors.$mydarkgray;
 	border-radius: 5px;
-	min-height: 400px;
+	min-height: 350px;
 
 	.wysiwyg-editor {
 		padding: 20px;
@@ -138,9 +139,10 @@
 }
 
 .lesson-form {
-	border: 1px solid colors.$myblack;
-	border-radius: 10px;
 	padding: 20px;
 	margin-top: 20px;
 	margin-bottom: 50px;
+	border: 1px solid colors.$myblack;
+	border-radius: 10px;
+	background-color: white;
 }
