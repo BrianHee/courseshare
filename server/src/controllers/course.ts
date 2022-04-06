@@ -35,7 +35,7 @@ const read = (req: Request, res: Response) => {
 	logging.info(`Reading courseX id: ${_id} `);
 
 	Course.findById(_id) //break
-		.populate('author')
+		// .populate('author')
 		.exec()
 		.then((course) => {
 			if (course) {
@@ -59,7 +59,7 @@ const readAll = (req: Request, res: Response) => {
 	const user_id = req.params.userID;
 
 	Course.find({ author: user_id }) //break
-		.populate('author')
+		// .populate('author')
 		.exec()
 		.then((courses) => {
 			return res.status(200).json({

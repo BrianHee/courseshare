@@ -13,6 +13,7 @@ import CoursePreview from '../../components/CoursePreview';
 import IUser from '../../interfaces/user';
 
 import styles from './styles.module.scss';
+import LoadingComponent from '../../components/LoadingComponent';
 
 const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const userContext = useContext(UserContext);
@@ -102,6 +103,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 				{renderCourses}
 				{error && error}
 			</div>
+			<LoadingComponent loading={loading} />
 		</div>
 	);
 };

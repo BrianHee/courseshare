@@ -29,6 +29,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lessonsLen, setLessonsLen] = useState<number>(0);
 
+	const [user, setUser] = useState<string>('');
 	const [course, setCourse] = useState<ICourse>();
 	const [courseTitle, setCourseTitle] = useState<string>('');
 	const [courseDesc, setCourseDesc] = useState<string>('');
@@ -56,16 +57,15 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
-				setUserVerified(state._id === response.data.course.author._id);
-
-				if (userVerified) {
+				if (state._id === response.data.course.author) {
 					setCourse(response.data.course);
 					setCourseTitle(response.data.course.title);
 					setCourseDesc(response.data.course.description);
 					setNavLessons(response.data.course.lessons);
 					setLessonsLen(response.data.course.lessons.length);
 				} else {
-					navigate('/error');
+					console.log(state._id, response.data.course.author);
+					return navigate('/error');
 				}
 			} else {
 				logging.error('Unable to find course');
@@ -315,7 +315,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 											'list',
 											'textAlign',
 											'history',
-											'embedded',
 											'emoji',
 											'image'
 										],
@@ -324,6 +323,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 										textAlign: { inDropdown: false },
 										link: { inDropdown: false },
 										history: { inDropdown: false }
+									}}
+									toolbarStyle={{
+										position: 'sticky',
+										top: 0,
+										zIndex: 1000
 									}}
 								/>
 							</form>
