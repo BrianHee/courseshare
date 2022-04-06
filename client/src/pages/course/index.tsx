@@ -20,6 +20,8 @@ export interface ILessons {
 const CoursePage: React.FunctionComponent<any> = (props) => {
 	const [_id, setId] = useState<string>('');
 	const [course, setCourse] = useState<ICourse | null>(null);
+	const [authorFirst, setAuthorFirst] = useState<string>('');
+	const [authorLast, setAuthorLast] = useState<string>('');
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lesson, setLesson] = useState<ILesson | null>();
 	const [loading, setLoading] = useState<boolean>(true);
@@ -33,6 +35,8 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
+				setAuthorFirst(response.data.course.author.firstName);
+				setAuthorLast(response.data.course.author.lastName);
 			} else {
 				logging.error('Unable to set course');
 				navigate('/error');
@@ -44,7 +48,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 		} finally {
 			setTimeout(() => {
 				setLoading(false);
-			}, 1000);
+			}, 500);
 		}
 	};
 
@@ -115,6 +119,9 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 							) : (
 								<div className={styles['wrapper']}>
 									<div className={styles['course-title']}>{course.title}</div>
+									<h2 className={styles['course-author']}>
+										authored by: <b>{`${authorFirst} ${authorLast}`}</b>
+									</h2>
 									<div
 										className={styles['html-content']}
 										dangerouslySetInnerHTML={{ __html: course.description }}

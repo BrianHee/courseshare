@@ -19,11 +19,25 @@
 }
 
 .course-title {
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 	text-align: center;
 	font-family: 'DM Serif Text';
 	font-size: 3rem;
 	font-weight: 600;
+}
+
+.course-author {
+	text-align: center;
+	margin-bottom: 50px;
+
+	b {
+		color: colors.$myblue;
+		transition: 0.5s;
+
+		&:hover {
+			color: black;
+		}
+	}
 }
 
 .lesson-title {

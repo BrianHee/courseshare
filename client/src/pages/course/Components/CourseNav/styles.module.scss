@@ -26,23 +26,41 @@
 	border: 1.5px solid colors.$mygray;
 }
 
-.title {
-	font-size: 1.5rem;
-	font-family: 'DM Serif Text';
-	font-weight: 700;
-	padding: 20px 20px;
+.course-header {
+	margin: 10px;
+	border: 1px solid colors.$mydarkgray;
+	border-radius: 10px;
+	box-shadow: colors.$smaller-shadow;
+
+	.title {
+		border-radius: 10px;
+		font-size: 1.5rem;
+		font-family: 'DM Serif Text';
+		font-weight: 700;
+		padding: 20px 20px;
+		transition: 0.2s;
+
+		&:hover {
+			background-color: colors.$myblack;
+			color: colors.$mywhite;
+		}
+	}
 }
 
 .navbar ul li {
-	font-size: 1.5rem;
-	border-top: 1px solid black;
+	font-size: 1.25rem;
+	font-family: 'DM Serif Text';
 }
 
 .link {
+	margin: 20px 10px;
 	padding: 12px 20px;
 	height: 50px;
-	width: 100%;
+	width: auto;
 	display: block;
+	border: 1px solid colors.$mydarkgray;
+	border-radius: 10px;
+	box-shadow: colors.$smaller-shadow;
 	transition: 0.5s;
 	white-space: nowrap;
 	overflow: hidden;
@@ -55,7 +73,7 @@
 }
 
 .navbar ul li:last-child {
-	margin-bottom: 80px;
+	margin-bottom: 100px;
 }
 
 .link:hover {

@@ -35,7 +35,7 @@ const read = (req: Request, res: Response) => {
 	logging.info(`Reading courseX id: ${_id} `);
 
 	Course.findById(_id) //break
-		// .populate('author')
+		.populate('author')
 		.exec()
 		.then((course) => {
 			if (course) {

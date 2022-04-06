@@ -19,6 +19,7 @@ import trashIcon from '../../assets/trash.png';
 import trashOpen from '../../assets/trash-open.png';
 import ICourse from '../../interfaces/course';
 import { UserContext } from '../../context';
+import LoadingComponent from '../../components/LoadingComponent';
 
 export interface ILessons {
 	lessonId: string;
@@ -29,7 +30,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lessonsLen, setLessonsLen] = useState<number>(0);
 
-	const [user, setUser] = useState<string>('');
 	const [course, setCourse] = useState<ICourse>();
 	const [courseTitle, setCourseTitle] = useState<string>('');
 	const [courseDesc, setCourseDesc] = useState<string>('');
@@ -38,12 +38,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [content, setContent] = useState<string>('');
 	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 	const [update, setUpdate] = useState<boolean>(false);
-	const [userVerified, setUserVerified] = useState<boolean>(true);
 
 	const [success, setSuccess] = useState<string>('');
 	const [error, setError] = useState<string>('');
 
-	const [loading, setLoading] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const { courseID, lessonID } = useParams();
 
@@ -57,14 +56,14 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
 
 			if (response.status === 200) {
-				if (state._id === response.data.course.author) {
+				if (state._id === response.data.course.author._id) {
 					setCourse(response.data.course);
 					setCourseTitle(response.data.course.title);
 					setCourseDesc(response.data.course.description);
 					setNavLessons(response.data.course.lessons);
 					setLessonsLen(response.data.course.lessons.length);
 				} else {
-					console.log(state._id, response.data.course.author);
+					console.log(state._id, response.data.course.author._id);
 					return navigate('/error');
 				}
 			} else {
@@ -72,6 +71,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			}
 		} catch (error) {
 			logging.error(error);
+		} finally {
+			setTimeout(() => {
+				setLoading(false);
+			}, 500);
 		}
 	};
 
@@ -257,130 +260,134 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	return (
 		<div className={styles['wrapper']}>
 			<NavBar />
-			<div className={styles['workspace-container']}>
-				<div className={styles['edit-nav']}>
-					<EditNav lessons={navLessons} />
-					<div className={styles['add-lesson-container']}>
-						<button className={`${styles.button} ${styles.add}`} type="button" onClick={addLesson}>
-							+ Add Lesson
-						</button>
+			{loading ? (
+				<LoadingComponent />
+			) : (
+				<div className={styles['workspace-container']}>
+					<div className={styles['edit-nav']}>
+						<EditNav lessons={navLessons} />
+						<div className={styles['add-lesson-container']}>
+							<button className={`${styles.button} ${styles.add}`} type="button" onClick={addLesson}>
+								+ Add Lesson
+							</button>
+						</div>
 					</div>
-				</div>
-				<div className={styles['right-component']}>
-					{lessonID ? (
-						<div className={styles['editor-viewport']}>
-							<div className={styles['viewport-header']}>
-								<h1 className={styles['lesson-title']}>{title}</h1>
-								<div className={styles['header-buttons']}>
-									<button
-										className={`${styles.button} ${styles['save-lesson']}`}
-										type="button"
-										onClick={saveLesson}
-									>
-										<img src={saveIcon} alt="save" height="15" /> Save Lesson
-									</button>
-									<button
-										className={`${styles.button} ${styles.delete}`}
-										type="button"
-										onClick={deleteLesson}
-									>
-										<img src={trashIcon} alt="trash" height="15" /> Delete Lesson
-									</button>
+					<div className={styles['right-component']}>
+						{lessonID ? (
+							<div className={styles['editor-viewport']}>
+								<div className={styles['viewport-header']}>
+									<h1 className={styles['lesson-title']}>{title}</h1>
+									<div className={styles['header-buttons']}>
+										<button
+											className={`${styles.button} ${styles['save-lesson']}`}
+											type="button"
+											onClick={saveLesson}
+										>
+											<img src={saveIcon} alt="save" height="15" /> Save Lesson
+										</button>
+										<button
+											className={`${styles.button} ${styles.delete}`}
+											type="button"
+											onClick={deleteLesson}
+										>
+											<img src={trashIcon} alt="trash" height="15" /> Delete Lesson
+										</button>
+									</div>
+								</div>
+								<form className={styles['lesson-form']}>
+									<label>Title</label>
+									<br />
+									<input
+										className={styles.input}
+										type="text"
+										value={title}
+										onChange={(e) => setTitle(e.target.value)}
+									></input>
+									<br />
+									<label>Content</label>
+									<Editor
+										editorState={editorState}
+										wrapperClassName={styles['wysiwyg-wrapper']}
+										editorClassName={styles['wysiwyg-editor']}
+										onEditorStateChange={(newState) => {
+											setEditorState(newState);
+											setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
+										}}
+										toolbar={{
+											options: [
+												'inline',
+												'blockType',
+												'fontSize',
+												'list',
+												'textAlign',
+												'history',
+												'emoji',
+												'image'
+											],
+											inline: { inDropdown: false },
+											list: { inDropdown: false },
+											textAlign: { inDropdown: false },
+											link: { inDropdown: false },
+											history: { inDropdown: false }
+										}}
+										toolbarStyle={{
+											position: 'sticky',
+											top: 0,
+											zIndex: 1000
+										}}
+									/>
+								</form>
+							</div>
+						) : (
+							<div className={styles['course-editor']}>
+								<div className={styles['viewport-header']}>
+									<h1>Course Information</h1>
+									<div className={styles['header-buttons']}>
+										<button
+											className={`${styles.button} ${styles['save-lesson']}`}
+											type="button"
+											onClick={saveCourse}
+										>
+											<img src={saveIcon} alt="save" height="15" /> Save
+										</button>
+										<button
+											className={`${styles.button} ${styles.delete}`}
+											type="button"
+											onClick={deleteCourse}
+										>
+											<img src={trashIcon} alt="trash" height="15" /> Delete Course
+										</button>
+									</div>
+								</div>
+								<div>
+									<label>Course Title</label>
+									<input
+										className={styles.input}
+										type="text"
+										value={courseTitle}
+										onChange={(e) => setCourseTitle(e.target.value)}
+									></input>
+									<label>Course Description</label>
+									<textarea
+										className={`${styles.input} ${styles['desc-input']}`}
+										value={courseDesc}
+										onChange={(e) => setCourseDesc(e.target.value)}
+									></textarea>
 								</div>
 							</div>
-							<form className={styles['lesson-form']}>
-								<label>Title</label>
-								<br />
-								<input
-									className={styles.input}
-									type="text"
-									value={title}
-									onChange={(e) => setTitle(e.target.value)}
-								></input>
-								<br />
-								<label>Content</label>
-								<Editor
-									editorState={editorState}
-									wrapperClassName={styles['wysiwyg-wrapper']}
-									editorClassName={styles['wysiwyg-editor']}
-									onEditorStateChange={(newState) => {
-										setEditorState(newState);
-										setContent(draftToHtml(convertToRaw(newState.getCurrentContent())));
-									}}
-									toolbar={{
-										options: [
-											'inline',
-											'blockType',
-											'fontSize',
-											'list',
-											'textAlign',
-											'history',
-											'emoji',
-											'image'
-										],
-										inline: { inDropdown: false },
-										list: { inDropdown: false },
-										textAlign: { inDropdown: false },
-										link: { inDropdown: false },
-										history: { inDropdown: false }
-									}}
-									toolbarStyle={{
-										position: 'sticky',
-										top: 0,
-										zIndex: 1000
-									}}
-								/>
-							</form>
+						)}
+						<div className={styles['button-container']}>
+							<button
+								className={`${styles.button} ${styles['preview-course']}`}
+								type="button"
+								onClick={seePreview}
+							>
+								Preview
+							</button>
 						</div>
-					) : (
-						<div className={styles['course-editor']}>
-							<div className={styles['viewport-header']}>
-								<h1>Course Information</h1>
-								<div className={styles['header-buttons']}>
-									<button
-										className={`${styles.button} ${styles['save-lesson']}`}
-										type="button"
-										onClick={saveCourse}
-									>
-										<img src={saveIcon} alt="save" height="15" /> Save
-									</button>
-									<button
-										className={`${styles.button} ${styles.delete}`}
-										type="button"
-										onClick={deleteCourse}
-									>
-										<img src={trashIcon} alt="trash" height="15" /> Delete Course
-									</button>
-								</div>
-							</div>
-							<div>
-								<label>Course Title</label>
-								<input
-									className={styles.input}
-									type="text"
-									value={courseTitle}
-									onChange={(e) => setCourseTitle(e.target.value)}
-								></input>
-								<label>Course Description</label>
-								<textarea
-									className={`${styles.input} ${styles['desc-input']}`}
-									value={courseDesc}
-									onChange={(e) => setCourseDesc(e.target.value)}
-								></textarea>
-							</div>
-						</div>
-					)}
-					<div className={styles['button-container']}>
-						<button
-							className={`${styles.button} ${styles['preview-course']}`}
-							type="button"
-							onClick={seePreview}
-						>
-							Preview
-						</button>
 					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	);
 };
