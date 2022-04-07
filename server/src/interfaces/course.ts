@@ -6,4 +6,5 @@ export default interface ICourse {
 	description: string;
 	lessons: object[];
 	lessoncount: number;
+	picture?: string;
 }

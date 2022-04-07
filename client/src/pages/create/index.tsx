@@ -11,6 +11,7 @@ import NavBar from '../../components/NavBar';
 const CreatePage: React.FunctionComponent = () => {
 	const [title, setTitle] = useState<string>('');
 	const [description, setDesc] = useState<string>('');
+	const [picture, setPicture] = useState<string>('');
 	const [error, setError] = useState<string>('');
 	const [success, setSuccess] = useState<string>('');
 
@@ -31,11 +32,11 @@ const CreatePage: React.FunctionComponent = () => {
 			const response = await axios.post(`${config.server.url}/course/create`, {
 				title,
 				description,
-				author: state._id
+				author: state._id,
+				picture
 			});
 
 			if (response.status === 201) {
-				//not consoling the response
 				setSuccess('Course succesfully created');
 				navigate(`/edit/${response.data._id}`);
 			}
@@ -49,10 +50,12 @@ const CreatePage: React.FunctionComponent = () => {
 			<NavBar />
 			<div className={styles['form-wrapper']}>
 				<form>
-					<div className={styles.label}>Course title</div>
-					<input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
-					<div className={styles.label}>Course description</div>
-					<textarea value={description} onChange={(e) => setDesc(e.target.value)}></textarea>
+					<div className={styles.label}>Title</div>
+					<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+					<div className={styles.label}>Description</div>
+					<textarea value={description} onChange={(e) => setDesc(e.target.value)} />
+					<div className={styles.label}>Picture</div>
+					<input placeholder="URL" type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
 					<div className={styles.error}>{error}</div>
 					<button type="button" onClick={createCourse}>
 						Create Course

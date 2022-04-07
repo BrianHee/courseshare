@@ -17,7 +17,8 @@ const CourseSchema: Schema = new Schema(
 				_id: false
 			}
 		],
-		lessoncount: { type: Number }
+		lessoncount: { type: Number },
+		picture: { type: String }
 	},
 	{
 		timestamps: true

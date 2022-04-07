@@ -47,9 +47,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 				logging.error(error);
 				setError('Unable to fetch courses');
 			} finally {
-				setTimeout(() => {
-					setLoading(false);
-				}, 0);
+				setLoading(false);
 			}
 		}
 	};
