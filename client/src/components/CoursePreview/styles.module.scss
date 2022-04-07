@@ -4,16 +4,62 @@
 .container {
 	display: block;
 	background-color: white;
-	border: 2px solid colors.$mygray;
 	border-radius: 10px;
 	height: 300px;
 	width: 250px;
-	padding: 10px;
-	margin: 0 0 20px;
 	box-shadow: colors.$smaller-shadow;
 	transition: 0.5s;
 }
 
 .container:hover {
 	box-shadow: colors.$bigger-shadow;
+}
+
+.container {
+	.image-wrapper {
+		display: block;
+		overflow: hidden;
+		height: 50%;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+
+		img {
+			position: relative;
+			max-width: 100%;
+			bottom: 50%;
+		}
+	}
+
+	.text-wrapper {
+		font-family: 'DM Serif Text';
+
+		.title-wrapper {
+			display: -webkit-box;
+			height: 95px;
+			padding: 10px;
+			margin-bottom: 10px;
+			font-size: 1.5rem;
+			font-weight: 600;
+			overflow-x: hidden;
+			overflow-y: hidden;
+			text-overflow: ellipsis;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+		}
+
+		.share-wrapper {
+			height: 45px;
+			padding: 10px 10px;
+			background-color: colors.$mygray;
+			border-radius: 0 0 10px 10px;
+
+			div {
+				float: left;
+			}
+
+			img {
+				float: right;
+			}
+		}
+	}
 }

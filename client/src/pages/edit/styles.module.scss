@@ -37,7 +37,7 @@
 	position: fixed;
 	bottom: 0;
 	height: 60px;
-	background-color: colors.$mywhite;
+	background-color: colors.$mygray;
 	display: flex;
 	justify-content: center;
 	border-top: 1px solid colors.$mygray;
@@ -114,7 +114,7 @@
 	font-size: 20px;
 
 	&:focus {
-		outline: colors.$myblue 1px solid;
+		outline: colors.$myblue 2px solid;
 	}
 }
 

@@ -53,11 +53,11 @@
 }
 
 .link {
+	display: block;
 	margin: 20px 10px;
 	padding: 12px 20px;
 	height: 50px;
 	width: auto;
-	display: block;
 	border: 1px solid colors.$mydarkgray;
 	border-radius: 10px;
 	box-shadow: colors.$smaller-shadow;

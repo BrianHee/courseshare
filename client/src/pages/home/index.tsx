@@ -71,13 +71,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 				courses.map((course, index) => {
 					return (
 						<div key={index}>
-							<CoursePreview
-								_id={course._id}
-								author={(course.author as IUser).firstName}
-								title={course.title}
-								createdAt={course.createdAt}
-								updatedAt={course.updatedAt}
-							/>
+							<CoursePreview _id={course._id} title={course.title} image={course.image} />
 						</div>
 					);
 				})
