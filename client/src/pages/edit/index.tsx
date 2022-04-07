@@ -33,6 +33,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [course, setCourse] = useState<ICourse>();
 	const [courseTitle, setCourseTitle] = useState<string>('');
 	const [courseDesc, setCourseDesc] = useState<string>('');
+	const [courseImage, setCourseImage] = useState<string>('');
 	const [lesson, setLesson] = useState<ILesson>();
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
@@ -60,6 +61,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					setCourse(response.data.course);
 					setCourseTitle(response.data.course.title);
 					setCourseDesc(response.data.course.description);
+					setCourseImage(response.data.course.image);
 					setNavLessons(response.data.course.lessons);
 					setLessonsLen(response.data.course.lessons.length);
 				} else {
@@ -360,19 +362,32 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 									</div>
 								</div>
 								<div>
-									<label>Course Title</label>
+									<label>Title</label>
 									<input
 										className={styles.input}
 										type="text"
 										value={courseTitle}
 										onChange={(e) => setCourseTitle(e.target.value)}
-									></input>
-									<label>Course Description</label>
+									/>
+									<label>Description</label>
 									<textarea
 										className={`${styles.input} ${styles['desc-input']}`}
 										value={courseDesc}
 										onChange={(e) => setCourseDesc(e.target.value)}
-									></textarea>
+									/>
+									<label>Image</label>
+									<input
+										className={styles.input}
+										placeholder="URL"
+										type="text"
+										value={courseImage}
+										onChange={(e) => setCourseImage(e.target.value)}
+									/>
+									{courseImage ? (
+										<div className={styles['image-wrapper']}>
+											<img src={courseImage} alt="image" />
+										</div>
+									) : null}
 								</div>
 							</div>
 						)}

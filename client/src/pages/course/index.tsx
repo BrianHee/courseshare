@@ -110,9 +110,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 						<div className={styles['container']}>
 							{lesson ? (
 								<div className={styles['wrapper']}>
-									{/* <div className={styles['title-wrapper']}> */}
 									<div className={styles['lesson-title']}>{lesson.title}</div>
-									{/* </div> */}
 									<div
 										className={styles['html-content']}
 										dangerouslySetInnerHTML={{ __html: lesson.content }}
@@ -124,8 +122,8 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 									<h2 className={styles['course-author']}>
 										authored by: <b>{`${authorFirst} ${authorLast}`}</b>
 									</h2>
-									<div className={styles['course-picture']}>
-										<img src={course.picture} alt="image" />
+									<div className={styles['course-image']}>
+										<img src={course.image} alt="image" />
 									</div>
 									<div
 										className={styles['html-content']}

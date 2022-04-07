@@ -28,7 +28,7 @@
 
 .course-author {
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 
 	b {
 		color: colors.$myblue;
@@ -37,6 +37,17 @@
 		&:hover {
 			color: black;
 		}
+	}
+}
+
+.course-image {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 25px;
+
+	img {
+		max-width: 500px;
+		max-height: 500px;
 	}
 }
 

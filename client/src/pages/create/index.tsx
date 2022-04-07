@@ -11,7 +11,7 @@ import NavBar from '../../components/NavBar';
 const CreatePage: React.FunctionComponent = () => {
 	const [title, setTitle] = useState<string>('');
 	const [description, setDesc] = useState<string>('');
-	const [picture, setPicture] = useState<string>('');
+	const [image, setImage] = useState<string>('');
 	const [error, setError] = useState<string>('');
 	const [success, setSuccess] = useState<string>('');
 
@@ -33,7 +33,7 @@ const CreatePage: React.FunctionComponent = () => {
 				title,
 				description,
 				author: state._id,
-				picture
+				image
 			});
 
 			if (response.status === 201) {
@@ -54,8 +54,8 @@ const CreatePage: React.FunctionComponent = () => {
 					<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 					<div className={styles.label}>Description</div>
 					<textarea value={description} onChange={(e) => setDesc(e.target.value)} />
-					<div className={styles.label}>Picture</div>
-					<input placeholder="URL" type="text" value={picture} onChange={(e) => setPicture(e.target.value)} />
+					<div className={styles.label}>Image</div>
+					<input placeholder="URL" type="text" value={image} onChange={(e) => setImage(e.target.value)} />
 					<div className={styles.error}>{error}</div>
 					<button type="button" onClick={createCourse}>
 						Create Course

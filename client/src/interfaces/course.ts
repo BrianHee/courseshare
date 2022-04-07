@@ -7,5 +7,5 @@ export default interface ICourse {
 	description: string;
 	createdAt: string;
 	updatedAt: string;
-	picture?: string;
+	image?: string;
 }

@@ -121,6 +121,25 @@
 .course-editor {
 	margin: 30px;
 
+	label {
+		font-family: 'DM Serif Text';
+		font-size: 1.2rem;
+	}
+
+	.image-wrapper {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		margin-top: 20px;
+		border-radius: 10px;
+		background-color: colors.$mywhite;
+		img {
+			max-width: 500px;
+			max-height: 500px;
+			padding: 0 auto;
+		}
+	}
+
 	textarea {
 		height: 400px;
 		font-family: Arial;

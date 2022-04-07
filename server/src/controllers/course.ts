@@ -6,14 +6,14 @@ import logging from '../config/logging';
 const create = async (req: Request, res: Response) => {
 	logging.info('attempting to create COURSEX');
 
-	const { author, title, description, picture } = req.body;
+	const { author, title, description, image } = req.body;
 
 	const course = new Course({
 		author,
 		title,
 		description,
 		lessoncount: 0,
-		picture
+		image
 	});
 
 	return course
