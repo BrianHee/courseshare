@@ -43,8 +43,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	//toast notifications
 	const toastRef = useRef<any>();
-	const [text, setText] = useState<string>('');
-	const [mode, setMode] = useState<string>('');
 
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -174,15 +172,13 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			});
 
 			if (response.status === 201) {
-				setText('Course successfully saved');
-				setMode('success');
 			} else {
 				logging.error('Unable to save course title and desc');
 			}
 		} catch (error) {
 			logging.error(error);
 		} finally {
-			addToast();
+			addToast('success', 'Course successfully saved.');
 		}
 	};
 
@@ -244,15 +240,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		setEditorState(editorState);
 	};
 
-	const addToast = () => {
-		toastRef.current!.addMessage({ mode, message: text });
+	const addToast = (type: string, message: string) => {
+		toastRef.current!.addMessage({ type, message });
 	};
-
-	useEffect(() => {
-		if (text) {
-			addToast();
-		}
-	}, [text]);
 
 	useEffect(() => {
 		if (lessonID) {

@@ -11,7 +11,7 @@ interface IToastProps {
 const Toast: React.FunctionComponent<IToastProps> = (props) => {
 	const { type, message, onClose } = props;
 
-	const stylesClasses = useMemo(() => [styles.toast, styles[type]].join(' '), []);
+	const stylesClasses = useMemo(() => [styles.toast, styles[type]].join(' '), [type]);
 
 	return (
 		<div className={stylesClasses} onClick={onClose}>
