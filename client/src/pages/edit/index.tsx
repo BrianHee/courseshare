@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import config from '../../config/config';
 import logging from '../../config/logging';
@@ -41,8 +41,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
 	const [update, setUpdate] = useState<boolean>(false);
 
-	const [success, setSuccess] = useState<string>('');
-	const [error, setError] = useState<string>('');
+	//toast notifications
+	const toastRef = useRef<any>();
+	const [text, setText] = useState<string>('');
+	const [mode, setMode] = useState<string>('');
 
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -126,13 +128,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					const response = await axios.patch(`${config.server.url}/course/${courseID}/${lessonID}`, {
 						lessonTitle: title
 					});
-					setSuccess('Successfully saved');
 					getCourse();
 				} catch (error) {
 					logging.error(error);
 				}
 			} else {
-				setError('Unable to save lesson');
+				logging.error('Unable to save lesson');
 			}
 		} catch (error) {
 			logging.error(error);
@@ -173,11 +174,15 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			});
 
 			if (response.status === 201) {
+				setText('Course successfully saved');
+				setMode('success');
 			} else {
-				logging.error('unable to save course title and desc');
+				logging.error('Unable to save course title and desc');
 			}
 		} catch (error) {
 			logging.error(error);
+		} finally {
+			addToast();
 		}
 	};
 
@@ -238,6 +243,16 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 		setEditorState(editorState);
 	};
+
+	const addToast = () => {
+		toastRef.current!.addMessage({ mode, message: text });
+	};
+
+	useEffect(() => {
+		if (text) {
+			addToast();
+		}
+	}, [text]);
 
 	useEffect(() => {
 		if (lessonID) {
@@ -405,7 +420,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					</div>
 				</div>
 			)}
-			<ToastPortal />
+			<ToastPortal ref={toastRef} />
 		</div>
 	);
 };
