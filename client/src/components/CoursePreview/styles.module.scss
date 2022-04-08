@@ -4,6 +4,7 @@
 .container {
 	display: block;
 	background-color: white;
+	border: 0.5px solid colors.$mydarkgray;
 	border-radius: 10px;
 	height: 300px;
 	width: 250px;
@@ -16,6 +17,8 @@
 }
 
 .container {
+	font-family: 'DM Serif Text';
+
 	.image-wrapper {
 		display: block;
 		overflow: hidden;
@@ -23,43 +26,47 @@
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
 
-		img {
-			position: relative;
+		.image {
 			max-width: 100%;
-			bottom: 50%;
+		}
+
+		.default-image {
+			max-width: 100%;
 		}
 	}
 
-	.text-wrapper {
-		font-family: 'DM Serif Text';
+	.title-wrapper {
+		display: -webkit-box;
+		height: 95px;
+		padding: 10px;
+		margin-bottom: 10px;
+		font-size: 1.5rem;
+		font-weight: 600;
+		overflow-x: hidden;
+		overflow-y: hidden;
+		text-overflow: ellipsis;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+	}
 
-		.title-wrapper {
-			display: -webkit-box;
-			height: 95px;
-			padding: 10px;
-			margin-bottom: 10px;
-			font-size: 1.5rem;
-			font-weight: 600;
-			overflow-x: hidden;
-			overflow-y: hidden;
-			text-overflow: ellipsis;
-			-webkit-line-clamp: 3;
-			-webkit-box-orient: vertical;
+	.share-wrapper {
+		height: 45px;
+		padding: 10px 10px;
+		background-color: colors.$mygray;
+		border-radius: 0 0 10px 10px;
+		font-family: 'DM Serif Text';
+		transition: 0.5s;
+
+		div {
+			float: left;
 		}
 
-		.share-wrapper {
-			height: 45px;
-			padding: 10px 10px;
-			background-color: colors.$mygray;
-			border-radius: 0 0 10px 10px;
+		img {
+			float: right;
+		}
 
-			div {
-				float: left;
-			}
-
-			img {
-				float: right;
-			}
+		&:hover {
+			background-color: colors.$mydarkgray;
 		}
 	}
 }

@@ -167,7 +167,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		try {
 			const response = await axios.patch(`${config.server.url}/course/${courseID}`, {
 				title: courseTitle,
-				description: courseDesc
+				description: courseDesc,
+				image: courseImage
 			});
 
 			if (response.status === 201) {

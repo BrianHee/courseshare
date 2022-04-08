@@ -3,7 +3,8 @@
 
 .container {
 	padding-top: 70px;
-	width: 100vw;
+	padding-bottom: 50px;
+	width: 1425px;
 	min-height: 100vh;
 	background-color: colors.$mygray;
 }
@@ -12,7 +13,7 @@
 	font-size: 30px;
 	width: 100%;
 	padding: 20px 75px;
-	width: 1440px;
+	max-width: 1425px;
 	margin: 0 auto;
 }
 
@@ -22,7 +23,7 @@
 }
 
 .tab-container {
-	width: 1440px;
+	width: 1425px;
 	padding: 0 75px;
 	margin: 0 auto;
 	display: flex;
@@ -58,7 +59,7 @@
 }
 
 .courses-container {
-	width: 1440px;
+	width: 1425px;
 	padding: 0 75px;
 	margin: 25px auto;
 	display: grid;

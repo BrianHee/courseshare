@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import shareIcon from '../../assets/share.png';
+import defaultImage from '../../assets/default-image.png';
 import styles from './styles.module.scss';
 
 export interface ICoursePreviewProps {
@@ -14,20 +15,24 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 	const { _id, title, image } = props;
 
 	return (
-		<Link to={`/edit/${_id}`} className={styles['container']}>
-			<div className={styles['image-wrapper']}>
-				<img src={image} alt="image" />
-			</div>
-			<div className={styles['text-wrapper']}>
-				<div className={styles['title-wrapper']}>{title}</div>
-				<div className={styles['share-wrapper']}>
-					<Link to={`/course/${_id}`}>
-						<div>Share</div>
-						<img src={shareIcon} alt="share" height="20" />
-					</Link>
+		<div className={styles['container']}>
+			<Link to={`/edit/${_id}`}>
+				<div className={styles['image-wrapper']}>
+					{image ? (
+						<img className={styles['image']} src={image} alt="image" />
+					) : (
+						<img className={styles['default-image']} src={defaultImage} alt="image" />
+					)}
 				</div>
-			</div>
-		</Link>
+				<div className={styles['title-wrapper']}>{title}</div>
+			</Link>
+			<Link to={`/course/${_id}`}>
+				<div className={styles['share-wrapper']}>
+					<div>Share</div>
+					<img src={shareIcon} alt="share" height="20" />
+				</div>
+			</Link>
+		</div>
 	);
 };
 
