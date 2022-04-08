@@ -20,6 +20,7 @@ import trashOpen from '../../assets/trash-open.png';
 import ICourse from '../../interfaces/course';
 import { UserContext } from '../../context';
 import LoadingComponent from '../../components/LoadingComponent';
+import ToastPortal from '../../components/Toast/ToastPortal';
 
 export interface ILessons {
 	lessonId: string;
@@ -404,6 +405,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					</div>
 				</div>
 			)}
+			<ToastPortal />
 		</div>
 	);
 };
