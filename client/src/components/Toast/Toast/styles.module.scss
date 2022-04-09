@@ -29,27 +29,35 @@
 }
 .success {
 	background-color: #eaffe7;
-	color: #00e760;
+	div {
+		color: #00e760 !important;
+	}
 }
 
 .delete {
 	background-color: #ffd5d5;
-	color: colors.$myred;
+	div {
+		color: colors.$myred !important;
+	}
 }
 
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
+		transform: translateX(50px);
 	}
 	25% {
 		opacity: 1;
+		transform: translateX(0);
 	}
 
 	75% {
 		opacity: 1;
+		transform: translateX(0);
 	}
 
 	100% {
 		opacity: 0;
+		transform: translateX(50px);
 	}
 }
