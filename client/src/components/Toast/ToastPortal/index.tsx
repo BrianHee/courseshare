@@ -15,12 +15,29 @@ interface IToast {
 
 const ToastPortal = forwardRef(({}, ref) => {
 	const [toasts, setToasts] = useState<IToast[]>([]);
+	const [removing, setRemoving] = useState<string>('');
+
 	const { loaded, portalId } = useToastPortal();
 
 	const removeToast = (id: string) => {
 		setToasts(toasts.filter((toast) => toast.id !== id));
-		console.log('Close attempted');
 	};
+
+	useEffect(() => {
+		if (toasts.length) {
+			const id = toasts[toasts.length - 1].id;
+
+			setTimeout(() => {
+				setRemoving(id);
+			}, 3000);
+		}
+	}, [toasts]);
+
+	useEffect(() => {
+		if (removing) {
+			setToasts(toasts.filter((toast) => toast.id !== removing));
+		}
+	}, [removing]);
 
 	useImperativeHandle(ref, () => ({
 		addMessage(toast: IToast) {
