@@ -1,45 +1,55 @@
+@use '../../../styles/colors.scss';
+
 .toast {
-	width: 350px;
 	display: flex;
-	min-height: 75px;
 	position: relative;
 	align-items: center;
-	justify-content: center;
-
-	opacity: 1;
+	justify-content: space-around;
+	width: 300px;
+	height: 50px;
 	padding: 15px;
-	color: white;
-	cursor: pointer;
 	border-radius: 5px;
 	box-sizing: border-box;
-	box-shadow: 0px 0px 2px rgb(69, 69, 69);
+	box-shadow: colors.$myshadow;
+
+	font-family: Arial;
+	font-weight: 700;
+	cursor: pointer;
 
 	transition: 0.2s;
-	animation: fadeIn 0.75s;
+	animation: fadeIn 3s;
+
+	img {
+		height: 20px;
+	}
 }
 .toast:hover {
 	transition: 0.2s;
-	transform: scale(0.95);
-	box-shadow: 0px 0px 3px gray;
+	transform: scale(0.97);
 }
 .success {
-	background-color: #83bd92;
+	background-color: #eaffe7;
+	color: #00e760;
 }
-.warning {
-	background-color: #bda883;
-}
-.error {
-	background-color: #bd8383;
-}
-.info {
-	background-color: #8398bd;
+
+.delete {
+	background-color: #ffd5d5;
+	color: colors.$myred;
 }
 
 @keyframes fadeIn {
-	from {
+	0% {
 		opacity: 0;
 	}
-	to {
+	25% {
 		opacity: 1;
+	}
+
+	75% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
 	}
 }

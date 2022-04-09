@@ -122,6 +122,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			});
 
 			if (response.status === 201) {
+				addToast('success', 'Lesson successfully saved.');
 				try {
 					const response = await axios.patch(`${config.server.url}/course/${courseID}/${lessonID}`, {
 						lessonTitle: title
@@ -143,6 +144,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			const response = await axios.delete(`${config.server.url}/lesson/${lessonID}`);
 
 			if (response.status === 201) {
+				addToast('delete', 'Lesson successfully deleted.');
 				try {
 					const reply = await axios.delete(`${config.server.url}/course/${courseID}/${lessonID}`);
 
@@ -172,13 +174,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			});
 
 			if (response.status === 201) {
+				addToast('success', 'Course successfully saved.');
 			} else {
 				logging.error('Unable to save course title and desc');
 			}
 		} catch (error) {
 			logging.error(error);
-		} finally {
-			addToast('success', 'Course successfully saved.');
 		}
 	};
 
