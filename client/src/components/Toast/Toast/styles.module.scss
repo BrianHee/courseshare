@@ -29,14 +29,14 @@
 }
 .success {
 	background-color: #eaffe7;
-	div {
+	.message {
 		color: #00e760 !important;
 	}
 }
 
 .delete {
 	background-color: #ffd5d5;
-	div {
+	.message {
 		color: colors.$myred !important;
 	}
 }
@@ -46,12 +46,12 @@
 		opacity: 0;
 		transform: translateX(50px);
 	}
-	25% {
+	20% {
 		opacity: 1;
 		transform: translateX(0);
 	}
 
-	75% {
+	80% {
 		opacity: 1;
 		transform: translateX(0);
 	}

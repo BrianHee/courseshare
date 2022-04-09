@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import config from '../../config/config';
 import logging from '../../config/logging';
@@ -21,6 +21,7 @@ import ICourse from '../../interfaces/course';
 import { UserContext } from '../../context';
 import LoadingComponent from '../../components/LoadingComponent';
 import ToastPortal from '../../components/Toast/ToastPortal';
+import ModalPortal from '../../components/Modal/ModalPortal';
 
 export interface ILessons {
 	lessonId: string;
@@ -43,6 +44,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	//toast notifications
 	const toastRef = useRef<any>();
+	//modal
+	const modalRef = useRef<any>();
 
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -52,6 +55,15 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [state, setState] = userContext;
 
 	const navigate = useNavigate();
+
+	//blocknav?
+	const blockNavigation = useMemo(() => {
+		if (course && !lessonID) {
+			return course.title !== courseTitle || course.description !== courseDesc;
+		} else if (lessonID && lesson) {
+			return lesson.title !== title || lesson.content !== content;
+		}
+	}, [courseTitle, courseDesc, title, content]);
 
 	const getCourse = async () => {
 		try {
@@ -140,6 +152,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const deleteLesson = async () => {
+		addModal('lesson');
 		try {
 			const response = await axios.delete(`${config.server.url}/lesson/${lessonID}`);
 
@@ -243,6 +256,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const addToast = (type: string, message: string) => {
 		toastRef.current!.addMessage({ type, message });
+	};
+
+	const addModal = (type: 'course' | 'lesson') => {
+		modalRef.current!.addModal({ type });
 	};
 
 	useEffect(() => {
@@ -411,6 +428,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					</div>
 				</div>
 			)}
+			<ModalPortal ref={modalRef} />
 			<ToastPortal ref={toastRef} />
 		</div>
 	);
