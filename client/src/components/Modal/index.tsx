@@ -1,9 +1,5 @@
-import React, { useMemo } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
-import axios from 'axios';
-
-import config from '../../config/config';
-import logging from '../../config/logging';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 import trashIcon from '../../assets/trash.png';
@@ -30,18 +26,36 @@ const Modal: React.FunctionComponent<IModalProps> = (props) => {
 
 	if (type === 'course') {
 		return (
-			<div className={`${styles.modal} ${styles.success}`}>
-				<div className={styles.message}>Are you sure you would like to delete this course?</div>
-				<button onClick={confirmFunction}>Confirm</button>
-				<button onClick={onClose}>Cancel</button>
+			<div className={styles.container}>
+				<div className={styles.modal}>
+					<img src={trashIcon} alt="icon" />
+					<div className={styles.message}>Are you sure you would like to delete this course?</div>
+					<div className={styles.buttons}>
+						<button className={styles.confirm} onClick={confirmFunction}>
+							Confirm
+						</button>
+						<button className={styles.cancel} onClick={onClose}>
+							Cancel
+						</button>
+					</div>
+				</div>
 			</div>
 		);
 	} else if (type === 'lesson') {
 		return (
-			<div className={`${styles.modal} ${styles.delete}`}>
-				<div className={styles.message}>Are you sure you would like to delete this lesson?</div>
-				<button onClick={confirmFunction}>Confirm</button>
-				<button onClick={onClose}>Cancel</button>
+			<div className={styles.container}>
+				<div className={styles.modal}>
+					<img src={trashIcon} alt="icon" />
+					<div className={styles.message}>Are you sure you would like to delete this lesson?</div>
+					<div className={styles.buttons}>
+						<button className={styles.confirm} onClick={confirmFunction}>
+							Confirm
+						</button>
+						<button className={styles.cancel} onClick={onClose}>
+							Cancel
+						</button>
+					</div>
+				</div>
 			</div>
 		);
 	} else {
