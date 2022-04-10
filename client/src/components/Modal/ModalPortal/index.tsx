@@ -10,6 +10,7 @@ import Modal from '..';
 interface IModal {
 	id: string;
 	type: 'course' | 'lesson';
+	onConfirm: any;
 }
 
 const ModalPortal = forwardRef(({}, ref) => {
@@ -30,7 +31,14 @@ const ModalPortal = forwardRef(({}, ref) => {
 	return loaded
 		? ReactDOM.createPortal(
 				<div className={styles.container}>
-					{modal ? <Modal key={modal.id} type={modal.type} onClose={() => removeModal()} /> : null}
+					{modal ? (
+						<Modal
+							key={modal.id}
+							type={modal.type}
+							onConfirm={modal.onConfirm}
+							onClose={() => removeModal()}
+						/>
+					) : null}
 				</div>,
 				document.getElementById(portalId)!
 		  )

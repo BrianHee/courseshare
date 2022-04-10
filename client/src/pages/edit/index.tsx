@@ -152,7 +152,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const deleteLesson = async () => {
-		addModal('lesson');
+		// addModal('lesson');
 		try {
 			const response = await axios.delete(`${config.server.url}/lesson/${lessonID}`);
 
@@ -176,6 +176,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		} finally {
 			navigate(`/edit/${courseID}`);
 		}
+	};
+
+	const deleteLessonModal = () => {
+		addModal('lesson', deleteLesson);
 	};
 
 	const saveCourse = async () => {
@@ -258,8 +262,8 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		toastRef.current!.addMessage({ type, message });
 	};
 
-	const addModal = (type: 'course' | 'lesson') => {
-		modalRef.current!.addModal({ type });
+	const addModal = (type: 'course' | 'lesson', onConfirm: any) => {
+		modalRef.current!.addModal({ type, onConfirm });
 	};
 
 	useEffect(() => {
@@ -315,7 +319,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 										<button
 											className={`${styles.button} ${styles.delete}`}
 											type="button"
-											onClick={deleteLesson}
+											onClick={deleteLessonModal}
 										>
 											<img src={trashIcon} alt="trash" height="15" /> Delete Lesson
 										</button>
