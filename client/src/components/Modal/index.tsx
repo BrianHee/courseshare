@@ -32,7 +32,7 @@ const Modal: React.FunctionComponent<IModalProps> = (props) => {
 		return (
 			<div className={`${styles.modal} ${styles.success}`}>
 				<div className={styles.message}>Are you sure you would like to delete this course?</div>
-				<button onClick={onConfirm}>Confirm</button>
+				<button onClick={confirmFunction}>Confirm</button>
 				<button onClick={onClose}>Cancel</button>
 			</div>
 		);

@@ -152,7 +152,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	};
 
 	const deleteLesson = async () => {
-		// addModal('lesson');
 		try {
 			const response = await axios.delete(`${config.server.url}/lesson/${lessonID}`);
 
@@ -219,6 +218,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		} finally {
 			navigate('/home');
 		}
+	};
+
+	const deleteCourseModal = () => {
+		addModal('course', deleteCourse);
 	};
 
 	const seePreview = () => {
@@ -384,7 +387,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 										<button
 											className={`${styles.button} ${styles.delete}`}
 											type="button"
-											onClick={deleteCourse}
+											onClick={deleteCourseModal}
 										>
 											<img src={trashIcon} alt="trash" height="15" /> Delete Course
 										</button>
