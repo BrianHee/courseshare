@@ -86,6 +86,27 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 		}
 	};
 
+	const completeLesson = () => {
+		const completed = localStorage.getItem(`${lessonID}`);
+
+		if (lesson) {
+			const currentIndex = navLessons.findIndex((ele) => ele.lessonId === lesson._id);
+
+			if (currentIndex !== navLessons.length - 1) {
+				const nextLesson = navLessons[currentIndex + 1].lessonId;
+
+				if (completed) {
+					navigate(`/course/${courseID}/${nextLesson}`);
+				} else if (!completed) {
+					localStorage.setItem(`${lessonID}`, `${lessonID}`);
+					navigate(`/course/${courseID}/${nextLesson}`);
+				}
+			} else {
+				localStorage.setItem(`${lessonID}`, `${lessonID}`);
+			}
+		}
+	};
+
 	useEffect(() => {
 		getNavLessons();
 		getCourse();
@@ -115,6 +136,9 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 										className={styles['html-content']}
 										dangerouslySetInnerHTML={{ __html: lesson.content }}
 									/>
+									<div className={styles['next-button']}>
+										<button onClick={completeLesson}>Complete Lesson</button>
+									</div>
 								</div>
 							) : (
 								<div className={styles['wrapper']}>

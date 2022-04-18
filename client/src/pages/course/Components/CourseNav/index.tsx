@@ -21,6 +21,7 @@ export interface IProps {
 
 const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const [course, setCourse] = useState<ICourse>();
+	const [completed, setCompleted] = useState<boolean>(false);
 	const { lessons } = props;
 	const { courseID, lessonID } = useParams();
 	const navigate = useNavigate();
