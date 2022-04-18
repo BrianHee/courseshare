@@ -53,9 +53,11 @@
 }
 
 .link {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	margin: 20px 10px;
-	padding: 12px 20px;
+	padding: 0px 15px;
 	height: 50px;
 	width: auto;
 	border: 1px solid colors.$mydarkgray;
@@ -65,6 +67,14 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+
+	.check-wrapper {
+		display: flex;
+
+		img {
+			height: 20px;
+		}
+	}
 }
 
 .selected {

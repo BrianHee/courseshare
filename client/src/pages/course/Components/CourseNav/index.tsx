@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import config from '../../../../config/config';
 import logging from '../../../../config/logging';
@@ -8,6 +8,8 @@ import logging from '../../../../config/logging';
 
 import ICourse from '../../../../interfaces/course';
 
+import check from '../../../../assets/check.png';
+import uncheck from '../../../../assets/uncheck.png';
 import styles from './styles.module.scss';
 
 export interface ILessons {
@@ -24,7 +26,6 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const [completed, setCompleted] = useState<boolean>(false);
 	const { lessons } = props;
 	const { courseID, lessonID } = useParams();
-	const navigate = useNavigate();
 
 	const getCourse = async () => {
 		try {
@@ -38,6 +39,10 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 		} catch (error) {
 			logging.error(error);
 		}
+	};
+
+	const checkCompletion = (lessonId: string) => {
+		return localStorage.getItem(lessonId);
 	};
 
 	useEffect(() => {
@@ -65,6 +70,9 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 									to={`/course/${courseID}/${ele.lessonId}`}
 								>
 									{ele.lessonTitle}
+									<div className={styles['check-wrapper']}>
+										{checkCompletion(ele.lessonId) ? <img src={check} /> : <img src={uncheck} />}
+									</div>
 								</Link>
 							</li>
 						);
