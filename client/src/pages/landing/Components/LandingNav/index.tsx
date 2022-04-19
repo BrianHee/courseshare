@@ -64,15 +64,22 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 
 	return (
 		<div className={styles['navbar']} id="navbar">
-			<div className={styles['logo']}>
-				<Link to="/">
-					<img src={scrollTrans ? logo2 : logo} alt="logo" height="40" />
-				</Link>
-			</div>
-			<div className={styles['container']}>
-				<button className={scrollTrans ? styles['button2'] : styles['button1']} onClick={loginUser}>
-					Sign In
-				</button>
+			<div className={styles.container}>
+				<div className={styles['logo']}>
+					<Link to="/">
+						<img src={scrollTrans ? logo2 : logo} alt="logo" />
+					</Link>
+				</div>
+				<div className={styles['button-wrapper']}>
+					<button
+						className={
+							scrollTrans ? `${styles['button-transition']} ${styles['button']}` : styles['button']
+						}
+						onClick={loginUser}
+					>
+						Sign In
+					</button>
+				</div>
 			</div>
 		</div>
 	);
