@@ -139,7 +139,6 @@ const deleteAllLessons = (req: Request, res: Response) => {
 
 	Lesson.deleteMany(query)
 		.then((result) => {
-			console.log(`${result.deletedCount} item(s) deleted`);
 			return res.status(201).json({
 				message: `${result.deletedCount} item(s) deleted`
 			});

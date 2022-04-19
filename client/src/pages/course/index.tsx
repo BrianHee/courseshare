@@ -42,7 +42,6 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 				navigate('/error');
 			}
 		} catch (error) {
-			console.log('catch entered');
 			logging.error(error);
 			navigate('/error');
 		} finally {
@@ -103,6 +102,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 				}
 			} else {
 				localStorage.setItem(`${lessonID}`, `${lessonID}`);
+				navigate(`/course/${courseID}`);
 			}
 		}
 	};

@@ -27,14 +27,12 @@
 }
 
 .right-component {
+	display: flex;
 	margin: 100px 10px;
-}
 
-.image-component {
-	position: absolute;
-	top: 600px;
-	right: 175px;
-	z-index: 1;
+	img {
+		height: 40vw;
+	}
 }
 
 .dynamic {

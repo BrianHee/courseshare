@@ -63,9 +63,7 @@ const UserProvider = ({ children }: any) => {
 	};
 
 	useEffect(() => {
-		console.log('contextAPI called');
 		if (token) {
-			console.log('contextAPI: there is a token');
 			fetchUser();
 		} else {
 			setUser({

@@ -200,7 +200,6 @@ const addLesson = (req: Request, res: Response) => {
 const deleteLesson = (req: Request, res: Response) => {
 	const _id = req.params.courseID;
 	const lessonId = req.params.lessonID;
-	console.log('removing from lesson from course', _id, lessonId);
 
 	Course.findOneAndUpdate({ _id }, { $pull: { lessons: { lessonId } } }, { new: true })
 		.then((course) => {
@@ -224,7 +223,6 @@ const updateLessonTitle = (req: Request, res: Response) => {
 	const _id = req.params.courseID;
 	const lessonId = req.params.lessonID;
 	const { lessonTitle } = req.body;
-	console.log('Updating lesson Title', _id, lessonId);
 
 	Course.findOneAndUpdate(
 		{ _id, 'lessons.lessonId': lessonId },

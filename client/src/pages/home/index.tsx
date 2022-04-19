@@ -28,7 +28,6 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 
 	useEffect(() => {
 		getAllCourses();
-		console.log(state);
 	}, [state]);
 
 	const getAllCourses = async () => {

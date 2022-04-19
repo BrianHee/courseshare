@@ -78,7 +78,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					setNavLessons(response.data.course.lessons);
 					setLessonsLen(response.data.course.lessons.length);
 				} else {
-					console.log(state._id, response.data.course.author._id);
 					return navigate('/error');
 				}
 			} else {
