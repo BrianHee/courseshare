@@ -56,15 +56,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const navigate = useNavigate();
 
-	//blocknav?
-	const blockNavigation = useMemo(() => {
-		if (course && !lessonID) {
-			return course.title !== courseTitle || course.description !== courseDesc;
-		} else if (lessonID && lesson) {
-			return lesson.title !== title || lesson.content !== content;
-		}
-	}, [courseTitle, courseDesc, title, content]);
-
 	const getCourse = async () => {
 		try {
 			const response = await axios.get(`${config.server.url}/course/${courseID}`);
@@ -78,13 +69,15 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					setNavLessons(response.data.course.lessons);
 					setLessonsLen(response.data.course.lessons.length);
 				} else {
-					return navigate('/error');
+					navigate('/error');
 				}
 			} else {
 				logging.error('Unable to find course');
+				navigate('/error');
 			}
 		} catch (error) {
 			logging.error(error);
+			navigate('/error');
 		} finally {
 			setTimeout(() => {
 				setLoading(false);
@@ -108,11 +101,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 			if (response.status === 201) {
 				try {
-					const update = await axios.patch(`${config.server.url}/course/${courseID}/add`, {
+					const reply = await axios.patch(`${config.server.url}/course/${courseID}/add`, {
 						lessonId: response.data.lesson._id,
 						lessonTitle: response.data.lesson.title
 					});
-					setLessonsLen(update.data.lessons.length);
+					setLessonsLen(reply.data.lessons.length);
 					navigate(`/edit/${courseID}/${response.data.lesson._id}`);
 				} catch (error) {
 					logging.error(error);
@@ -189,6 +182,11 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			});
 
 			if (response.status === 201) {
+				setCourse(response.data.course);
+				setCourseTitle(response.data.course.title);
+				setCourseDesc(response.data.course.description);
+				setCourseImage(response.data.course.image);
+
 				addToast('success', 'Course successfully saved.');
 			} else {
 				logging.error('Unable to save course title and desc');
@@ -298,7 +296,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			) : (
 				<div className={styles['workspace-container']}>
 					<div className={styles['edit-nav']}>
-						<EditNav lessons={navLessons} />
+						<EditNav lessons={navLessons} courseTitle={courseTitle} />
 						<div className={styles['add-lesson-container']}>
 							<button className={`${styles.button} ${styles.add}`} type="button" onClick={addLesson}>
 								+ Add Lesson

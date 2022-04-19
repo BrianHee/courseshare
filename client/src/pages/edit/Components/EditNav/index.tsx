@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
@@ -20,30 +20,16 @@ export interface ILessons {
 
 export interface IProps {
 	lessons: ILessons[];
+	courseTitle: string;
 }
 
 const EditNav: React.FunctionComponent<IProps> = (props) => {
-	const { lessons } = props;
+	const { lessons, courseTitle } = props;
 
 	const [course, setCourse] = useState<ICourse>();
 	const [lessonsArray, setLessonsArray] = useState<ILessons[]>(lessons);
 
 	const { courseID, lessonID } = useParams();
-	const navigate = useNavigate();
-
-	const getCourse = async () => {
-		try {
-			const response = await axios.get(`${config.server.url}/course/${courseID}`);
-
-			if (response.status === 200) {
-				setCourse(response.data.course);
-			} else {
-				logging.error('Unable to get course');
-			}
-		} catch (error) {
-			logging.error(error);
-		}
-	};
 
 	const handleOnDragEnd = (result: any) => {
 		if (!result.destination) return;
@@ -65,16 +51,14 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 	// })
 
 	useEffect(() => {
-		getCourse();
-	}, []);
+		setLessonsArray(lessons);
+	}, [lessons]);
 
 	return (
 		<nav className={styles['navbar']}>
 			<div className={styles['course-header']}>
 				<Link to={`/edit/${courseID}`}>
-					<p className={lessonID ? styles['title'] : `${styles.title} ${styles.selected}`}>
-						{course && course.title}
-					</p>
+					<p className={lessonID ? styles['title'] : `${styles.title} ${styles.selected}`}>{courseTitle}</p>
 				</Link>
 			</div>
 			<DragDropContext onDragEnd={handleOnDragEnd}>
