@@ -26,7 +26,6 @@ export interface IProps {
 const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const { lessons, courseTitle } = props;
 
-	const [course, setCourse] = useState<ICourse>();
 	const [lessonsArray, setLessonsArray] = useState<ILessons[]>(lessons);
 
 	const { courseID, lessonID } = useParams();
@@ -40,19 +39,29 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 		setLessonsArray(draggableItems);
 	};
 
-	// const updateLessonOrder = async () => {
-	// 	try {
-	// 		const response = await axios.
-	// 	}
-	// }
+	const updateLessonOrder = async () => {
+		try {
+			const response = await axios.patch(`${config.server.url}/course/${courseID}`, {
+				lessons: lessonsArray
+			});
 
-	// useEffect(() => {
-
-	// })
+			if (response.status === 201) {
+				console.log('successfully reordered lessons');
+			} else {
+				logging.error('Unable to save course title and desc');
+			}
+		} catch (error) {
+			logging.error(error);
+		}
+	};
 
 	useEffect(() => {
 		setLessonsArray(lessons);
 	}, [lessons]);
+
+	useEffect(() => {
+		updateLessonOrder();
+	}, [lessonsArray]);
 
 	return (
 		<nav className={styles['navbar']}>
