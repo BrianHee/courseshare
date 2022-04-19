@@ -80,6 +80,40 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 			<DragDropContext onDragEnd={handleOnDragEnd}>
 				<Droppable droppableId="lessons">
 					{(provided) => (
+						<div {...provided.droppableProps} ref={provided.innerRef}>
+							{lessonsArray &&
+								lessonsArray.map((ele, idx) => {
+									return (
+										<Draggable key={ele.lessonId} draggableId={ele.lessonId} index={idx}>
+											{(provided) => (
+												<Link
+													className={
+														ele.lessonId === lessonID
+															? `${styles.link} ${styles.selected}`
+															: styles['link']
+													}
+													to={`/edit/${courseID}/${ele.lessonId}`}
+													{...provided.draggableProps}
+													ref={provided.innerRef}
+												>
+													{ele.lessonTitle}
+													<div {...provided.dragHandleProps}>
+														<img src={dragIcon} />
+													</div>
+												</Link>
+											)}
+										</Draggable>
+									);
+								})}
+							{provided.placeholder}
+						</div>
+					)}
+				</Droppable>
+			</DragDropContext>
+
+			{/* <DragDropContext onDragEnd={handleOnDragEnd}>
+				<Droppable droppableId="lessons">
+					{(provided) => (
 						<ul {...provided.droppableProps} ref={provided.innerRef}>
 							{lessonsArray &&
 								lessonsArray.map((ele, idx) => {
@@ -109,7 +143,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 						</ul>
 					)}
 				</Droppable>
-			</DragDropContext>
+			</DragDropContext> */}
 		</nav>
 	);
 };
