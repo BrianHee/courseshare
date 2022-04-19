@@ -1,37 +1,38 @@
 @use '../../../../styles/colors.scss';
 
 .container {
-	height: 100vh;
+	display: flex;
+	justify-content: center;
+	min-height: calc(68rem - 5vw);
 	background: colors.$myblue;
+	overflow-x: hidden;
 }
 
 .component-container {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
+	width: 100%;
+	max-width: 1080px;
 }
 
 .left-component {
-	padding: 10rem 15rem;
-	font-size: 1.5rem;
+	font-size: calc(0.2vw + 1.5rem);
 	cursor: default;
 	user-select: none;
-}
+	h1 {
+		margin: 5rem;
+		transition: 0.5s;
 
-.left-component h1 {
-	margin: 10vh;
-	transition: 0.5s;
-}
-
-.left-component h1:hover {
-	color: white;
+		&:hover {
+			color: white;
+		}
+	}
 }
 
 .right-component {
-	display: flex;
-	margin: 100px 10px;
-
 	img {
-		height: calc(30vw + 10rem);
+		height: calc(10vw + 30rem);
 	}
 }
 
@@ -88,5 +89,14 @@
 	100% {
 		opacity: 1;
 		-webkit-transform: translateY(0);
+	}
+}
+
+@media screen and (max-width: 599px) {
+	.right-component {
+		display: none;
+	}
+	.component-container {
+		justify-content: center;
 	}
 }
