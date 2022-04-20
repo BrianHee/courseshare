@@ -53,11 +53,15 @@ const CreatePage: React.FunctionComponent = () => {
 					<div className={styles.label}>Title</div>
 					<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
 					<div className={styles.label}>Description</div>
-					<textarea value={description} onChange={(e) => setDesc(e.target.value)} />
+					<textarea
+						className={styles.textarea}
+						value={description}
+						onChange={(e) => setDesc(e.target.value)}
+					/>
 					<div className={styles.label}>Image</div>
 					<input placeholder="URL" type="text" value={image} onChange={(e) => setImage(e.target.value)} />
 					<div className={styles.error}>{error}</div>
-					<button type="button" onClick={createCourse}>
+					<button className={styles.button} type="button" onClick={createCourse}>
 						Create Course
 					</button>
 				</form>

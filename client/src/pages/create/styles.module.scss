@@ -1,19 +1,18 @@
 @use '../../styles/colors.scss';
 
 .container {
-	height: 100vh;
-	background-color: colors.$mygray;
 	display: flex;
 	justify-content: center;
+	height: 100vh;
+	min-height: calc(40vw + 13rem);
+	background-color: colors.$mygray;
 }
 
 .form-wrapper {
 	display: block;
-	justify-content: center;
 	margin: auto;
-	height: auto;
-	min-height: 200px;
-	width: 500px;
+	padding: 2.5rem;
+	width: calc(8vw + 30rem);
 	text-align: center;
 	background-color: white;
 	border-radius: 10px;
@@ -22,14 +21,14 @@
 
 .form-wrapper {
 	input {
+		margin-bottom: 1rem;
+		padding: 0 1rem;
+		width: 100%;
 		border: none;
 		border-radius: 5px;
 		border: 1px solid colors.$mydarkgray;
-		margin: 15px auto 0px;
-		padding: 0 20px;
-		width: 80%;
-		line-height: 3rem;
-		font-size: 20px;
+		line-height: calc(0.5vw + 2.4rem);
+		font-size: calc(0.5vw + 1rem);
 
 		&:focus {
 			outline: colors.$myblue 2px solid;
@@ -37,44 +36,41 @@
 	}
 
 	.label {
-		padding-top: 20px;
-		padding-left: 50px;
+		margin-bottom: 0.5rem;
 		font-family: 'DM Serif Text';
-		font-size: 1.5rem;
+		font-size: calc(0.5vw + 1rem);
 		text-align: left;
 	}
 
-	textarea {
+	.textarea {
 		border: 1px solid colors.$mydarkgray;
-		width: 80%;
-		margin: 10px 0 0 0;
-		padding: 0 20px;
+		width: 100%;
+		height: calc(5vw + 5.5rem);
+		padding: 1rem;
+		margin-bottom: 1rem;
 		border-radius: 5px;
-		line-height: 3rem;
-		font-size: 20px;
+		line-height: 1.4rem;
 		resize: none;
 		font-family: Arial;
-		font-size: 1rem;
+		font-size: calc(0.5vw + 1rem);
 
 		&:focus {
 			outline: colors.$myblue 2px solid;
 		}
 	}
 
-	button {
-		align-items: center;
-		width: 150px;
-		height: 40px;
-		margin: 25px 0;
+	.button {
+		padding: 1rem;
+		border: none;
 		border-radius: 10px;
-		background-color: colors.$mygreen;
-		border: 2px solid colors.$mygreen;
-		color: white;
 		font-family: Arial, sans-serif;
 		font-weight: 600;
-		font-size: 1.15rem;
+		font-size: calc(0.3vw + 0.8rem);
+		color: white;
+		background-color: colors.$mygreen;
+		border: 2px solid colors.$mygreen;
 		cursor: pointer;
-		transition: 0.2s;
+		transition: 0.5s;
 
 		&:hover {
 			background-color: colors.$mywhite;
@@ -86,9 +82,9 @@
 	.error {
 		color: red;
 		width: 100%;
-		min-height: 20px;
+		font-size: calc(0.3vw + 0.8rem);
+		height: calc(0.3vw + 0.8rem);
 		text-align: left;
-		margin: 5px 0;
-		padding: 0 50px;
+		margin-bottom: 1.5rem;
 	}
 }
