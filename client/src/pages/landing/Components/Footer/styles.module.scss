@@ -1,5 +1,66 @@
+@use '../../../../styles/colors.scss';
+
 .container {
-	height: 100vh;
-	width: 100%;
-	background: white;
+	display: block;
+	text-align: center;
+	background-color: white;
+	min-height: clamp(15rem, calc(15vw + 2rem), 20rem);
+}
+
+.text {
+	h1 {
+		font-size: calc(0.5vw + 2rem);
+	}
+	h2 {
+		font-family: 'DM Sans', sans-serif;
+		font-size: calc(0.5vw + 0.9rem);
+	}
+
+	strong {
+		font-family: Arial;
+
+		i {
+			font-style: normal;
+			color: colors.$myblue;
+		}
+	}
+
+	.link {
+		display: inline-block;
+
+		font-family: Arial;
+		font-style: normal;
+
+		&:after {
+			content: '';
+			display: block;
+			height: 3px;
+			width: 0%;
+			background-color: colors.$myblue;
+			transition: 0.5s;
+		}
+
+		&:hover:after {
+			width: 101%;
+		}
+	}
+}
+
+.button {
+	background-color: colors.$myblue;
+	border: none;
+	border-radius: 10px;
+	width: calc(0.5vw + 5.5rem);
+	height: calc(0.1vw + 2.7rem);
+	font-family: Arial, sans-serif;
+	font-weight: 600;
+	font-size: calc(0.1vw + 0.9rem);
+	cursor: pointer;
+	color: black;
+	transition: 0.5s;
+	margin: 1.5rem auto;
+
+	&:hover {
+		background-color: rgb(131, 195, 255, 0.7);
+	}
 }

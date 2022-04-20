@@ -13,7 +13,6 @@ import styles from './styles.module.scss';
 export interface NavPropsInterface {}
 
 const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
-	const [loading, setLoading] = useState<boolean>(false);
 	const [scrollTrans, setScrollTrans] = useState<boolean>(false);
 
 	const navigate = useNavigate();
@@ -24,7 +23,6 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 		const token = localStorage.getItem('token');
 
 		if (token) {
-			setLoading(true);
 			const { data: loginData } = await axios.post(config.server.autologin, {
 				token
 			});
