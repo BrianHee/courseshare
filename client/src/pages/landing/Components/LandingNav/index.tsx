@@ -13,8 +13,8 @@ import styles from './styles.module.scss';
 export interface NavPropsInterface {}
 
 const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
-	const [loading, setLoading] = useState(false);
-	const [scrollTrans, setScrollTrans] = useState(false);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [scrollTrans, setScrollTrans] = useState<boolean>(false);
 
 	const navigate = useNavigate();
 

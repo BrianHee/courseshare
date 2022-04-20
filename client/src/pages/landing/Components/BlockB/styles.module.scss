@@ -47,4 +47,23 @@
 		max-width: calc(20vw + 8rem);
 		text-align: left;
 	}
+
+	img {
+		opacity: 0;
+	}
+}
+
+.animation {
+	animation: fade 1s both;
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

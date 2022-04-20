@@ -14,7 +14,7 @@ const BlockA = () => {
 					<h1 className={styles['dynamic']}>Teach.</h1>
 					<h1 className={styles['dynamic']}>Share.</h1>
 				</div>
-				<div className={styles['right-component']} ref={animation}>
+				<div className={`${styles['right-component']} ${styles.animation}`}>
 					<img src={blockA} />
 				</div>
 			</div>

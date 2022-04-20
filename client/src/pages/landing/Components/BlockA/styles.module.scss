@@ -48,15 +48,21 @@
 }
 
 .dynamic:nth-child(2) {
+	animation: fade 1.5s both;
+	-moz-animation: fade 1.5s both;
+	-webkit-animation: fade 1.5s both;
+}
+
+.dynamic:nth-child(3) {
 	animation: fade 2s both;
 	-moz-animation: fade 2s both;
 	-webkit-animation: fade 2s both;
 }
 
-.dynamic:nth-child(3) {
-	animation: fade 3s both;
-	-moz-animation: fade 3s both;
-	-webkit-animation: fade 3s both;
+.animation {
+	animation: fade 2.5s both;
+	-moz-animation: fade 2.5s both;
+	-webkit-animation: fade 2.5s both;
 }
 
 @keyframes fade {
