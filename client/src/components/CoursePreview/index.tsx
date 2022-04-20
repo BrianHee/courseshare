@@ -16,22 +16,24 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 
 	return (
 		<div className={styles['container']}>
-			<Link to={`/edit/${_id}`}>
-				<div className={styles['image-wrapper']}>
-					{image ? (
-						<img className={styles['image']} src={image} alt="image" />
-					) : (
-						<img className={styles['default-image']} src={defaultImage} alt="image" />
-					)}
-				</div>
-				<div className={styles['title-wrapper']}>{title}</div>
-			</Link>
-			<Link to={`/course/${_id}`}>
-				<div className={styles['share-wrapper']}>
-					<div>Share</div>
-					<img src={shareIcon} alt="share" height="20" />
-				</div>
-			</Link>
+			<div className={styles.wrapper}>
+				<Link to={`/edit/${_id}`}>
+					<div className={styles['image-wrapper']}>
+						{image ? (
+							<img className={styles['image']} src={image} alt="image" />
+						) : (
+							<img className={styles['default-image']} src={defaultImage} alt="image" />
+						)}
+					</div>
+					<div className={styles['title-wrapper']}>{title}</div>
+				</Link>
+				<Link to={`/course/${_id}`}>
+					<div className={styles['share-wrapper']}>
+						<div>Share</div>
+						<img src={shareIcon} alt="share" height="20" />
+					</div>
+				</Link>
+			</div>
 		</div>
 	);
 };

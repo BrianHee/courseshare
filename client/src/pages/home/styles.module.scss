@@ -9,6 +9,7 @@
 
 	.wrapper {
 		padding: 0 calc(7vw + 0.5rem);
+		padding-bottom: 5rem;
 	}
 }
 
@@ -56,10 +57,9 @@
 }
 
 .courses-container {
-	margin: 25px auto;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 50px 95px;
+	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+	grid-gap: 2rem;
 }
 
 .empty-message {

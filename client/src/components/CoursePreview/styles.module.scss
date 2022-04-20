@@ -2,18 +2,25 @@
 @use '../../styles/fonts.scss';
 
 .container {
-	display: block;
-	background-color: white;
-	border: 0.5px solid colors.$mydarkgray;
-	border-radius: 10px;
-	height: 300px;
-	width: 250px;
-	box-shadow: colors.$smaller-shadow;
-	transition: 0.5s;
-}
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
 
-.container:hover {
-	box-shadow: colors.$bigger-shadow;
+	.wrapper {
+		width: 250px;
+		height: 300px;
+		background-color: white;
+		border: 0.5px solid colors.$mydarkgray;
+		border-radius: 10px;
+		box-shadow: colors.$smaller-shadow;
+		transition: 0.5s;
+
+		&:hover {
+			box-shadow: colors.$bigger-shadow;
+		}
+	}
 }
 
 .container {
