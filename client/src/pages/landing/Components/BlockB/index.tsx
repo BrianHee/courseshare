@@ -49,7 +49,7 @@ const BlockB = () => {
 					</h2>
 				</div>
 			</div>
-			<div className={styles.section}>
+			<div className={`${styles.section} ${styles.sectionB}`}>
 				<div className={styles.text}>
 					<h1>Express your passions</h1>
 					<h2>Share your interests in a learning-conducive format for your targeted audience.</h2>

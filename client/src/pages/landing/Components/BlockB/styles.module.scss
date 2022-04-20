@@ -21,7 +21,7 @@
 .header {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 15rem;
+	margin-bottom: 10rem;
 
 	.header-text {
 		width: 100%;
@@ -46,6 +46,11 @@
 		width: 100%;
 		max-width: calc(20vw + 8rem);
 		text-align: left;
+
+		h1 {
+			font-size: calc(0.2vw + 2rem);
+			margin-bottom: 1rem;
+		}
 	}
 
 	img {
@@ -65,5 +70,33 @@
 	100% {
 		opacity: 1;
 		transform: translateY(0);
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.section {
+		display: block;
+
+		img {
+			height: calc(10vw + 25rem);
+		}
+
+		.text {
+			margin: 3rem auto;
+			max-width: calc(20vw + 25rem);
+			text-align: center;
+		}
+
+		&.sectionB {
+			display: flex;
+			flex-direction: column;
+
+			.text {
+				order: 2;
+			}
+			img {
+				order: 1;
+			}
+		}
 	}
 }
