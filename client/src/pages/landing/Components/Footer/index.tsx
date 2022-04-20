@@ -50,7 +50,7 @@ const Footer = () => {
 						course<i>share</i>
 					</strong>{' '}
 					with{' '}
-					<Link to={'/'} className={styles.link}>
+					<Link to={'/guest'} className={styles.link}>
 						Guest Login
 					</Link>
 				</h2>
