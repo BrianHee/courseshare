@@ -1,7 +1,50 @@
 @use '../../../../styles/colors.scss';
 
 .container {
-	height: 100vh;
-	width: 100%;
+	display: block;
+	text-align: center;
+	min-height: clamp(60rem, calc(40vw + 15rem), 80rem);
 	background-image: linear-gradient(180deg, colors.$myblue, white);
+	overflow-x: hidden;
+
+	img {
+		height: calc(10vw + 15rem);
+	}
+
+	h2 {
+		font-family: 'DM Sans', sans-serif;
+		font-weight: 800;
+		font-size: calc(0.2vw + 1.1rem);
+	}
+}
+
+.header {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 15rem;
+
+	.header-text {
+		width: 100%;
+		max-width: calc(20vw + 20rem);
+
+		h1 {
+			font-size: calc(0.2vw + 2.3rem);
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+.section {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin: 10rem auto;
+	width: 100%;
+	max-width: 1080px;
+
+	.text {
+		width: 100%;
+		max-width: calc(20vw + 8rem);
+		text-align: left;
+	}
 }

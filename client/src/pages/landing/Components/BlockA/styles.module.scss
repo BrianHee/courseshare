@@ -3,7 +3,7 @@
 .container {
 	display: flex;
 	justify-content: center;
-	min-height: calc(68rem - 5vw);
+	min-height: clamp(60rem, calc(40vw + 15rem), 80rem);
 	background: colors.$myblue;
 	overflow-x: hidden;
 }
