@@ -40,11 +40,10 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 					courses.sort((x: ICourse, y: ICourse) => y.updatedAt.localeCompare(x.updatedAt));
 					setCourses(courses);
 				} else {
-					setError('Unable to retrieve courses');
+					navigate('/error');
 				}
 			} catch (error) {
-				logging.error(error);
-				setError('Unable to fetch courses');
+				navigate('/error');
 			} finally {
 				setLoading(false);
 			}
@@ -67,39 +66,46 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 			);
 		} else {
 			setRender(
-				courses.map((course, index) => {
-					return (
-						<div key={index}>
-							<CoursePreview _id={course._id} title={course.title} image={course.image} />
-						</div>
-					);
-				})
+				<div className={styles['courses-container']}>
+					{courses.map((course, index) => {
+						return (
+							<div key={index}>
+								<CoursePreview _id={course._id} title={course.title} image={course.image} />
+							</div>
+						);
+					})}
+				</div>
 			);
 		}
 	}, [courses]);
 
 	return (
-		<div className={styles['container']}>
+		<div className={styles.container}>
 			<NavBar />
-			<div className={styles['greeting-container']}>{state._id ? <h1>Hello, {state.firstName}!</h1> : <></>}</div>
-			<div className={styles['tab-container']}>
-				<div className={styles['tab']}>
-					<span>Courses</span>
+			<div className={styles['nav-placeholder']}></div>
+			<div className={styles.wrapper}>
+				<div className={styles['greeting-container']}>
+					{state._id ? <h1>Hello, {state.firstName}!</h1> : <h1>Hello!</h1>}
 				</div>
-				<div>
-					<button className={styles['create-button']} type="button" onClick={navigateNewCourse}>
-						+ New Course
-					</button>
+				<div className={styles['tab-container']}>
+					<div className={styles['tab']}>
+						<span>Courses</span>
+					</div>
+					<div className={styles['button-container']}>
+						<button className={styles['create-button']} type="button" onClick={navigateNewCourse}>
+							+ New Course
+						</button>
+					</div>
 				</div>
+				{loading ? (
+					<LoadingComponent />
+				) : (
+					<div className={styles['render-container']}>
+						{renderCourses}
+						{error && error}
+					</div>
+				)}
 			</div>
-			{loading ? (
-				<LoadingComponent />
-			) : (
-				<div className={styles['courses-container']}>
-					{renderCourses}
-					{error && error}
-				</div>
-			)}
 		</div>
 	);
 };

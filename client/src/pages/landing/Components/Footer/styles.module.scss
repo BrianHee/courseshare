@@ -27,9 +27,9 @@
 
 	.link {
 		display: inline-block;
-
 		font-family: Arial;
 		font-style: normal;
+		transition: 0.5s;
 
 		&:after {
 			content: '';
@@ -42,6 +42,10 @@
 
 		&:hover:after {
 			width: 101%;
+		}
+
+		&:hover {
+			color: colors.$myblue;
 		}
 	}
 }

@@ -16,8 +16,8 @@ const GuestPage: React.FunctionComponent = () => {
 	const guestLogin = async () => {
 		try {
 			const response = await axios.post(config.server.login, {
-				email: 'guest@guest.com',
-				password: '123456'
+				email: `${config.guest.email}`,
+				password: `${config.guest.password}`
 			});
 
 			if (response.status === 200) {

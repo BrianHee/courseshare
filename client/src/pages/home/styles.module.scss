@@ -1,66 +1,61 @@
 @use '../../styles/colors.scss';
-@use '../../styles/fonts.scss';
 
 .container {
-	padding-top: 70px;
-	padding-bottom: 50px;
-	width: 1425px;
-	min-height: 100vh;
 	background-color: colors.$mygray;
+
+	.nav-placeholder {
+		height: clamp(5rem, calc(5vw + 1rem), 6.5rem);
+	}
+
+	.wrapper {
+		padding: 0 calc(7vw + 0.5rem);
+	}
 }
 
 .greeting-container {
-	font-size: 30px;
-	width: 100%;
-	padding: 20px 75px;
-	max-width: 1425px;
-	margin: 0 auto;
-}
-
-.greeting-container h1 {
+	margin: calc(0.5vw + 1.5rem) 0;
+	font-size: calc(0.7vw + 1.2rem);
 	border-bottom: 2px colors.$mydarkgray solid;
-	font-weight: 500;
 }
 
 .tab-container {
-	width: 1425px;
-	padding: 0 75px;
-	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: calc(1vw + 1rem);
+
+	.tab {
+		font-size: calc(0.7vw + 2rem);
+		font-family: 'DM Serif Display';
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		flex-direction: column;
+	}
 }
 
-.tab {
-	font-size: 3rem;
-	font-family: 'DM Serif Display';
+.button-container {
 	display: flex;
-	justify-content: center;
-	align-content: center;
-	flex-direction: column;
-}
+	align-items: center;
 
-.create-button {
-	background-color: rgba(73, 73, 73, 1);
-	border: none;
-	border-radius: 10px;
-	width: 150px;
-	height: 40px;
-	font-family: Arial, sans-serif;
-	font-weight: 600;
-	font-size: 1.15rem;
-	cursor: pointer;
-	color: white;
-	transition: 0.5s;
-	margin: 10px 0;
-}
+	.create-button {
+		padding: 1rem;
+		border: none;
+		border-radius: 10px;
+		font-family: Arial, sans-serif;
+		font-weight: 600;
+		font-size: calc(0.3vw + 0.8rem);
+		color: white;
+		background-color: rgba(73, 73, 73, 1);
+		cursor: pointer;
+		transition: 0.5s;
 
-.create-button:hover {
-	background-color: rgba(73, 73, 73, 0.5);
+		&:hover {
+			background-color: rgba(73, 73, 73, 0.5);
+		}
+	}
 }
 
 .courses-container {
-	width: 1425px;
-	padding: 0 75px;
 	margin: 25px auto;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
@@ -68,10 +63,31 @@
 }
 
 .empty-message {
-	font-family: 'DM Serif Text';
-	font-size: 20px;
-}
+	font-family: 'DM Sans';
+	font-size: calc(0.3vw + 1.5rem);
+	width: 100%;
 
-.empty-message .link {
-	text-decoration: underline solid colors.$myblue;
+	.link {
+		display: inline-block;
+		transition: 0.5s;
+		font-family: Arial;
+		font-weight: 600;
+
+		&:after {
+			content: '';
+			display: block;
+			height: 3px;
+			width: 0%;
+			background-color: colors.$myblue;
+			transition: 0.5s;
+		}
+
+		&:hover:after {
+			width: 100%;
+		}
+
+		&:hover {
+			color: colors.$myblue;
+		}
+	}
 }
