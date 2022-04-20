@@ -19,8 +19,6 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 			firstName: '',
 			lastName: '',
 			email: ''
-			// loading: false
-			// error: null
 		});
 		localStorage.removeItem('token');
 		navigate('/');
@@ -31,7 +29,7 @@ const NavBar: React.FunctionComponent<NavPropsInterface> = (props) => {
 			<div className={styles['container']}>
 				<div className={styles['logo-container']}>
 					<Link to="/home">
-						<img src={logo} alt="courseshare" height="40" />
+						<img src={logo} alt="courseshare" />
 					</Link>
 				</div>
 				<div className={styles['logout-container']}>
