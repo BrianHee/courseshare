@@ -7,6 +7,7 @@ import config from '../../config/config';
 import { UserContext } from '../../context';
 
 import styles from './styles.module.scss';
+import { Link } from 'react-router-dom';
 
 const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	const [firstName, setFirstName] = useState('');
@@ -98,6 +99,12 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 						Register
 					</button>
 				</form>
+				<div className={styles.login}>
+					Already have an account?{' '}
+					<Link className={styles.link} to={'/login'}>
+						Log in
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
