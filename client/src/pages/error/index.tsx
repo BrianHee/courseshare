@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 const ErrorPage: React.FunctionComponent = () => {
 	return (
-		<div>
+		<div className={styles.container}>
 			<p>Error</p>
 			<Link to="/home">Return Home</Link>
 		</div>

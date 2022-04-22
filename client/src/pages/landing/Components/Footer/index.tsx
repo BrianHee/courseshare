@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../../config/config';
 import { UserContext } from '../../../../context';
+import Copyright from './Copyright';
 
 import styles from './styles.module.scss';
 
@@ -55,6 +56,7 @@ const Footer = () => {
 					</Link>
 				</h2>
 			</div>
+			<Copyright />
 		</div>
 	);
 };
