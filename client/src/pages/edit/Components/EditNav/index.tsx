@@ -103,40 +103,6 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 					)}
 				</Droppable>
 			</DragDropContext>
-
-			{/* <DragDropContext onDragEnd={handleOnDragEnd}>
-				<Droppable droppableId="lessons">
-					{(provided) => (
-						<ul {...provided.droppableProps} ref={provided.innerRef}>
-							{lessonsArray &&
-								lessonsArray.map((ele, idx) => {
-									return (
-										<Draggable key={ele.lessonId} draggableId={ele.lessonId} index={idx}>
-											{(provided) => (
-												<li {...provided.draggableProps} ref={provided.innerRef}>
-													<Link
-														className={
-															ele.lessonId === lessonID
-																? `${styles.link} ${styles.selected}`
-																: styles['link']
-														}
-														to={`/edit/${courseID}/${ele.lessonId}`}
-													>
-														{ele.lessonTitle}
-														<div {...provided.dragHandleProps}>
-															<img src={dragIcon} />
-														</div>
-													</Link>
-												</li>
-											)}
-										</Draggable>
-									);
-								})}
-							{provided.placeholder}
-						</ul>
-					)}
-				</Droppable>
-			</DragDropContext> */}
 		</nav>
 	);
 };

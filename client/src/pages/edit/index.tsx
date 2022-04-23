@@ -304,6 +304,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						</div>
 					</div>
 					<div className={styles['right-component']}>
+						<div className={styles['nav-spacer']}></div>
 						{lessonID ? (
 							<div className={styles['editor-viewport']}>
 								<div className={styles['viewport-header']}>
@@ -379,7 +380,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 											type="button"
 											onClick={saveCourse}
 										>
-											<img src={saveIcon} alt="save" height="15" /> Save
+											<img src={saveIcon} alt="save" height="15" /> Save Course
 										</button>
 										<button
 											className={`${styles.button} ${styles.delete}`}
@@ -422,7 +423,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						)}
 						<div className={styles['button-container']}>
 							<button
-								className={`${styles.button} ${styles['preview-course']}`}
+								className={`${styles.button} ${styles['preview']}`}
 								type="button"
 								onClick={seePreview}
 							>

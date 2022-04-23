@@ -2,13 +2,12 @@
 
 .navbar {
 	position: fixed;
-	top: 75px;
+	top: clamp(5rem, calc(5vw + 1rem), 6.5rem);
 	width: 350px;
 	height: 100%;
 	background-color: colors.$mygray;
 	overflow-y: scroll;
 	padding-bottom: 125px;
-	// border-right: 1px solid colors.$mydarkgray;
 }
 
 .navbar::-webkit-scrollbar {
@@ -89,6 +88,8 @@
 	color: colors.$mywhite;
 }
 
-// .navbar .link:last-child {
-// 	margin-bottom: 80px;
-// }
+@media screen and (max-width: 1080px) {
+	.navbar {
+		display: none;
+	}
+}
