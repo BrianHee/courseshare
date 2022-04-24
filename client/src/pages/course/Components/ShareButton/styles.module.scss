@@ -1,0 +1,89 @@
+@use '../../../../styles/colors.scss';
+
+.container {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 75px;
+	width: 250px;
+	display: flex;
+	align-items: center;
+	justify-content: right;
+	overflow: hidden;
+
+	img {
+		width: calc(0.5vw + 1.25rem);
+	}
+}
+
+.share {
+	position: absolute;
+	right: 2rem;
+	bottom: 1rem;
+	padding: 0.5rem;
+	aspect-ratio: 1;
+	border: none;
+	border-radius: 50%;
+	background-color: colors.$mydarkgray;
+	overflow-x: hidden;
+	transition: 0.5s;
+	opacity: 0.5;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+
+	&.animate {
+		animation: slideOut 2s both;
+	}
+}
+
+.notification {
+	position: absolute;
+	right: -200px;
+	background: colors.$mydarkgray;
+	padding: 1rem;
+	border-radius: 10px;
+
+	font-family: Arial, sans-serif;
+	font-weight: 800;
+	color: white;
+	transition: 0.5s;
+
+	&.animate {
+		animation: slideIn 2s both;
+	}
+}
+
+@keyframes slideOut {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translatex(100px);
+	}
+
+	80% {
+		transform: translateX(100px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideIn {
+	0% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translatex(-210px);
+	}
+	80% {
+		transform: translateX(-210px);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}

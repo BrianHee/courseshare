@@ -4,6 +4,7 @@
 	position: fixed;
 	right: 0;
 	overflow-y: scroll;
+	overflow-x: hidden;
 	width: calc(100% - 350px);
 	height: calc(100% - 75px);
 	margin: 75px 0 0 350px;

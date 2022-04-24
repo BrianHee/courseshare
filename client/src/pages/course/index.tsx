@@ -11,6 +11,7 @@ import styles from './styles.module.scss';
 import CourseNav from './Components/CourseNav';
 import ILesson from '../../interfaces/lesson';
 import LoadingComponent from '../../components/LoadingComponent';
+import ShareButton from './Components/ShareButton';
 
 export interface ILessons {
 	lessonId: string;
@@ -160,6 +161,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 						</div>
 					</div>
 				)}
+				<ShareButton />
 			</div>
 		);
 	} else {
