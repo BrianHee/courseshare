@@ -89,7 +89,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 													{...provided.draggableProps}
 													ref={provided.innerRef}
 												>
-													{ele.lessonTitle}
+													<div className={styles['lesson-title']}>{ele.lessonTitle}</div>
 													<div {...provided.dragHandleProps}>
 														<img src={dragIcon} />
 													</div>

@@ -64,13 +64,20 @@
 	transition: background-color 0.5s;
 	font-size: 1.25rem;
 	font-family: 'DM Serif Text';
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 
 	&:hover {
 		background-color: colors.$myblack;
-		color: colors.$mywhite;
+		.lesson-title {
+			color: colors.$mywhite;
+		}
+	}
+
+	.lesson-title {
+		display: block;
+		width: 85%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	div {
@@ -86,10 +93,13 @@
 .selected {
 	background-color: colors.$myblack;
 	color: colors.$mywhite;
+
+	.lesson-title {
+		color: colors.$mywhite;
+	}
 }
 
 @media screen and (max-width: 1080px) {
 	.navbar {
-		display: none;
 	}
 }

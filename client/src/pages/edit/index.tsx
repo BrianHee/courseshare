@@ -304,25 +304,26 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 						</div>
 					</div>
 					<div className={styles['right-component']}>
-						<div className={styles['nav-spacer']}></div>
 						{lessonID ? (
 							<div className={styles['editor-viewport']}>
 								<div className={styles['viewport-header']}>
-									<h1 className={styles['lesson-title']}>{title}</h1>
+									<div className={styles['lesson-title']}>
+										<h1>{title}</h1>
+									</div>
 									<div className={styles['header-buttons']}>
 										<button
 											className={`${styles.button} ${styles['save-lesson']}`}
 											type="button"
 											onClick={saveLesson}
 										>
-											<img src={saveIcon} alt="save" height="15" /> Save Lesson
+											<img src={saveIcon} alt="save" height="15" /> <span>Save Lesson</span>
 										</button>
 										<button
 											className={`${styles.button} ${styles.delete}`}
 											type="button"
 											onClick={deleteLessonModal}
 										>
-											<img src={trashIcon} alt="trash" height="15" /> Delete Lesson
+											<img src={trashIcon} alt="trash" height="15" /> <span>Delete Lesson</span>
 										</button>
 									</div>
 								</div>
@@ -380,14 +381,14 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 											type="button"
 											onClick={saveCourse}
 										>
-											<img src={saveIcon} alt="save" height="15" /> Save Course
+											<img src={saveIcon} alt="save" height="15" /> <span>Save Course</span>
 										</button>
 										<button
 											className={`${styles.button} ${styles.delete}`}
 											type="button"
 											onClick={deleteCourseModal}
 										>
-											<img src={trashIcon} alt="trash" height="15" /> Delete Course
+											<img src={trashIcon} alt="trash" height="15" /> <span>Delete Course</span>
 										</button>
 									</div>
 								</div>
