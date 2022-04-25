@@ -185,3 +185,16 @@
 		}
 	}
 }
+
+@media screen and (max-width: 450px) {
+	.navbar {
+		width: 300px;
+		transform: translateX(-300px);
+	}
+
+	.tab {
+		&.toggle {
+			transform: translateX(300px);
+		}
+	}
+}
