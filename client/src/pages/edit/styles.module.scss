@@ -108,6 +108,7 @@
 	right: 2rem;
 
 	.preview {
+		border: none;
 		&:hover {
 			background-color: colors.$mydarkgray;
 		}

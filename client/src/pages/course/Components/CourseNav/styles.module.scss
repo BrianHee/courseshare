@@ -8,6 +8,7 @@
 	height: 100%;
 	overflow-y: scroll;
 	background-color: colors.$mygray;
+	z-index: 10;
 }
 
 .navbar::-webkit-scrollbar {
@@ -101,4 +102,43 @@
 .link:hover {
 	background-color: colors.$myblack;
 	color: colors.$mywhite;
+}
+
+.tab {
+	display: none;
+	position: absolute;
+	z-index: 5;
+	top: 45vh;
+	left: 0;
+
+	button {
+		background-color: rgba(0, 0, 0, 0);
+		border: none;
+
+		img {
+			height: 100px;
+			cursor: pointer;
+		}
+	}
+}
+
+@media screen and (max-width: 1080px) {
+	.navbar {
+		border-right: 1px solid colors.$mydarkgray;
+		transform: translateX(-350px);
+		transition: 0.5s ease-out;
+
+		&.toggle {
+			transform: translateX(0);
+		}
+	}
+
+	.tab {
+		display: block;
+		transition: 0.5s ease-out;
+
+		&.toggle {
+			transform: translateX(350px);
+		}
+	}
 }
