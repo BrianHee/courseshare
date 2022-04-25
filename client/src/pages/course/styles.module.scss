@@ -46,12 +46,17 @@
 .course-image {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 25px;
+	margin-bottom: 50px;
 
 	img {
 		max-width: 500px;
 		max-height: 500px;
 	}
+}
+
+.course-description {
+	font-family: 'DM Sans';
+	font-size: clamp(1rem, calc(0.5vw + 1rem), 2.5rem);
 }
 
 .lesson-title {
@@ -65,19 +70,31 @@
 
 .html-content {
 	font-family: 'DM Sans';
-	font-size: clamp(1rem, calc(0.5vw + 1.25rem), 2rem);
-	line-height: 2rem;
+	font-size: clamp(1rem, calc(0.5vw + 1rem), 2rem);
+	line-height: 1.25rem;
 	white-space: pre-wrap;
 
+	li {
+		padding-left: 1rem;
+		list-style-type: disc;
+		list-style-position: inside;
+	}
+
 	img {
-		width: 100% !important;
+		width: 50% !important;
+		transform: translateX(50%);
+		margin-bottom: 2rem;
+	}
+
+	p {
+		line-height: 2.25rem;
 	}
 }
 
 .next-button {
 	display: flex;
 	justify-content: center;
-	margin-top: 10rem;
+	margin-top: 5rem;
 
 	button {
 		background-color: colors.$mygreen;

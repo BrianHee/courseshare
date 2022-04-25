@@ -73,7 +73,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 		<>
 			<nav className={styles['navbar']} ref={navigationRef}>
 				<div className={styles['course-header']}>
-					<Link to={`/course/${courseID}`}>
+					<Link to={`/course/${courseID}`} onClick={handleToggle}>
 						<p className={lessonID ? styles['title'] : `${styles.title} ${styles.selected}`}>
 							{course && course.title}
 						</p>

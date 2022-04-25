@@ -162,7 +162,17 @@
 	min-height: 350px;
 
 	.wysiwyg-editor {
-		padding: 20px;
+		padding: 0 20px;
+		font-size: calc(0.5vw + 0.8rem);
+
+		li {
+			list-style-type: disc;
+		}
+
+		img {
+			width: 50% !important;
+			transform: translateX(50%);
+		}
 	}
 }
 

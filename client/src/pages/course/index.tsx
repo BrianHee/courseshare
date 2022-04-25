@@ -152,10 +152,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 											<img src={course.image} alt="image" />
 										</div>
 									) : null}
-									<div
-										className={styles['html-content']}
-										dangerouslySetInnerHTML={{ __html: course.description }}
-									/>
+									<div className={styles['course-description']}>{course.description}</div>
 								</div>
 							)}
 						</div>
