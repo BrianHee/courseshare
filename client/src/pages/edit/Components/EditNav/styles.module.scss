@@ -3,11 +3,12 @@
 .navbar {
 	position: fixed;
 	top: clamp(5rem, calc(5vw + 1rem), 6.5rem);
-	width: 350px;
+	padding-bottom: 125px;
 	height: 100%;
+	width: 350px;
 	background-color: colors.$mygray;
 	overflow-y: scroll;
-	padding-bottom: 125px;
+	z-index: 20;
 }
 
 .navbar::-webkit-scrollbar {
@@ -99,7 +100,88 @@
 	}
 }
 
+.add-lesson-container {
+	width: 339px;
+	position: fixed;
+	bottom: 0;
+	height: 60px;
+	background-color: colors.$mygray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 1px solid colors.$mydarkgray;
+	z-index: 100000;
+
+	.button {
+		padding: clamp(0.8rem, calc(0.05vw + 0.75rem), 0.8rem) calc(0.05vw + 1.5rem);
+		background-color: rgba(73, 73, 73, 1);
+		border-radius: 10px;
+		font-family: Arial, sans-serif;
+		font-weight: 600;
+		font-size: clamp(0.85rem, calc(0.3vw + 0.8rem), 1.1rem);
+		cursor: pointer;
+		color: white;
+		transition: 0.2s;
+		align-items: center;
+	}
+
+	.button.add {
+		padding: 0.75rem 1.5rem;
+		background-color: colors.$mygreen;
+		border: 2px solid colors.$mygreen;
+
+		&:hover {
+			background-color: colors.$mywhite;
+			color: colors.$mygreen;
+			border: 2px solid colors.$mygreen;
+		}
+	}
+}
+
+.tab {
+	display: none;
+	position: absolute;
+	z-index: 10;
+	top: 45vh;
+	left: 0;
+
+	button {
+		background-color: rgba(0, 0, 0, 0);
+		border: none;
+
+		img {
+			height: 100px;
+			cursor: pointer;
+		}
+	}
+}
+
 @media screen and (max-width: 1080px) {
 	.navbar {
+		border-right: 1px solid colors.$mydarkgray;
+		transform: translateX(-350px);
+		transition: 0.5s;
+
+		&.toggle {
+			transform: translateX(0);
+		}
+	}
+
+	.add-lesson-container {
+		transform: translateX(-350px);
+		transition: 0.5s;
+
+		&.toggle {
+			transform: translateX(0);
+		}
+	}
+
+	.tab {
+		display: block;
+		transition: 0.5s;
+
+		&.toggle {
+			transform: translateX(350px);
+		}
 	}
 }

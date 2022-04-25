@@ -13,7 +13,7 @@
 	width: calc(100% - 350px);
 	height: 100%;
 	right: 0;
-	margin-top: clamp(6rem, calc(5vw + 2rem), 7.5rem);
+	margin-top: clamp(5rem, calc(5vw + 1rem), 6.5rem);
 	overflow-y: scroll;
 	padding: 0 calc(0.5vw + 1rem);
 	padding-bottom: 15rem;
@@ -27,7 +27,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 2rem;
+	margin: 1rem 0 2rem;
 	width: 100%;
 
 	.lesson-title {
@@ -45,18 +45,6 @@
 		display: flex;
 		gap: 1rem;
 	}
-}
-
-.add-lesson-container {
-	width: 339px;
-	position: fixed;
-	bottom: 0;
-	height: 60px;
-	background-color: colors.$mygray;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-top: 1px solid colors.$mydarkgray;
 }
 
 .button {
@@ -114,7 +102,7 @@
 	}
 }
 
-.button-container {
+.preview-container {
 	position: fixed;
 	bottom: 1rem;
 	right: 2rem;
@@ -193,33 +181,34 @@
 	.right-component {
 		padding: 0 calc(7vw + 0.5rem) 15rem;
 		width: 100%;
-	}
-
-	.header-buttons {
-		.button {
-			padding: 0.5rem 1rem;
+		.header-buttons {
+			.button {
+				padding: 0.5rem 1rem;
+			}
 		}
-	}
 
-	.button-container {
-		right: calc(7vw + 0.5rem);
+		.preview-container {
+			right: calc(7vw + 0.5rem);
+		}
 	}
 }
 
 @media screen and (max-width: 650px) {
-	.lesson-title {
-		width: calc(100% - 150px) !important;
-	}
-
-	.button.save-lesson {
-		span {
-			display: none;
+	.right-component {
+		.lesson-title {
+			width: calc(100% - 150px) !important;
 		}
-	}
 
-	.button.delete {
-		span {
-			display: none;
+		.button.save-lesson {
+			span {
+				display: none;
+			}
+		}
+
+		.button.delete {
+			span {
+				display: none;
+			}
 		}
 	}
 }

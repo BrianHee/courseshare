@@ -91,14 +91,12 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const addLesson = async () => {
 		const [course, title, content] = [courseID, `Lesson ${lessonsLen + 1}`, ''];
-
 		try {
 			const response = await axios.post(`${config.server.url}/lesson/create`, {
 				course,
 				title,
 				content
 			});
-
 			if (response.status === 201) {
 				try {
 					const reply = await axios.patch(`${config.server.url}/course/${courseID}/add`, {
@@ -296,12 +294,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			) : (
 				<div className={styles['workspace-container']}>
 					<div className={styles['edit-nav']}>
-						<EditNav lessons={navLessons} courseTitle={courseTitle} />
-						<div className={styles['add-lesson-container']}>
-							<button className={`${styles.button} ${styles.add}`} type="button" onClick={addLesson}>
-								+ Add Lesson
-							</button>
-						</div>
+						<EditNav lessons={navLessons} courseTitle={courseTitle} addFunction={addLesson} />
 					</div>
 					<div className={styles['right-component']}>
 						{lessonID ? (
@@ -422,7 +415,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 								</div>
 							</div>
 						)}
-						<div className={styles['button-container']}>
+						<div className={styles['preview-container']}>
 							<button
 								className={`${styles.button} ${styles['preview']}`}
 								type="button"
