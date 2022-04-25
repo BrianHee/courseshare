@@ -2,12 +2,12 @@
 
 .navbar {
 	position: fixed;
-	top: 75px;
+	top: clamp(5rem, calc(5vw + 1rem), 6.5rem);
+	padding-bottom: 125px;
 	width: 350px;
 	height: 100%;
-	background-color: colors.$mywhite;
 	overflow-y: scroll;
-	border-right: 1px solid colors.$mydarkgray;
+	background-color: colors.$mygray;
 }
 
 .navbar::-webkit-scrollbar {
@@ -27,7 +27,7 @@
 }
 
 .course-header {
-	margin: 10px;
+	margin: 27.5px 10px;
 	border: 1px solid colors.$mydarkgray;
 	border-radius: 10px;
 	box-shadow: colors.$smaller-shadow;
@@ -64,9 +64,21 @@
 	border-radius: 10px;
 	box-shadow: colors.$smaller-shadow;
 	transition: 0.5s;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+
+	&:hover {
+		background-color: colors.$myblack;
+		.lesson-title {
+			color: colors.$mywhite;
+		}
+	}
+
+	.lesson-title {
+		display: block;
+		width: 85%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
 	.check-wrapper {
 		display: flex;
@@ -80,10 +92,10 @@
 .selected {
 	background-color: colors.$myblack;
 	color: colors.$mywhite;
-}
 
-.navbar ul li:last-child {
-	margin-bottom: 100px;
+	.lesson-title {
+		color: colors.$mywhite;
+	}
 }
 
 .link:hover {

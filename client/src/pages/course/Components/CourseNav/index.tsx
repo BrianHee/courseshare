@@ -69,7 +69,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 									}
 									to={`/course/${courseID}/${ele.lessonId}`}
 								>
-									{ele.lessonTitle}
+									<div className={styles['lesson-title']}>{ele.lessonTitle}</div>
 									<div className={styles['check-wrapper']}>
 										{checkCompletion(ele.lessonId) ? <img src={check} /> : <img src={uncheck} />}
 									</div>

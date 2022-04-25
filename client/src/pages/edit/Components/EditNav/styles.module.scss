@@ -110,7 +110,7 @@
 	justify-content: center;
 	align-items: center;
 	border-top: 1px solid colors.$mydarkgray;
-	z-index: 100000;
+	z-index: 20;
 
 	.button {
 		padding: clamp(0.8rem, calc(0.05vw + 0.75rem), 0.8rem) calc(0.05vw + 1.5rem);
@@ -160,7 +160,7 @@
 	.navbar {
 		border-right: 1px solid colors.$mydarkgray;
 		transform: translateX(-350px);
-		transition: 0.5s;
+		transition: 0.5s ease-out;
 
 		&.toggle {
 			transform: translateX(0);
@@ -169,7 +169,7 @@
 
 	.add-lesson-container {
 		transform: translateX(-350px);
-		transition: 0.5s;
+		transition: 0.5s ease-out;
 
 		&.toggle {
 			transform: translateX(0);
@@ -178,7 +178,7 @@
 
 	.tab {
 		display: block;
-		transition: 0.5s;
+		transition: 0.5s ease-out;
 
 		&.toggle {
 			transform: translateX(350px);
