@@ -33,6 +33,7 @@
 .right-component {
 	img {
 		height: calc(10vw + 30rem);
+		pointer-events: none;
 	}
 }
 
