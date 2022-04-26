@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import logging from '../config/logging';
+import config from '../config/config';
 
 interface User {
 	_id: string;
@@ -35,7 +36,7 @@ const UserProvider = ({ children }: any) => {
 
 	const fetchUser = async () => {
 		try {
-			const { data: response } = await axios.get('http://localhost:1337/auth/me');
+			const { data: response } = await axios.get(`${config.server.url}/auth/me`);
 			if (response.data && response.data.user) {
 				setUser({
 					_id: response.data.user._id,

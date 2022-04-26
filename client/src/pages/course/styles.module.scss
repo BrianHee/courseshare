@@ -89,6 +89,14 @@
 	p {
 		line-height: 2.25rem;
 	}
+
+	code {
+		background-color: colors.$mygray;
+	}
+
+	pre {
+		line-height: 1.75rem;
+	}
 }
 
 .next-button {
