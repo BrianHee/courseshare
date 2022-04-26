@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'rea
 import ReactDOM from 'react-dom';
 
 import { useModalPortal } from '../hooks';
-import { uid } from '../../Toast/helpers';
+import { uniqueId } from '../../Toast/helpers';
 
 import styles from './styles.module.scss';
 import Modal from '..';
@@ -24,7 +24,7 @@ const ModalPortal = forwardRef(({}, ref) => {
 
 	useImperativeHandle(ref, () => ({
 		addModal(modal: IModal) {
-			setModal({ ...modal, id: `${uid()}` });
+			setModal({ ...modal, id: `${uniqueId()}` });
 		}
 	}));
 

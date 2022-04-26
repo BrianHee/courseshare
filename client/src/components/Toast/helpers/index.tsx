@@ -1,3 +1,3 @@
-export const uid = () => {
+export const uniqueId = () => {
 	return new Date().getTime();
 };

@@ -1,9 +1,9 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { useToastPortal } from '../hooks';
 import Toast from '../Toast';
-import { uid } from '../helpers';
+import { uniqueId } from '../helpers';
 
 import styles from './styles.module.scss';
 
@@ -41,7 +41,7 @@ const ToastPortal = forwardRef(({}, ref) => {
 
 	useImperativeHandle(ref, () => ({
 		addMessage(toast: IToast) {
-			setToasts([...toasts, { ...toast, id: `${uid()}` }]);
+			setToasts([...toasts, { ...toast, id: `${uniqueId()}` }]);
 		}
 	}));
 

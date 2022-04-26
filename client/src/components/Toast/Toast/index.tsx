@@ -1,17 +1,16 @@
-import React, { useMemo } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 
 import styles from './styles.module.scss';
 import checkIcon from '../../../assets/check.png';
 import trashIcon from '../../../assets/trash.png';
 
-interface IToastProps {
+interface ToastProps {
 	type: string;
 	message: string;
-	onClose: any;
+	onClose: () => void;
 }
 
-const Toast: React.FunctionComponent<IToastProps> = (props) => {
+const Toast: React.FunctionComponent<ToastProps> = (props) => {
 	const { type, message, onClose } = props;
 
 	if (type === 'success') {

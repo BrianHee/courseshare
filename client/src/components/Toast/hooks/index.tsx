@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { uid } from '../helpers';
+import { uniqueId } from '../helpers';
 
 import styles from './styles.module.scss';
 
 export const useToastPortal = () => {
 	const [loaded, setLoaded] = useState<boolean>(false);
-	const [portalId] = useState<string>(`toast-portal-${uid()}`);
+	const [portalId] = useState<string>(`toast-portal-${uniqueId()}`);
 
 	useEffect((): ReturnType<any> => {
 		const div: HTMLDivElement = document.createElement('div');
