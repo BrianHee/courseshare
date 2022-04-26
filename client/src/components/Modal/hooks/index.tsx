@@ -15,7 +15,7 @@ export const useModalPortal = () => {
 		document.getElementsByTagName('body')[0].prepend(div);
 		setLoaded(true);
 
-		return () => document.getElementsByClassName('body')[0].removeChild(div);
+		return () => document.getElementsByTagName('body')[0].removeChild(div);
 	}, [portalId]);
 
 	return { loaded, portalId };
