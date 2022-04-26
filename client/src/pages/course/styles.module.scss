@@ -95,8 +95,11 @@
 	}
 
 	pre {
+		padding: 0.5rem;
+		border-radius: 5px;
 		line-height: 1.75rem;
-		background-color: colors.$mygray;
+		background-color: colors.$myblack;
+		color: colors.$mywhite;
 	}
 }
 
