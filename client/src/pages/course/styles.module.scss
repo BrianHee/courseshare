@@ -96,9 +96,7 @@
 
 	pre {
 		line-height: 1.75rem;
-		& > code {
-			display: block;
-		}
+		background-color: colors.$mygray;
 	}
 }
 
