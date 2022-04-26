@@ -9,7 +9,6 @@
 	height: 50px;
 	padding: 15px;
 	border-radius: 5px;
-	box-sizing: border-box;
 	box-shadow: colors.$myshadow;
 
 	font-family: Arial;
@@ -19,14 +18,15 @@
 	transition: 0.2s;
 	animation: fadeIn 3s;
 
+	&:hover {
+		opacity: 0.9;
+	}
+
 	img {
 		height: 20px;
 	}
 }
-.toast:hover {
-	transition: 0.2s;
-	transform: scale(0.97);
-}
+
 .success {
 	background-color: #eaffe7;
 	.message {
