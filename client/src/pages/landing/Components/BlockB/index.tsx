@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import example1 from '../../../../assets/example1.png';
 import example2 from '../../../../assets/example2.png';
-import example3 from '../../../../assets/example3.png';
+import nystrip from '../../../../assets/nystrip.png';
+import toast from '../../../../assets/toast.png';
+import config from '../../../../config/config';
 import styles from './styles.module.scss';
 
 const BlockB = () => {
-	const [scrollA, setScrollA] = useState<boolean>(false);
-	const [scrollB, setScrollB] = useState<boolean>(false);
-	const [scrollC, setScrollC] = useState<boolean>(false);
-
 	const observer = new IntersectionObserver(
 		(entries) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add(styles.animation);
+					observer.unobserve(entry.target);
 					return;
 				}
 			});
@@ -23,9 +23,9 @@ const BlockB = () => {
 	);
 
 	useEffect(() => {
-		observer.observe(document.getElementById('imageA')!);
-		observer.observe(document.getElementById('imageB')!);
-		observer.observe(document.getElementById('imageC')!);
+		const elementIds = ['imageA', 'imageB', 'imageC', 'imageD', 'imageE'];
+
+		elementIds.map((id) => observer.observe(document.getElementById(id)!));
 	}, []);
 
 	return (
@@ -57,7 +57,16 @@ const BlockB = () => {
 				<img src={example2} id="imageB" />
 			</div>
 			<div className={styles.section}>
-				<img src={example3} id="imageC" />
+				<div className={styles['links-container']}>
+					<div className={styles['course-links']} id="imageC">
+						<Link className={styles.link} to={`/course/6252ff5c17a0cd3bf521529c`}>
+							<img src={nystrip} id="imageD" />
+						</Link>
+						<Link className={styles.link} to={`/course/6267341e7a4e402cdc5d65f2`}>
+							<img className={styles.scale} src={toast} id="imageE" />
+						</Link>
+					</div>
+				</div>
 				<div className={styles.text}>
 					<h1>Learn from others</h1>
 					<h2>Try a course curated by us!</h2>

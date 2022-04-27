@@ -59,6 +59,39 @@
 	}
 }
 
+.links-container {
+	display: flex;
+	justify-content: center;
+	margin-right: 3rem;
+
+	.course-links {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: calc(1vw + 1rem);
+		opacity: 0;
+
+		background-image: url('../../../../assets/window.png');
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		width: fit-content;
+		height: fit-content;
+		padding: calc(1vw + 3rem) calc(1vw + 2rem);
+
+		img {
+			height: calc(5vw + 10rem);
+			opacity: 0;
+		}
+
+		.link:hover {
+			img {
+				transform: scale(1.01) !important;
+			}
+		}
+	}
+}
+
 .animation {
 	animation: fade 1s both;
 }
@@ -98,6 +131,14 @@
 			img {
 				order: 1;
 			}
+		}
+	}
+
+	.links-container {
+		margin: 0;
+
+		img {
+			height: calc(5vw + 10rem);
 		}
 	}
 }
