@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import share from '../../../../assets/share.png';
-import config from '../../../../config/config';
+import 'dotenv/config';
 import styles from './styles.module.scss';
 
 const ShareButton: React.FunctionComponent = () => {
@@ -10,7 +10,7 @@ const ShareButton: React.FunctionComponent = () => {
 	const buttonElementRef = useRef<HTMLButtonElement>(null);
 	const notifElementRef = useRef<HTMLDivElement>(null);
 
-	const courseLink = useMemo(() => `${config.client.url}/course/${courseID}`, [courseID]);
+	const courseLink = useMemo(() => `${process.env.SERVER_URL}/course/${courseID}`, [courseID]);
 
 	const handleClick = () => {
 		navigator.clipboard.writeText(courseLink);

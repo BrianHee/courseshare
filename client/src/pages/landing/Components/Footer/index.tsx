@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import config from '../../../../config/config';
+import 'dotenv/config';
 import { UserContext } from '../../../../context';
 import Copyright from './Copyright';
 
@@ -17,7 +17,7 @@ const Footer = () => {
 		const token = localStorage.getItem('token');
 
 		if (token) {
-			const { data: loginData } = await axios.post(config.server.autologin, {
+			const { data: loginData } = await axios.post(`${process.env.SERVER_URL}/auth/autologin`, {
 				token
 			});
 			let response = loginData;

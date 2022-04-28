@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
-import config from '../../config/config';
-import logging from '../../config/logging';
+import 'dotenv/config';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
@@ -58,7 +57,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(`${config.server.url}/course/${courseID}`);
+			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				if (state._id === response.data.course.author._id) {
@@ -72,11 +71,9 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					navigate('/error');
 				}
 			} else {
-				logging.error('Unable to find course');
 				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
 			navigate('/error');
 		} finally {
 			setTimeout(() => {
@@ -92,33 +89,33 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const addLesson = async () => {
 		const [course, title, content] = [courseID, `Lesson ${lessonsLen + 1}`, ''];
 		try {
-			const response = await axios.post(`${config.server.url}/lesson/create`, {
+			const response = await axios.post(`${process.env.SERVER_URL}/lesson/create`, {
 				course,
 				title,
 				content
 			});
 			if (response.status === 201) {
 				try {
-					const reply = await axios.patch(`${config.server.url}/course/${courseID}/add`, {
+					const reply = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}/add`, {
 						lessonId: response.data.lesson._id,
 						lessonTitle: response.data.lesson.title
 					});
 					setLessonsLen(reply.data.lessons.length);
 					navigate(`/edit/${courseID}/${response.data.lesson._id}`);
 				} catch (error) {
-					logging.error(error);
+					navigate('/error');
 				}
 			} else {
-				logging.error('Unable to add course');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		}
 	};
 
 	const saveLesson = async () => {
 		try {
-			const response = await axios.patch(`${config.server.url}/lesson/${lessonID}`, {
+			const response = await axios.patch(`${process.env.SERVER_URL}/lesson/${lessonID}`, {
 				title,
 				content
 			});
@@ -126,42 +123,42 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			if (response.status === 201) {
 				addToast('success', 'Lesson successfully saved.');
 				try {
-					const response = await axios.patch(`${config.server.url}/course/${courseID}/${lessonID}`, {
+					const response = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}/${lessonID}`, {
 						lessonTitle: title
 					});
 					getCourse();
 				} catch (error) {
-					logging.error(error);
+					navigate('/error');
 				}
 			} else {
-				logging.error('Unable to save lesson');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		}
 	};
 
 	const deleteLesson = async () => {
 		try {
-			const response = await axios.delete(`${config.server.url}/lesson/${lessonID}`);
+			const response = await axios.delete(`${process.env.SERVER_URL}/lesson/${lessonID}`);
 
 			if (response.status === 201) {
 				addToast('delete', 'Lesson successfully deleted.');
 				try {
-					const reply = await axios.delete(`${config.server.url}/course/${courseID}/${lessonID}`);
+					const reply = await axios.delete(`${process.env.SERVER_URL}/course/${courseID}/${lessonID}`);
 
 					if (response.status === 201) {
 						setNavLessons(response.data.lessons);
 						setLessonsLen(lessonsLen - 1);
 					}
 				} catch (error) {
-					logging.error('Unable to delete lesson from course');
+					navigate('/error');
 				}
 			} else {
-				logging.error('Unable to delete lesson');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		} finally {
 			navigate(`/edit/${courseID}`);
 		}
@@ -173,7 +170,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const saveCourse = async () => {
 		try {
-			const response = await axios.patch(`${config.server.url}/course/${courseID}`, {
+			const response = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}`, {
 				title: courseTitle,
 				description: courseDesc,
 				image: courseImage
@@ -187,29 +184,29 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 				addToast('success', 'Course successfully saved.');
 			} else {
-				logging.error('Unable to save course title and desc');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		}
 	};
 
 	const deleteCourse = async () => {
 		try {
-			const response = await axios.delete(`${config.server.url}/course/${courseID}`);
+			const response = await axios.delete(`${process.env.SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 201) {
-				const reply = await axios.delete(`${config.server.url}/lesson/course/${courseID}`);
+				const reply = await axios.delete(`${process.env.SERVER_URL}/lesson/course/${courseID}`);
 
 				if (reply.status === 201) {
 				} else {
-					logging.error('Unable to delete lessons');
+					navigate('/error');
 				}
 			} else {
-				logging.error('Unable to delete course');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		} finally {
 			navigate('/home');
 		}
@@ -230,7 +227,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 		if (lessonID) {
 			try {
-				const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
+				const response = await axios.get(`${process.env.SERVER_URL}/lesson/${lessonID}`);
 
 				if (response.status === 200) {
 					setLesson(response.data.lesson);
@@ -238,10 +235,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 					setContent(response.data.lesson.content);
 					setUpdate(true);
 				} else {
-					logging.error('Unable to find lesson');
+					navigate('/error');
 				}
 			} catch (error) {
-				logging.error(error);
+				navigate('/error');
 			} finally {
 				setUpdate(false);
 			}

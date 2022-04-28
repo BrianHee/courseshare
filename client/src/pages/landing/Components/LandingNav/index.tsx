@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import config from '../../../../config/config';
+import 'dotenv/config';
 import { UserContext } from '../../../../context';
 import logo from '../../../../assets/logo.png';
 import logo2 from '../../../../assets/logo2.png';
@@ -23,7 +23,7 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 		const token = localStorage.getItem('token');
 
 		if (token) {
-			const { data: loginData } = await axios.post(config.server.autologin, {
+			const { data: loginData } = await axios.post(`${process.env.SERVER_URL}/auth/autologin`, {
 				token
 			});
 			let response = loginData;

@@ -1,10 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-// import passport from 'passport';
-import session from 'express-session';
 import cors from 'cors';
-
-// const LocalStrategy = require('passport-local').Strategy;
 
 import logging from './config/logging';
 import config from './config/config';
@@ -42,11 +38,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '50mb' }));
 app.use(cors());
 
-// Passport
-// app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 // API Access
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -61,7 +52,6 @@ app.use((req, res, next) => {
 });
 
 // Routes
-// app.get('/', (req, res) => res.send('hello world'));
 app.use('/auth', authRoutes); // designates all auth routes eg) /auth/signup
 app.use('/course', courseRoutes);
 app.use('/lesson', lessonRoutes);

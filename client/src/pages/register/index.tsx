@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import PageInterface from '../../interfaces/page';
-import config from '../../config/config';
+import 'dotenv/config';
 import { UserContext } from '../../context';
 
 import styles from './styles.module.scss';
@@ -24,7 +24,7 @@ const RegisterPage: React.FunctionComponent<PageInterface> = (props) => {
 	const handleClick = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 
-		const { data: registerData } = await axios.post(config.server.register, {
+		const { data: registerData } = await axios.post(`${process.env.SERVER_URL}/auth/register`, {
 			firstName,
 			lastName,
 			email,

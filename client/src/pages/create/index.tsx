@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context';
 import axios from 'axios';
-import config from '../../config/config';
-import logging from '../../config/logging';
+import 'dotenv/config';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './styles.module.scss';
@@ -29,7 +28,7 @@ const CreatePage: React.FunctionComponent = () => {
 		}
 		setError('');
 		try {
-			const response = await axios.post(`${config.server.url}/course/create`, {
+			const response = await axios.post(`${process.env.SERVER_URL}/course/create`, {
 				title,
 				description,
 				author: state._id,
@@ -39,9 +38,11 @@ const CreatePage: React.FunctionComponent = () => {
 			if (response.status === 201) {
 				setSuccess('Course succesfully created');
 				navigate(`/edit/${response.data._id}`);
+			} else {
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		}
 	};
 

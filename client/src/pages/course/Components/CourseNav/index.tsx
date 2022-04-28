@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import config from '../../../../config/config';
-import logging from '../../../../config/logging';
-// import ILesson from '../../../interfaces/lesson';
+import 'dotenv/config';
 
 import ICourse from '../../../../interfaces/course';
 
@@ -30,21 +28,22 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const [toggled, setToggled] = useState<boolean>(false);
 	const { lessons } = props;
 	const { courseID, lessonID } = useParams();
+	const navigate = useNavigate();
 
 	const navigationRef = useRef<HTMLElement>(null);
 	const tabRef = useRef<HTMLDivElement>(null);
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(`${config.server.url}/course/${courseID}`);
+			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
 			} else {
-				logging.error('Unable to get course');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		}
 	};
 

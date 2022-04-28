@@ -5,3 +5,4 @@ config
 Notes.md
 package-lock.json
 .env
+.prettierignore

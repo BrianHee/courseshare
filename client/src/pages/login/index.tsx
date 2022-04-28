@@ -1,15 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// import PageInterface from '../interfaces/page';
-import config from '../../config/config';
+import 'dotenv/config';
 import { UserContext } from '../../context';
 
 import styles from './styles.module.scss';
-import logging from '../../config/logging';
-import { stat } from 'fs';
 
 const LoginPage: React.FunctionComponent<any> = (props) => {
 	const [email, setEmail] = useState<string>('');
@@ -23,7 +20,7 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 	const handleClick = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post(config.server.login, {
+			const response = await axios.post(`${process.env.SERVER_URL}/auth/login`, {
 				email,
 				password
 			});

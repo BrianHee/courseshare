@@ -6,7 +6,7 @@ import { RotatingLines } from 'react-loader-spinner';
 
 import styles from './styles.module.scss';
 import axios from 'axios';
-import config from '../../config/config';
+import 'dotenv/config';
 import { UserContext } from '../../context';
 
 const GuestPage: React.FunctionComponent = () => {
@@ -15,9 +15,9 @@ const GuestPage: React.FunctionComponent = () => {
 
 	const guestLogin = async () => {
 		try {
-			const response = await axios.post(config.server.login, {
-				email: `${config.guest.email}`,
-				password: `${config.guest.password}`
+			const response = await axios.post(`${process.env.SERVER_URL}/auth/login`, {
+				email: `${process.env.GUEST_EMAIL}`,
+				password: `${process.env.GUEST_PASS}`
 			});
 
 			if (response.status === 200) {

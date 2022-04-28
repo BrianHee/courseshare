@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import config from '../../config/config';
-import logging from '../../config/logging';
+import 'dotenv/config';
 import ICourse from '../../interfaces/course';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -32,18 +31,16 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(`${config.server.url}/course/${courseID}`);
+			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
 				setAuthorFirst(response.data.course.author.firstName);
 				setAuthorLast(response.data.course.author.lastName);
 			} else {
-				logging.error('Unable to set course');
 				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
 			navigate('/error');
 		} finally {
 			setTimeout(() => {
@@ -54,16 +51,14 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 	const getNavLessons = async () => {
 		try {
-			const response = await axios.get(`${config.server.url}/course/${courseID}`);
+			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setNavLessons(response.data.course.lessons);
 			} else {
-				logging.error('Unable to find course');
 				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
 			navigate('/error');
 		}
 	};
@@ -71,16 +66,14 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	const getLesson = async () => {
 		if (lessonID) {
 			try {
-				const response = await axios.get(`${config.server.url}/lesson/${lessonID}`);
+				const response = await axios.get(`${process.env.SERVER_URL}/lesson/${lessonID}`);
 
 				if (response.status === 200) {
 					setLesson(response.data.lesson);
 				} else {
-					logging.error('Unable to find lesson');
 					navigate('/error');
 				}
 			} catch (error) {
-				logging.error(error);
 				navigate('/error');
 			}
 		}

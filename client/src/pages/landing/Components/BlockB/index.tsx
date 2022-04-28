@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import example1 from '../../../../assets/example1.png';
 import example2 from '../../../../assets/example2.png';
 import nystrip from '../../../../assets/nystrip.png';
 import toast from '../../../../assets/toast.png';
-import config from '../../../../config/config';
 import styles from './styles.module.scss';
 
 const BlockB = () => {

@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-import config from '../../../../config/config';
-import logging from '../../../../config/logging';
+import 'dotenv/config';
 
 import dragIcon from '../../../../assets/drag-icon.png';
 import tabIn from '../../../../assets/tab-in.svg';
@@ -29,6 +28,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const navigationRef = useRef<HTMLElement>(null);
 	const tabRef = useRef<HTMLDivElement>(null);
 	const addContainerRef = useRef<HTMLDivElement>(null);
+	const navigate = useNavigate();
 
 	const [lessonsArray, setLessonsArray] = useState<ILessons[]>(lessons);
 
@@ -45,17 +45,17 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 
 	const updateLessonOrder = async () => {
 		try {
-			const response = await axios.patch(`${config.server.url}/course/${courseID}`, {
+			const response = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}`, {
 				lessons: lessonsArray
 			});
 
 			if (response.status === 201) {
 				return;
 			} else {
-				logging.error('Unable to save course title and desc');
+				navigate('/error');
 			}
 		} catch (error) {
-			logging.error(error);
+			navigate('/error');
 		}
 	};
 
