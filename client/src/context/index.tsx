@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import logging from '../config/logging';
 import config from '../config/config';
 
 interface User {
@@ -53,7 +52,6 @@ const UserProvider = ({ children }: any) => {
 				});
 			}
 		} catch (error) {
-			logging.error(error);
 			setUser({
 				_id: '',
 				firstName: '',
