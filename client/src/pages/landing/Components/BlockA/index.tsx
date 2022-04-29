@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styles from './styles.module.scss';
-import blockA from '../../../../assets/blockA.png';
+import blocka from '../../../../assets/blocka.png';
 
 const BlockA: React.FunctionComponent = () => {
 	return (
@@ -13,7 +13,7 @@ const BlockA: React.FunctionComponent = () => {
 					<h1 className={styles['dynamic']}>Share.</h1>
 				</div>
 				<div className={`${styles['right-component']} ${styles.animation}`}>
-					<img src={blockA} alt="blockA" />
+					<img src={blocka} alt="blocka" />
 				</div>
 			</div>
 		</div>
