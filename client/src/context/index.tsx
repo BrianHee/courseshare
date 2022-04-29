@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import 'dotenv/config';
 
 interface User {
 	_id: string;
@@ -35,7 +34,7 @@ const UserProvider = ({ children }: any) => {
 
 	const fetchUser = async () => {
 		try {
-			const { data: response } = await axios.get(`${process.env.SERVER_URL}/auth/me`);
+			const { data: response } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/auth/me`);
 			if (response.data && response.data.user) {
 				setUser({
 					_id: response.data.user._id,
@@ -72,7 +71,7 @@ const UserProvider = ({ children }: any) => {
 				email: ''
 			});
 		}
-	}, []);
+	}, [token]);
 
 	return <UserContext.Provider value={[user, setUser]}>{children}</UserContext.Provider>;
 };

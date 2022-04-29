@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import LoadingComponent from '../../components/LoadingComponent';
+import { useNavigate } from 'react-router-dom';
 
 import { RotatingLines } from 'react-loader-spinner';
 
 import styles from './styles.module.scss';
 import axios from 'axios';
-import 'dotenv/config';
 import { UserContext } from '../../context';
 
 const GuestPage: React.FunctionComponent = () => {
@@ -15,9 +13,9 @@ const GuestPage: React.FunctionComponent = () => {
 
 	const guestLogin = async () => {
 		try {
-			const response = await axios.post(`${process.env.SERVER_URL}/auth/login`, {
-				email: `${process.env.GUEST_EMAIL}`,
-				password: `${process.env.GUEST_PASS}`
+			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
+				email: `${process.env.REACT_APP_GUEST_EMAIL}`,
+				password: `${process.env.REACT_APP_GUEST_PASS}`
 			});
 
 			if (response.status === 200) {

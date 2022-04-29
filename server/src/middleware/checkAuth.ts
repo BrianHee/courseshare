@@ -5,7 +5,6 @@ import config from '../config/config';
 import logging from '../config/logging';
 
 export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
-	// return res.send('Not authenticated');
 	let token = req.header('authorization');
 
 	if (!token) {
@@ -32,11 +31,6 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 		logging.error(error);
 		return res.status(403).json({
 			error
-			// error: [
-			// 	{
-			// 		msg: 'unauthorized'
-			// 	}
-			// ]
 		});
 	}
 };

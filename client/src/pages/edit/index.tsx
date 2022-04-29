@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
-import 'dotenv/config';
+
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import EditNav from './Components/EditNav';
 
@@ -15,8 +15,6 @@ import styles from './styles.module.scss';
 import NavBar from '../../components/NavBar';
 import saveIcon from '../../assets/save.png';
 import trashIcon from '../../assets/trash.png';
-import trashOpen from '../../assets/trash-open.png';
-import ICourse from '../../interfaces/course';
 import { UserContext } from '../../context';
 import LoadingComponent from '../../components/LoadingComponent';
 import ToastPortal from '../../components/Toast/ToastPortal';
@@ -31,7 +29,6 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lessonsLen, setLessonsLen] = useState<number>(0);
 
-	const [course, setCourse] = useState<ICourse>();
 	const [courseTitle, setCourseTitle] = useState<string>('');
 	const [courseDesc, setCourseDesc] = useState<string>('');
 	const [courseImage, setCourseImage] = useState<string>('');
@@ -57,11 +54,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
+			const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				if (state._id === response.data.course.author._id) {
-					setCourse(response.data.course);
 					setCourseTitle(response.data.course.title);
 					setCourseDesc(response.data.course.description);
 					setCourseImage(response.data.course.image);
@@ -89,14 +85,14 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 	const addLesson = async () => {
 		const [course, title, content] = [courseID, `Lesson ${lessonsLen + 1}`, ''];
 		try {
-			const response = await axios.post(`${process.env.SERVER_URL}/lesson/create`, {
+			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/lesson/create`, {
 				course,
 				title,
 				content
 			});
 			if (response.status === 201) {
 				try {
-					const reply = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}/add`, {
+					const reply = await axios.patch(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}/add`, {
 						lessonId: response.data.lesson._id,
 						lessonTitle: response.data.lesson.title
 					});
@@ -115,7 +111,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const saveLesson = async () => {
 		try {
-			const response = await axios.patch(`${process.env.SERVER_URL}/lesson/${lessonID}`, {
+			const response = await axios.patch(`${process.env.REACT_APP_SERVER_URL}/lesson/${lessonID}`, {
 				title,
 				content
 			});
@@ -123,10 +119,17 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 			if (response.status === 201) {
 				addToast('success', 'Lesson successfully saved.');
 				try {
-					const response = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}/${lessonID}`, {
-						lessonTitle: title
-					});
-					getCourse();
+					const response = await axios.patch(
+						`${process.env.REACT_APP_SERVER_URL}/course/${courseID}/${lessonID}`,
+						{
+							lessonTitle: title
+						}
+					);
+					if (response.status === 201) {
+						getCourse();
+					} else {
+						navigate('/error');
+					}
 				} catch (error) {
 					navigate('/error');
 				}
@@ -140,16 +143,20 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const deleteLesson = async () => {
 		try {
-			const response = await axios.delete(`${process.env.SERVER_URL}/lesson/${lessonID}`);
+			const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/lesson/${lessonID}`);
 
 			if (response.status === 201) {
 				addToast('delete', 'Lesson successfully deleted.');
 				try {
-					const reply = await axios.delete(`${process.env.SERVER_URL}/course/${courseID}/${lessonID}`);
+					const reply = await axios.delete(
+						`${process.env.REACT_APP_SERVER_URL}/course/${courseID}/${lessonID}`
+					);
 
-					if (response.status === 201) {
+					if (reply.status === 201) {
 						setNavLessons(response.data.lessons);
 						setLessonsLen(lessonsLen - 1);
+					} else {
+						navigate('/error');
 					}
 				} catch (error) {
 					navigate('/error');
@@ -170,14 +177,13 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const saveCourse = async () => {
 		try {
-			const response = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}`, {
+			const response = await axios.patch(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`, {
 				title: courseTitle,
 				description: courseDesc,
 				image: courseImage
 			});
 
 			if (response.status === 201) {
-				setCourse(response.data.course);
 				setCourseTitle(response.data.course.title);
 				setCourseDesc(response.data.course.description);
 				setCourseImage(response.data.course.image);
@@ -193,10 +199,10 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 	const deleteCourse = async () => {
 		try {
-			const response = await axios.delete(`${process.env.SERVER_URL}/course/${courseID}`);
+			const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 201) {
-				const reply = await axios.delete(`${process.env.SERVER_URL}/lesson/course/${courseID}`);
+				const reply = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/lesson/course/${courseID}`);
 
 				if (reply.status === 201) {
 				} else {
@@ -227,7 +233,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 
 		if (lessonID) {
 			try {
-				const response = await axios.get(`${process.env.SERVER_URL}/lesson/${lessonID}`);
+				const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/lesson/${lessonID}`);
 
 				if (response.status === 200) {
 					setLesson(response.data.lesson);
@@ -406,7 +412,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 									/>
 									{courseImage ? (
 										<div className={styles['image-wrapper']}>
-											<img src={courseImage} alt="image" />
+											<img src={courseImage} alt="course" />
 										</div>
 									) : null}
 								</div>

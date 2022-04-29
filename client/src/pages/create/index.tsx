@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context';
 import axios from 'axios';
-import 'dotenv/config';
+
 import { useNavigate } from 'react-router-dom';
 
 import styles from './styles.module.scss';
@@ -12,7 +12,6 @@ const CreatePage: React.FunctionComponent = () => {
 	const [description, setDesc] = useState<string>('');
 	const [image, setImage] = useState<string>('');
 	const [error, setError] = useState<string>('');
-	const [success, setSuccess] = useState<string>('');
 
 	const [state, setState] = useContext(UserContext);
 	const navigate = useNavigate();
@@ -28,7 +27,7 @@ const CreatePage: React.FunctionComponent = () => {
 		}
 		setError('');
 		try {
-			const response = await axios.post(`${process.env.SERVER_URL}/course/create`, {
+			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/course/create`, {
 				title,
 				description,
 				author: state._id,
@@ -36,7 +35,6 @@ const CreatePage: React.FunctionComponent = () => {
 			});
 
 			if (response.status === 201) {
-				setSuccess('Course succesfully created');
 				navigate(`/edit/${response.data._id}`);
 			} else {
 				navigate('/error');

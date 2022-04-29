@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import 'dotenv/config';
+import React, { useEffect, useRef, useState } from 'react';
+
 import ICourse from '../../interfaces/course';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -18,20 +18,20 @@ export interface ILessons {
 }
 
 const CoursePage: React.FunctionComponent<any> = (props) => {
-	const [_id, setId] = useState<string>('');
 	const [course, setCourse] = useState<ICourse | null>(null);
 	const [authorFirst, setAuthorFirst] = useState<string>('');
 	const [authorLast, setAuthorLast] = useState<string>('');
 	const [navLessons, setNavLessons] = useState<ILessons[]>([]);
 	const [lesson, setLesson] = useState<ILesson | null>();
 	const [loading, setLoading] = useState<boolean>(true);
+	const courseViewPortRef = useRef<HTMLDivElement>(null);
 
 	const { courseID, lessonID } = useParams();
 	const navigate = useNavigate();
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
+			const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
@@ -51,7 +51,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 
 	const getNavLessons = async () => {
 		try {
-			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
+			const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setNavLessons(response.data.course.lessons);
@@ -66,7 +66,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	const getLesson = async () => {
 		if (lessonID) {
 			try {
-				const response = await axios.get(`${process.env.SERVER_URL}/lesson/${lessonID}`);
+				const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/lesson/${lessonID}`);
 
 				if (response.status === 200) {
 					setLesson(response.data.lesson);
@@ -107,6 +107,16 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 	}, []);
 
 	useEffect(() => {
+		const courseViewPort = courseViewPortRef.current;
+
+		if (courseViewPort) {
+			setTimeout(() => {
+				courseViewPort.scrollTo(0, 0);
+			}, 100);
+		}
+	}, [lessonID]);
+
+	useEffect(() => {
 		getLesson();
 		if (!lessonID) {
 			setLesson(null);
@@ -122,7 +132,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 				) : (
 					<div>
 						<CourseNav lessons={navLessons} />
-						<div className={styles['container']}>
+						<div className={styles['container']} ref={courseViewPortRef}>
 							{lesson ? (
 								<div className={styles['wrapper']}>
 									<div className={styles['lesson-title']}>{lesson.title}</div>
@@ -142,7 +152,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 									</h2>
 									{course.image ? (
 										<div className={styles['course-image']}>
-											<img src={course.image} alt="image" />
+											<img src={course.image} alt="course" />
 										</div>
 									) : null}
 									<div className={styles['course-description']}>{course.description}</div>

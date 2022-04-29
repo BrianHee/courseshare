@@ -20,9 +20,9 @@ const CoursePreview: React.FunctionComponent<ICoursePreviewProps> = (props) => {
 				<Link to={`/edit/${_id}`}>
 					<div className={styles['image-wrapper']}>
 						{image ? (
-							<img className={styles['image']} src={image} alt="image" />
+							<img className={styles['image']} src={image} alt="course" />
 						) : (
-							<img className={styles['default-image']} src={defaultImage} alt="image" />
+							<img className={styles['default-image']} src={defaultImage} alt="course" />
 						)}
 					</div>
 					<div className={styles['title-wrapper']}>{title}</div>

@@ -6,7 +6,7 @@ import PageInterface from '../../interfaces/page';
 import NavBar from '../../components/NavBar';
 import { UserContext } from '../../context';
 import ICourse from '../../interfaces/course';
-import 'dotenv/config';
+
 import { Link } from 'react-router-dom';
 import CoursePreview from '../../components/CoursePreview';
 
@@ -20,7 +20,6 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const [courses, setCourses] = useState<ICourse[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [renderCourses, setRender] = useState<any>('');
-	const [error, setError] = useState<string>('');
 
 	const navigate = useNavigate();
 
@@ -29,9 +28,9 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	}, [state]);
 
 	const getAllCourses = async () => {
-		if (state._id && state._id != 'temp') {
+		if (state._id && state._id !== 'temp') {
 			try {
-				const response = await axios.get(`${process.env.SERVER_URL}/course/user/${state._id}`);
+				const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/course/user/${state._id}`);
 
 				if (response.status === 200) {
 					let courses = response.data.courses;
@@ -95,14 +94,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 						</button>
 					</div>
 				</div>
-				{loading ? (
-					<LoadingComponent />
-				) : (
-					<div className={styles['render-container']}>
-						{renderCourses}
-						{error && error}
-					</div>
-				)}
+				{loading ? <LoadingComponent /> : <div className={styles['render-container']}>{renderCourses}</div>}
 			</div>
 		</div>
 	);

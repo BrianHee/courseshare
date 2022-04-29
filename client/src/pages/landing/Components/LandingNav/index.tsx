@@ -3,7 +3,6 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-import 'dotenv/config';
 import { UserContext } from '../../../../context';
 import logo from '../../../../assets/logo.png';
 import logo2 from '../../../../assets/logo2.png';
@@ -23,7 +22,7 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 		const token = localStorage.getItem('token');
 
 		if (token) {
-			const { data: loginData } = await axios.post(`${process.env.SERVER_URL}/auth/autologin`, {
+			const { data: loginData } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/autologin`, {
 				token
 			});
 			let response = loginData;
@@ -53,9 +52,11 @@ const LandingNav: React.FunctionComponent<NavPropsInterface> = (props) => {
 			nav.style.background = '#ffffff';
 			nav.style.transition = 'background 0.75s';
 		} else {
-			setScrollTrans(false);
-			nav!.style.background = 'rgba(0,0,0,0)';
-			nav!.style.transition = 'background 0.75s';
+			if (nav) {
+				setScrollTrans(false);
+				nav.style.background = 'rgba(0,0,0,0)';
+				nav.style.transition = 'background 0.75s';
+			}
 		}
 	};
 	window.addEventListener('scroll', transitionNav);

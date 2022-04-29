@@ -13,7 +13,7 @@ interface IToast {
 	message: string;
 }
 
-const ToastPortal = forwardRef(({}, ref) => {
+const ToastPortal = forwardRef((props, ref) => {
 	const [toasts, setToasts] = useState<IToast[]>([]);
 	const [removing, setRemoving] = useState<string>('');
 
@@ -37,7 +37,7 @@ const ToastPortal = forwardRef(({}, ref) => {
 		if (removing) {
 			setToasts(toasts.filter((toast) => toast.id !== removing));
 		}
-	}, [removing]);
+	}, [removing, toasts]);
 
 	useImperativeHandle(ref, () => ({
 		addMessage(toast: IToast) {

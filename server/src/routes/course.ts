@@ -15,5 +15,3 @@ router.delete('/:courseID/:lessonID', controller.deleteLesson);
 router.patch('/:courseID/:lessonID', controller.updateLessonTitle);
 
 export default router;
-
-// create, read, readAll, query, update, deleteCourse;

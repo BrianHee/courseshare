@@ -90,9 +90,3 @@ const errorRoutes: RouteInterface[] = [
 const routes: RouteInterface[] = [...authRoutes, ...courseRoutes, ...mainRoutes, ...errorRoutes];
 
 export default routes;
-
-// path: string;
-// name: string;
-// auth: boolean;
-// component: any;
-// props?: any;

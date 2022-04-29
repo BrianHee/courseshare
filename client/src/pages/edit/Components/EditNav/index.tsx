@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-import 'dotenv/config';
-
 import dragIcon from '../../../../assets/drag-icon.png';
 import tabIn from '../../../../assets/tab-in.svg';
 import tabOut from '../../../../assets/tab-out.svg';
@@ -45,7 +43,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 
 	const updateLessonOrder = async () => {
 		try {
-			const response = await axios.patch(`${process.env.SERVER_URL}/course/${courseID}`, {
+			const response = await axios.patch(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`, {
 				lessons: lessonsArray
 			});
 
@@ -114,7 +112,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 													>
 														<div className={styles['lesson-title']}>{ele.lessonTitle}</div>
 														<div {...provided.dragHandleProps}>
-															<img src={dragIcon} />
+															<img src={dragIcon} alt="drag" />
 														</div>
 													</Link>
 												)}
@@ -133,7 +131,9 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 				</button>
 			</div>
 			<div className={styles.tab} ref={tabRef}>
-				<button onClick={handleToggle}>{toggled ? <img src={tabIn} /> : <img src={tabOut} />}</button>
+				<button onClick={handleToggle}>
+					{toggled ? <img src={tabIn} alt="tab" /> : <img src={tabOut} alt="tab" />}
+				</button>
 			</div>
 		</>
 	);

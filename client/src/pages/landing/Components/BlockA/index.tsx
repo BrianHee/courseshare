@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 import styles from './styles.module.scss';
 import blockA from '../../../../assets/blockA.png';
 
-const BlockA = () => {
-	const animation = useRef(null);
-
+const BlockA: React.FunctionComponent = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles['component-container']}>
@@ -15,7 +13,7 @@ const BlockA = () => {
 					<h1 className={styles['dynamic']}>Share.</h1>
 				</div>
 				<div className={`${styles['right-component']} ${styles.animation}`}>
-					<img src={blockA} />
+					<img src={blockA} alt="blockA" />
 				</div>
 			</div>
 		</div>

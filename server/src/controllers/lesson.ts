@@ -33,8 +33,6 @@ const read = (req: Request, res: Response) => {
 	logging.info(`Reading lesson id: ${_id} `);
 
 	Lesson.findById(_id) //break
-		// .populate('author')
-		// .exec()
 		.then((lesson) => {
 			if (lesson) {
 				return res.status(200).json({ lesson });

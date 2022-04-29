@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import 'dotenv/config';
 import { UserContext } from '../../context';
 
 import styles from './styles.module.scss';
@@ -20,7 +19,7 @@ const LoginPage: React.FunctionComponent<any> = (props) => {
 	const handleClick = async (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		try {
-			const response = await axios.post(`${process.env.SERVER_URL}/auth/login`, {
+			const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`, {
 				email,
 				password
 			});

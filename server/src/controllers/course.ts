@@ -59,7 +59,6 @@ const readAll = (req: Request, res: Response) => {
 	const user_id = req.params.userID;
 
 	Course.find({ author: user_id }) //break
-		// .populate('author')
 		.exec()
 		.then((courses) => {
 			return res.status(200).json({

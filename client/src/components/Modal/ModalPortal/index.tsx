@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { useModalPortal } from '../hooks';
@@ -13,7 +13,7 @@ interface IModal {
 	onConfirm: any;
 }
 
-const ModalPortal = forwardRef(({}, ref) => {
+const ModalPortal = forwardRef((props, ref) => {
 	const [modal, setModal] = useState<IModal | null>();
 
 	const { loaded, portalId } = useModalPortal();

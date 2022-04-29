@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 
 import share from '../../../../assets/share.png';
-import 'dotenv/config';
+
 import styles from './styles.module.scss';
 
 const ShareButton: React.FunctionComponent = () => {
@@ -10,7 +10,7 @@ const ShareButton: React.FunctionComponent = () => {
 	const buttonElementRef = useRef<HTMLButtonElement>(null);
 	const notifElementRef = useRef<HTMLDivElement>(null);
 
-	const courseLink = useMemo(() => `${process.env.SERVER_URL}/course/${courseID}`, [courseID]);
+	const courseLink = useMemo(() => `${process.env.REACT_APP_SERVER_URL}/course/${courseID}`, [courseID]);
 
 	const handleClick = () => {
 		navigator.clipboard.writeText(courseLink);
@@ -29,7 +29,7 @@ const ShareButton: React.FunctionComponent = () => {
 	return (
 		<div className={styles.container}>
 			<button onClick={handleClick} className={styles.share} ref={buttonElementRef}>
-				<img src={share} />
+				<img src={share} alt="share" />
 			</button>
 			<div className={styles.notification} ref={notifElementRef}>
 				Link copied to clipboard!

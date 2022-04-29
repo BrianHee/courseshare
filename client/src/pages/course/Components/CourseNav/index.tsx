@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import 'dotenv/config';
 
 import ICourse from '../../../../interfaces/course';
 
@@ -24,7 +23,6 @@ export interface IProps {
 
 const EditNav: React.FunctionComponent<IProps> = (props) => {
 	const [course, setCourse] = useState<ICourse>();
-	const [completed, setCompleted] = useState<boolean>(false);
 	const [toggled, setToggled] = useState<boolean>(false);
 	const { lessons } = props;
 	const { courseID, lessonID } = useParams();
@@ -35,7 +33,7 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 
 	const getCourse = async () => {
 		try {
-			const response = await axios.get(`${process.env.SERVER_URL}/course/${courseID}`);
+			const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/course/${courseID}`);
 
 			if (response.status === 200) {
 				setCourse(response.data.course);
@@ -95,9 +93,9 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 										<div className={styles['lesson-title']}>{ele.lessonTitle}</div>
 										<div className={styles['check-wrapper']}>
 											{checkCompletion(ele.lessonId) ? (
-												<img src={check} />
+												<img src={check} alt="completed" />
 											) : (
-												<img src={uncheck} />
+												<img src={uncheck} alt="uncompleted" />
 											)}
 										</div>
 									</Link>
@@ -107,7 +105,9 @@ const EditNav: React.FunctionComponent<IProps> = (props) => {
 				</ul>
 			</nav>
 			<div className={styles.tab} ref={tabRef}>
-				<button onClick={handleToggle}>{toggled ? <img src={tabIn} /> : <img src={tabOut} />}</button>
+				<button onClick={handleToggle}>
+					{toggled ? <img src={tabIn} alt="toggle" /> : <img src={tabOut} alt="toggle" />}
+				</button>
 			</div>
 		</>
 	);

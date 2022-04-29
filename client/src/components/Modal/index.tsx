@@ -1,5 +1,4 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 import trashIcon from '../../assets/trash.png';
@@ -12,12 +11,6 @@ interface IModalProps {
 
 const Modal: React.FunctionComponent<IModalProps> = (props) => {
 	const { type, onConfirm, onClose } = props;
-	const { courseID, lessonID } = useParams();
-
-	// const confirmFunction = useMemo(() => {
-	// 	onConfirm();
-	// 	onClose();
-	// }, [onConfirm]);
 
 	function confirmFunction() {
 		onConfirm();

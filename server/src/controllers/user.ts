@@ -6,8 +6,6 @@ import User from '../models/User';
 import config from '../config/config';
 import validateRegisterInput from '../validation/register';
 
-// Validate registration info, and then proceed with registration 3/8
-
 const register = async (req: Request, res: Response) => {
 	const { errors, isValid } = validateRegisterInput(req.body);
 

@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 
-const Copyright = () => {
-	const navigate = useNavigate();
-
+const Copyright: React.FunctionComponent = () => {
 	return (
 		<div className={styles.container}>
 			<div>
