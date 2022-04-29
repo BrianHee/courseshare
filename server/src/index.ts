@@ -1,18 +1,28 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import 'dotenv/config';
 
 import logging from './config/logging';
-import config from './config/config';
 import authRoutes from './routes/user';
 import courseRoutes from './routes/course';
 import lessonRoutes from './routes/lesson';
 
 const app = express();
 
+const mongoOptions = {
+	useUnifiedTopology: true,
+	useNewUrlParser: true,
+	socketTimeoutMS: 30000,
+	keepAlive: true,
+	maxPoolSize: 50,
+	autoIndex: false,
+	retryWrites: false
+};
+
 // Connect to Mongo
 mongoose
-	.connect(config.mongo.url, config.mongo.options)
+	.connect(process.env.DATABASE as string, mongoOptions)
 	.then(() => {
 		logging.info('Mongo connected.');
 	})
@@ -66,4 +76,4 @@ app.use((req, res, next) => {
 });
 
 // Listen for Requests
-app.listen(config.server.port, () => console.log(`app listening on port ${config.server.port}`));
+app.listen(process.env.PORT, () => console.log(`app listening on port ${process.env.PORT}`));

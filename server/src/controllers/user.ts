@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 import JWT from 'jsonwebtoken';
 
 import User from '../models/User';
-import config from '../config/config';
 import validateRegisterInput from '../validation/register';
 
 const register = async (req: Request, res: Response) => {
@@ -34,7 +33,7 @@ const register = async (req: Request, res: Response) => {
 		password: hashedPassword
 	});
 
-	const token = await JWT.sign({ email: newUser.email }, config.jwt_secret, {
+	const token = await JWT.sign({ email: newUser.email }, `${process.env.JWT_SECRET}`, {
 		expiresIn: '7d'
 	});
 
@@ -71,7 +70,7 @@ const login = async (req: Request, res: Response) => {
 		});
 	}
 
-	const token = await JWT.sign({ email: user.email }, config.jwt_secret, {
+	const token = await JWT.sign({ email: user.email }, `${process.env.JWT_SECRET}`, {
 		expiresIn: '7d'
 	});
 
@@ -93,7 +92,7 @@ const autologin = async (req: Request, res: Response) => {
 	let { token } = req.body;
 
 	try {
-		const tokenToEmail = JWT.verify(token, config.jwt_secret) as {
+		const tokenToEmail = JWT.verify(token, `${process.env.JWT_SECRET}`) as {
 			email: string;
 		};
 		const email = tokenToEmail.email;

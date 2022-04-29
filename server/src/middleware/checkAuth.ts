@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import JWT from 'jsonwebtoken';
 
-import config from '../config/config';
 import logging from '../config/logging';
 
 export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
@@ -20,7 +19,7 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 	token = token.split(' ')[1];
 
 	try {
-		const user = JWT.verify(token, config.jwt_secret) as {
+		const user = JWT.verify(token, `${process.env.JWT_SECRET}`) as {
 			email: string;
 		};
 
