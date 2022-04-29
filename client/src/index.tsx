@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 import App from './App';
 import { UserProvider } from './context';
@@ -9,9 +9,11 @@ import './index.scss';
 
 ReactDOM.render(
 	<UserProvider>
-		<BrowserRouter>
+		{/* <BrowserRouter> */}
+		<HashRouter>
 			<App />
-		</BrowserRouter>
+		</HashRouter>
+		{/* </BrowserRouter> */}
 	</UserProvider>,
 	document.getElementById('root')
 );
