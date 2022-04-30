@@ -46,7 +46,15 @@ app.use((req, res, next) => {
 // BodyParser & Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: '50mb' }));
-app.use(cors());
+
+const corsConfig = {
+	origin: process.env.CLIENT_URL,
+	credentials: true
+};
+
+app.use(cors(corsConfig));
+app.set('trust proxy', 1);
+app.get('/', (req, res) => res.send('courseshare'));
 
 // API Access
 app.use((req, res, next) => {
