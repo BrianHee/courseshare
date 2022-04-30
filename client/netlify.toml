@@ -9,4 +9,8 @@
     [headers.values]
     Access-Control-Allow-Origin = "*"
 
-/api/*  https://api.courseshareapp.com/  200
+[[redirects]]
+  from = "/api/*"
+  to = "https://api.courseshareapp.com/:splat"
+  status = 200
+  force = true
