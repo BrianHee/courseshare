@@ -8,3 +8,5 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+/api/*  https://api.courseshareapp.com/  200
