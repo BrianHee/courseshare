@@ -9,11 +9,11 @@ import './index.scss';
 
 ReactDOM.render(
 	<UserProvider>
-		{/* <BrowserRouter> */}
-		<HashRouter>
+		<BrowserRouter>
+			{/* <HashRouter> */}
 			<App />
-		</HashRouter>
-		{/* </BrowserRouter> */}
+			{/* </HashRouter> */}
+		</BrowserRouter>
 	</UserProvider>,
 	document.getElementById('root')
 );
