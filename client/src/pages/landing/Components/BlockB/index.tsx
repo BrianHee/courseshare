@@ -68,7 +68,7 @@ const BlockB = () => {
 				</div>
 				<div className={styles.text}>
 					<h1>Learn from others</h1>
-					<h2>Try a course curated by us!</h2>
+					<h2>Click one of the links on the left and try a course curated by us!</h2>
 				</div>
 			</div>
 		</div>
