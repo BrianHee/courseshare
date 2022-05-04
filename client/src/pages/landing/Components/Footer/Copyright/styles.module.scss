@@ -30,3 +30,17 @@
 		}
 	}
 }
+
+@media screen and (max-width: 750px) {
+	.container {
+		h1 {
+			font-size: calc(1vw + 0.3rem);
+		}
+
+		.links {
+			& > * {
+				font-size: calc(1vw + 0.2rem);
+			}
+		}
+	}
+}
