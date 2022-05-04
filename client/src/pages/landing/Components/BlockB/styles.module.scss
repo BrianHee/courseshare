@@ -112,7 +112,8 @@
 		display: block;
 
 		img {
-			height: calc(10vw + 25rem);
+			width: calc(10vw + 15rem) !important;
+			height: auto;
 		}
 
 		.text {
@@ -138,7 +139,8 @@
 		margin: 0;
 
 		img {
-			height: calc(5vw + 10rem);
+			height: auto !important;
+			width: calc(10vw + 5rem) !important;
 		}
 	}
 }
