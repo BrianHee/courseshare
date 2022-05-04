@@ -43,7 +43,7 @@
 		border: none;
 		border-radius: 10px;
 		font-family: Arial, sans-serif;
-		font-weight: 600;
+		font-weight: 700;
 		font-size: calc(0.3vw + 0.8rem);
 		color: white;
 		background-color: rgba(73, 73, 73, 1);
@@ -64,6 +64,7 @@
 
 .empty-message {
 	font-family: 'DM Sans';
+	font-weight: 500;
 	font-size: calc(0.3vw + 1.5rem);
 	width: 100%;
 
@@ -71,7 +72,7 @@
 		display: inline-block;
 		transition: 0.5s;
 		font-family: Arial;
-		font-weight: 600;
+		font-weight: 700;
 
 		&:after {
 			content: '';

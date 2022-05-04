@@ -8,6 +8,7 @@
 	text-decoration: none;
 	box-sizing: border-box;
 	color: black;
+	font-synthesis: none !important;
 }
 
 html,
@@ -16,7 +17,6 @@ body {
 	width: 100%;
 	font-size: 14px;
 	background-color: colors.$mygray;
-	// letter-spacing: 0.5px;
 
 	link {
 		color: black;

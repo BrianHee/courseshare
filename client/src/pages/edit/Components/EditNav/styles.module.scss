@@ -37,7 +37,7 @@
 	.title {
 		font-size: 1.5rem;
 		font-family: 'DM Serif Text';
-		font-weight: 700;
+		font-weight: 400;
 		padding: 20px 20px;
 		border-radius: 10px;
 		transition: 0.2s;
@@ -117,7 +117,7 @@
 		background-color: rgba(73, 73, 73, 1);
 		border-radius: 10px;
 		font-family: Arial, sans-serif;
-		font-weight: 600;
+		font-weight: 700;
 		font-size: clamp(0.85rem, calc(0.3vw + 0.8rem), 1.1rem);
 		cursor: pointer;
 		color: white;

@@ -25,7 +25,7 @@
 	text-align: center;
 	font-family: 'DM Serif Text';
 	font-size: clamp(2.25rem, calc(1.5vw + 1.5rem), 4rem);
-	font-weight: 600;
+	font-weight: 400;
 }
 
 .course-author {
@@ -56,6 +56,7 @@
 
 .course-description {
 	font-family: 'DM Sans';
+	font-weight: 500;
 	font-size: clamp(1rem, calc(0.5vw + 1rem), 2.5rem);
 }
 
@@ -70,6 +71,7 @@
 
 .html-content {
 	font-family: 'DM Sans';
+	font-weight: 500;
 	font-size: clamp(1rem, calc(0.5vw + 1rem), 2rem);
 	line-height: 1.25rem;
 	white-space: pre-wrap;
@@ -119,7 +121,7 @@
 		border-radius: 10px;
 		padding: calc(0.25vw + 0.75rem) calc(0.25vw + 1rem);
 		font-family: Arial, sans-serif;
-		font-weight: 600;
+		font-weight: 700;
 		font-size: calc(0.1vw + 1rem);
 		cursor: pointer;
 		color: white;
