@@ -25,6 +25,12 @@ describe('CoursePreview Test', () => {
 	it('links to the course edit page', () => {
 		render(testElement);
 		const previewElement = screen.getByText(`${testProps.title}`);
-		expect(previewElement).toBeInTheDocument();
+		expect(previewElement.closest('a')).toHaveAttribute('href', `/edit/${testProps._id}`);
+	});
+
+	it('renders the course image', () => {
+		render(testElement);
+		const imageElement = screen.getByAltText('course');
+		expect(imageElement).toHaveAttribute('src', testProps.image);
 	});
 });
