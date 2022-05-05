@@ -16,19 +16,19 @@ describe('CoursePreview Test', () => {
 		</MemoryRouter>
 	);
 
-	it('renders the course title', () => {
+	it('should render the course title', () => {
 		render(testElement);
 		const previewElement = screen.getByText(`${testProps.title}`);
 		expect(previewElement).toBeInTheDocument();
 	});
 
-	it('links to the course edit page', () => {
+	it('should link to the course edit page', () => {
 		render(testElement);
 		const previewElement = screen.getByText(`${testProps.title}`);
 		expect(previewElement.closest('a')).toHaveAttribute('href', `/edit/${testProps._id}`);
 	});
 
-	it('renders the course image', () => {
+	it('should render the course image', () => {
 		render(testElement);
 		const imageElement = screen.getByAltText('course');
 		expect(imageElement).toHaveAttribute('src', testProps.image);

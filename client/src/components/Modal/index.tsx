@@ -5,8 +5,8 @@ import trashIcon from '../../assets/trash.png';
 
 interface IModalProps {
 	type: 'course' | 'lesson';
-	onConfirm: any;
-	onClose: any;
+	onConfirm: () => void;
+	onClose: () => void;
 }
 
 const Modal: React.FunctionComponent<IModalProps> = (props) => {

@@ -263,7 +263,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		toastRef.current!.addMessage({ type, message });
 	};
 
-	const addModal = (type: 'course' | 'lesson', onConfirm: any) => {
+	const addModal = (type: 'course' | 'lesson', onConfirm: () => void) => {
 		modalRef.current!.addModal({ type, onConfirm });
 	};
 
