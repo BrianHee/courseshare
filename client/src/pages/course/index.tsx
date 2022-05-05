@@ -9,7 +9,7 @@ import NavBar from '../../components/NavBar';
 import styles from './styles.module.scss';
 import CourseNav from './Components/CourseNav';
 import ILesson from '../../interfaces/lesson';
-import LoadingComponent from '../../components/LoadingComponent';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import ShareButton from './Components/ShareButton';
 
 export interface ILessons {
@@ -128,7 +128,7 @@ const CoursePage: React.FunctionComponent<any> = (props) => {
 			<div>
 				<NavBar />
 				{loading ? (
-					<LoadingComponent />
+					<LoadingSpinner />
 				) : (
 					<div>
 						<CourseNav lessons={navLessons} />

@@ -4,7 +4,7 @@ import { RotatingLines } from 'react-loader-spinner';
 
 import styles from './styles.module.scss';
 
-const LoadingComponent = () => {
+const LoadingSpinner: React.FunctionComponent = () => {
 	return (
 		<div className={styles['container']}>
 			<div>
@@ -16,4 +16,4 @@ const LoadingComponent = () => {
 	);
 };
 
-export default LoadingComponent;
+export default LoadingSpinner;

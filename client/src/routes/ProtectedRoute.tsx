@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import LoadingComponent from '../components/LoadingComponent';
+import LoadingSpinner from '../components/LoadingSpinner';
 import NavBar from '../components/NavBar';
 import { UserContext } from '../context';
 
@@ -11,7 +11,7 @@ export const ProtectedRoute = (props: any) => {
 		return (
 			<div>
 				<NavBar />
-				<LoadingComponent />
+				<LoadingSpinner />
 			</div>
 		);
 	} else if (!state._id) {

@@ -16,7 +16,7 @@ import NavBar from '../../components/NavBar';
 import saveIcon from '../../assets/save.png';
 import trashIcon from '../../assets/trash.png';
 import { UserContext } from '../../context';
-import LoadingComponent from '../../components/LoadingComponent';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import ToastPortal from '../../components/Toast/ToastPortal';
 import ModalPortal from '../../components/Modal/ModalPortal';
 
@@ -293,7 +293,7 @@ const EditPage: React.FunctionComponent<any> = (props) => {
 		<div className={styles['wrapper']}>
 			<NavBar />
 			{loading ? (
-				<LoadingComponent />
+				<LoadingSpinner />
 			) : (
 				<div className={styles['workspace-container']}>
 					<div className={styles['edit-nav']}>

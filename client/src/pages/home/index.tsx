@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import CoursePreview from '../../components/CoursePreview';
 
 import styles from './styles.module.scss';
-import LoadingComponent from '../../components/LoadingComponent';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 	const userContext = useContext(UserContext);
@@ -94,7 +94,7 @@ const HomePage: React.FunctionComponent<PageInterface> = (props) => {
 						</button>
 					</div>
 				</div>
-				{loading ? <LoadingComponent /> : <div className={styles['render-container']}>{renderCourses}</div>}
+				{loading ? <LoadingSpinner /> : <div className={styles['render-container']}>{renderCourses}</div>}
 			</div>
 		</div>
 	);
