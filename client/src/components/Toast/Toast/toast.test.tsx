@@ -24,7 +24,7 @@ describe('Toast test', () => {
 		expect(modalElement).toBeInTheDocument();
 	});
 
-	it('shoudl rende a toaster with type "delete"', () => {
+	it('shoudl render a toaster with type "delete"', () => {
 		render(testDeleteElement);
 		const modalElement = screen.getByText(/delete/i);
 		expect(modalElement).toBeInTheDocument();
