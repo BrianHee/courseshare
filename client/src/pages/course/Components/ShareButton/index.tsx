@@ -10,7 +10,7 @@ const ShareButton: React.FunctionComponent = () => {
 	const buttonElementRef = useRef<HTMLButtonElement>(null);
 	const notifElementRef = useRef<HTMLDivElement>(null);
 
-	const courseLink = useMemo(() => `${process.env.REACT_APP_SERVER_URL}/course/${courseID}`, [courseID]);
+	const courseLink = useMemo(() => `${process.env.REACT_APP_CLIENT_URL}/course/${courseID}`, [courseID]);
 
 	const handleClick = () => {
 		navigator.clipboard.writeText(courseLink);
