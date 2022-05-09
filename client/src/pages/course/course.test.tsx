@@ -14,19 +14,12 @@ describe('CoursePage test', () => {
 		</MemoryRouter>
 	);
 
-	it('should render the course title', async () => {
-		(axiosMock as unknown as jest.Mock).mockResolvedValueOnce({
-			status: 200,
-			data: {
-				course: {
-					title: 'How to Prepare a New York Strip'
-				}
-			}
-		});
+	it('should render course author', async () => {
 		await act(async () => {
 			render(testElement);
 		});
-		// const titleElement = screen.getByText('How to Prepare a New York Strip');
-		console.log(testElement);
+		const authorElement = screen;
+		// expect(authorElement).toBeInTheDocument();
+		console.log(authorElement);
 	});
 });
