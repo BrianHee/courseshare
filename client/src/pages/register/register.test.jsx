@@ -12,14 +12,14 @@ describe('Register Page test', () => {
 
 	it('should render an input for first name', () => {
 		render(testElement);
-		const emailElement = screen.getByPlaceholderText('First name');
-		expect(emailElement).toBeInTheDocument();
+		const firstNameElement = screen.getByPlaceholderText('First name');
+		expect(firstNameElement).toBeInTheDocument();
 	});
 
 	it('should render an input for last name', () => {
 		render(testElement);
-		const emailElement = screen.getByPlaceholderText('Last name');
-		expect(emailElement).toBeInTheDocument();
+		const lastNameElement = screen.getByPlaceholderText('Last name');
+		expect(lastNameElement).toBeInTheDocument();
 	});
 
 	it('should render an input for email', () => {
@@ -30,25 +30,25 @@ describe('Register Page test', () => {
 
 	it('should render an input for password', () => {
 		render(testElement);
-		const emailElement = screen.getByPlaceholderText('Password');
-		expect(emailElement).toBeInTheDocument();
+		const passElement = screen.getByPlaceholderText('Password');
+		expect(passElement).toBeInTheDocument();
 	});
 
 	it('should render an input for confirming password', () => {
 		render(testElement);
-		const emailElement = screen.getByPlaceholderText('Confirm password');
-		expect(emailElement).toBeInTheDocument();
+		const confirmPassElement = screen.getByPlaceholderText('Confirm password');
+		expect(confirmPassElement).toBeInTheDocument();
 	});
 
 	it('should render a button for registration', () => {
 		render(testElement);
-		const emailElement = screen.getByText('Register');
-		expect(emailElement).toBeInstanceOf(HTMLButtonElement);
+		const registerElement = screen.getByText('Register');
+		expect(registerElement).toBeInstanceOf(HTMLButtonElement);
 	});
 
 	it('should render a link for login page', () => {
 		render(testElement);
-		const emailElement = screen.getByRole('link');
-		expect(emailElement).toHaveAttribute('href', '/login');
+		const loginElement = screen.getByRole('link');
+		expect(loginElement).toHaveAttribute('href', '/login');
 	});
 });
