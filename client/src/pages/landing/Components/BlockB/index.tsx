@@ -39,7 +39,7 @@ const BlockB = () => {
 				</div>
 			</div>
 			<div className={styles.section}>
-				<img src={example1} id="imageA" alt="courseshare" />
+				<img src={example1} id="imageA" alt="imageA" />
 				<div className={styles.text}>
 					<h1>Build your course</h1>
 					<h2>
@@ -53,16 +53,16 @@ const BlockB = () => {
 					<h1>Express your passions</h1>
 					<h2>Share your interests in a learning-conducive format for your targeted audience.</h2>
 				</div>
-				<img src={example2} id="imageB" alt="courseshare" />
+				<img src={example2} id="imageB" alt="imageB" />
 			</div>
 			<div className={styles.section}>
 				<div className={styles['links-container']}>
 					<div className={styles['course-links']} id="imageC">
 						<Link className={styles.link} to={`/course/6252ff5c17a0cd3bf521529c`}>
-							<img src={nystrip} id="imageD" alt="courseshare" />
+							<img src={nystrip} id="imageD" alt="imageD" />
 						</Link>
 						<Link className={styles.link} to={`/course/6267341e7a4e402cdc5d65f2`}>
-							<img className={styles.scale} src={toast} id="imageE" alt="courseshare" />
+							<img className={styles.scale} src={toast} id="imageE" alt="imageE" />
 						</Link>
 					</div>
 				</div>
