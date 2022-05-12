@@ -15,14 +15,22 @@ describe('Copyright test', () => {
 		const linkElement = screen.getByText(/privacy/i);
 		expect(linkElement).toHaveAttribute('href', '/');
 	});
+
 	it('should render a link for terms page', () => {
 		render(testElement);
 		const linkElement = screen.getByText(/terms/i);
 		expect(linkElement).toHaveAttribute('href', '/');
 	});
+
 	it('should render a link for contact page', () => {
 		render(testElement);
 		const linkElement = screen.getByText(/contact/i);
 		expect(linkElement).toHaveAttribute('href', '/');
+	});
+
+	it('should render the copyright claim', () => {
+		render(testElement);
+		const claimElement = screen.getByText('© 2022 Courseshare All Rights Reserved.');
+		expect(claimElement).toBeInTheDocument();
 	});
 });
