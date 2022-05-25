@@ -1,5 +1,7 @@
-# Getting started with course
+# Getting started with courseshare
 
-# `npm install`
+![courseshare](https://courseshareapp.com/favico.ico)
+
+In order
 
 # Dependencies
