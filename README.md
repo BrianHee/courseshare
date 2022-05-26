@@ -8,7 +8,7 @@ Courseshare is a full-stack web application for creating online courses and tuto
 
 # 🧑‍💻 Demo
 
-For a demo, please visit the following link: [coureshareapp](https://courseshareapp.com)
+For a demo, please visit the following link: [Coureshareapp](https://courseshareapp.com)
 
 # ✍️ Cloning the Repo
 
@@ -25,3 +25,10 @@ To install all necessary dependencies, run the following:
 ```
 npm install
 ```
+
+# ⚛️ Tech Stack
+
+-   Database: [MongoDB](https://mongodb.com)
+-   Server Framework:[Express](https://expressjs.com)
+-   Web Framework: [ReactJS](https://reactjs.org)
+-   Server Environment: [NodeJS](https://nodejs.org)
