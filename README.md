@@ -11,8 +11,8 @@ an intuitive user interface.
 
 As we have plunged ourselves into an at-home lifestyle in response to the ongoing pandemic, many of us have inevitably
 become reliant on techonology for many of our communicative needs. The intentions behind developing Courseshare were to
-provide an educational platform that allows for effortless production and dsitribution of educational material that
-would otherwise be difficult under quarantine circumstances.
+provide an educational platform that allows for effortless production and distribution of educational material that
+would otherwise prove to be difficult under quarantine circumstances.
 
 # 🧑‍💻 Demo
 
