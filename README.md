@@ -2,16 +2,17 @@
 
 # 🤔 About
 
-Courseshare is a full-stack web application for creating online courses and tutorials with an intuitive user interface.
+Courseshare is a full-stack web application for creating and distribution online courses and educational material with
+an intuitive user interface.
 
 <p align='center'><img src='https://www.courseshareapp.com/static/media/example2.2db144ba.png' width='300'/></p>
 
 # 🤘 Motivations
 
 As we have plunged ourselves into an at-home lifestyle in response to the ongoing pandemic, many of us have inevitably
-become reliant on techonology for many of our communicative needs. The intentions behind creating Courseshare were to
-provide an educational platform that allows for effortless creation and dsitribution of educational material that would
-otherwise be difficult under quarantine circumstances.
+become reliant on techonology for many of our communicative needs. The intentions behind developing Courseshare were to
+provide an educational platform that allows for effortless production and dsitribution of educational material that
+would otherwise be difficult under quarantine circumstances.
 
 # 🧑‍💻 Demo
 
