@@ -18,6 +18,9 @@ would otherwise prove to be difficult under quarantine circumstances.
 
 For a demo, please visit the following link: [Coureshareapp](https://courseshareapp.com)
 
+Once on the application site, you can either create a new account or check out the features with guest login at the
+bottom of the page!
+
 # ✍️ Cloning the Repo
 
 To clone the repository for Courseshare, run the following in the directory of choice:
