@@ -14,6 +14,8 @@ become reliant on techonology for many of our communicative needs. The intention
 provide an educational platform that allows for effortless production and distribution of educational material that
 would otherwise prove to be difficult under quarantine circumstances.
 
+<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/example1.png' width='300' /></p>
+
 # 🧑‍💻 Demo
 
 For a demo, please visit the following link: [Coureshareapp](https://courseshareapp.com)
