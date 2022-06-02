@@ -1,4 +1,4 @@
-<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/logo2.png' width='150' /></p>
+<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/logo2.png' height='100' /></p>
 
 # 🤔 About
 
