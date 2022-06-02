@@ -5,7 +5,7 @@
 Courseshare is a full-stack web application for creating and distribution online courses and educational material with
 an intuitive user interface.
 
-<p align='center'><img src='https://www.courseshareapp.com/static/media/example2.2db144ba.png' width='300'/></p>
+<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/blocka.png' width='300'/></p>
 
 # 🤘 Motivations
 
@@ -14,7 +14,7 @@ become reliant on techonology for many of our communicative needs. The intention
 provide an educational platform that allows for effortless production and distribution of educational material that
 would otherwise prove to be difficult under quarantine circumstances.
 
-<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/example1.png' width='300' /></p>
+<p align='center'><img src='https://www.courseshareapp.com/static/media/example2.2db144ba.png' width='300'/></p>
 
 # 🧑‍💻 Demo
 
