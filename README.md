@@ -1,4 +1,4 @@
-<p align='center'><img src='https://courseshareapp.com/favicon.ico' width='150' /></p>
+<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/logo2.png' width='150' /></p>
 
 # 🤔 About
 
@@ -22,6 +22,8 @@ For a demo, please visit the following link: [Coureshareapp](https://courseshare
 
 Once on the application site, you can either create a new account or check out the features with guest login at the
 bottom of the page!
+
+<p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/example1.png' width='300' /></p>
 
 # ✍️ Cloning the Repo
 
