@@ -50,6 +50,6 @@ npm install
 
 # 🌳 Environmental Variables
 
-There are several global variables that need to be declared in order for this application to run as a full-fledged
-application. These variables are the CLIENT_URL and SERVER_URL, which have been declared within a dotEnv file in the
-original repository.
+There are several global variables that need to be declared in order for this application to run as a complete platform.
+These variables are the CLIENT_URL and SERVER_URL, which have been declared within a dotEnv file in the original
+repository.
