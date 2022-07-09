@@ -2,8 +2,8 @@
 
 # 🤔 About
 
-Courseshare is a full-stack web application for creating and distributing online courses and educational material with
-an intuitive user interface.
+Courseshare is a full-stack web application for the creation and distribution of online courses and educational material
+through the utilization of an intuitive user interface.
 
 <p align='center'><img src='https://github.com/BrianHee/courseshare/blob/main/client/src/assets/blocka.png' width='300'/></p>
 
