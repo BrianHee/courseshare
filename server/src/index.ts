@@ -58,6 +58,9 @@ app.get('/', (req, res) => res.send('courseshare'));
 
 // API Access
 app.use((req, res, next) => {
+	if (!req.headers || req.headers !== process.env.CLIENT_URL) {
+		return res.status(403);
+	}
 	res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL);
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
